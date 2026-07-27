@@ -1,0 +1,46 @@
+.env
+.venv/
+
+.claude/
+.idea/
+
+# Documentos internos de trabajo — NUNCA se publican (se borran al terminar la limpieza)
+CLAUDE.md
+FILE_INVENTORY.md
+
+# Notebooks: el repo es 100% CLI (src/ + scripts/), no se publica ningún .ipynb.
+# Los originales viven en temp-trash/. Guard por si alguno reaparece en la raíz.
+*.ipynb
+
+# Raw / intermediate FRED datasets — nunca se publican (ver CLAUDE.md, seccion "Publishing rules")
+fred_data_releases/
+temp-trash/
+fred_database_v3_context_48.json
+fred_database_v3_context_48.parquet
+fred_database_v4_context_48.json
+fred_database_v4_context_48.parquet
+fred_tags_checkpoint.json
+fred_tags_output.parquet
+fred_tags_output_faltantes.parquet
+tags_notes_lookup.json
+
+# Exports HTML renderizados de notebooks (redundantes con el .ipynb fuente)
+*.html
+
+# Runtime local: datos descargados/procesados y checkpoints entrenados — nunca se publican.
+# Se mantiene la estructura de carpetas via .gitkeep, se ignora todo lo demás.
+data/**
+!data/**/
+!**/.gitkeep
+
+models/**
+!models/**/
+!**/.gitkeep
+
+# Python packaging / cache
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/

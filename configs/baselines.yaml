@@ -1,0 +1,37 @@
+# Hiperparámetros por baseline (Fase 7). El contexto es un parámetro por baseline, no un
+# valor fijo compartido: en el TFG, AutoETS y Chronos-Bolt se ejecutaron con
+# ctx=8 (pese a que sus propios comentarios decían "debe coincidir con ctx=30"), mientras que
+# Chronos-2 y TimesFM sí usaron ctx=30, igual que Unimodal-ablation/NeuroSym-CBF. Cambia estos
+# valores libremente para relanzar cualquier baseline con otro contexto -- no hay ningún
+# "valor correcto" hardcodeado en el código, solo lo que pongas aquí.
+
+seasonality: 12
+horizon_len: 18
+padding_value: -1
+
+autoets:
+  # La variante reportada en el TFG (tabla 6.1) es 'normafter' -- verificado por coincidencia
+  # numérica exacta con el paper a ctx=8 (MAE 0.7808, MASE 3.2380, sMAPE med 91.23%). La otra
+  # variante ('normbefore', normalizar el contexto antes de ajustar) queda disponible en el
+  # código como alternativa, pero NO es la del trabajo. Usa: 10_evaluate.py --model autoets-normafter
+  variant: normafter
+  context_len: 8
+  n_jobs: 4       # min(4, os.cpu_count()) en la implementación original
+
+chronos_bolt:
+  context_len: 8
+  min_context_len: 8
+  model_id: amazon/chronos-bolt-base
+  batch_size: 256
+
+chronos2:
+  context_len: 30
+  min_context_len: 13
+  model_id: amazon/chronos-2
+  batch_size: 256
+
+timesfm:
+  context_len: 30
+  min_context_len: 13
+  checkpoint: google/timesfm-1.0-200m-pytorch
+  batch_size: 256

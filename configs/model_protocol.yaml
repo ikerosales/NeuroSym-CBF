@@ -1,0 +1,37 @@
+# Protocolo experimental compartido por Unimodal-ablation y NeuroSym-CBF (Fase 6).
+# "No cambiar estos valores entre modelos" -- criterio original del TFG, preservado: son los
+# valores exactos usados para entrenar y evaluar los modelos del TFG.
+
+seed: 40
+
+data:
+  min_context_len: 13
+  context_len: 30
+  horizon_len: 18
+  padding_value: -1
+  batch_size: 2048
+  num_workers: 0    # workers del DataLoader — solo rendimiento, no afecta a los resultados
+                    # (el orden de muestras lo fija el sampler seedeado en el proceso principal).
+                    # En Windows déjalo a 0: el spawn serializa el dataset entero (~1GB) por pipe
+                    # a cada worker y el pickle se trunca (OSError 22). En Linux (fork) sí compensa.
+
+backbone:
+  num_blocks: 4
+  patch_len: 4
+  patch_stride: 2
+  d_model: 64
+  d_ff_ts: 128
+  dropout: 0.1
+  seasonality: 12
+
+sae_film:               # solo lo usa NeuroSym-CBF (no Unimodal-ablation)
+  d_ff_meta: 64
+  dict_mult: 2
+  top_k: 16
+
+training:
+  num_epochs: 3
+  lr: 0.001
+  weight_decay: 0.0001
+  scheduler_t_max: 20
+  grad_clip_norm: 1.0

@@ -1,0 +1,30 @@
+# Configuración de las Fases 1-2 del pipeline (descarga y limpieza de datos crudos de FRED).
+# Rutas bajo `paths:` se resuelven relativas a DATA_DIR (ver .env / fred_forecast.config.data_dir()).
+
+# El trabajo usa solo series mensuales. El descargador soporta otras frecuencias válidas de
+# FRED (ver VALID_FREQUENCIES en fred_client.py), pero el pipeline del TFG es Monthly-only.
+frequencies:
+  - Monthly
+
+tags:
+  max_requests_per_minute: 120
+  concurrent_requests: 20
+  max_retries: 5
+  batch_size: 5000
+
+cleaning:
+  context_months: 48
+  max_nan_ratio: 0.25
+
+embeddings:
+  model_name: google-t5/t5-base
+  max_length: 128
+  batch_size: 32
+
+paths:
+  raw_dir: raw                  # -> <DATA_DIR>/raw/parquet_<freq>/release_<id>.parquet
+  tags_dir: raw/tags            # -> <DATA_DIR>/raw/tags/
+  interim_dir: interim          # -> <DATA_DIR>/interim/final_dataset_<freq>/release_<id>.parquet
+  processed_dir: processed      # -> <DATA_DIR>/processed/fred_database_context_<N>.json
+  embeddings_dir: embeddings    # -> <DATA_DIR>/embeddings/metadata_embeddings.pkl
+  series_ids_file: series_ids/series_ids.json
