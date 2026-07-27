@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fred-forecast"
+version = "0.1.0"
+description = "Multimodal neurosymbolic forecasting over FRED macroeconomic time series (TFG)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Iker Rosales" },
+    { name = "Pablo Montero-Manso" },
+]
+
+# Cotas inferiores = versiones con las que se ha verificado el pipeline end-to-end.
+dependencies = [
+    "pandas>=2.3",
+    "numpy>=2.4",
+    "pyarrow>=23.0",
+    "fastparquet>=2025.12",
+    "requests>=2.32",
+    "aiohttp>=3.13",
+    "python-dotenv>=1.2",
+    "pyyaml>=6.0",
+    "tqdm>=4.67",
+    "torch>=2.10",
+    "transformers>=4.57",
+    "sentencepiece>=0.2",
+    "accelerate>=1.13",
+    "chronos-forecasting>=2.2",
+    # NOTA: timesfm NO está aquí a propósito — el baseline TimesFM necesita timesfm 1.2.x
+    # (API TimesFm/TimesFmHparams, checkpoint timesfm-1.0-200m-pytorch), que ya no está en
+    # PyPI (la 2.x cambió la API y el checkpoint). Ver README, sección del baseline TimesFM.
+    "statsforecast>=2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
