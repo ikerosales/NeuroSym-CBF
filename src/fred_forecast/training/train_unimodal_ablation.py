@@ -1,7 +1,7 @@
-"""Unimodal-ablation: entrena y evalúa `UnimodalAblationModel`.
+"""Unimodal-ablation: train and evaluate `UnimodalAblationModel`.
 
-Mismo bucle y protocolo que NeuroSym-CBF (MAE, AdamW, CosineAnnealingLR, grad-clip), pero sin
-la rama de metadatos ni la normalización del decoder del SAE.
+Same loop and protocol as NeuroSym-CBF (MAE, AdamW, CosineAnnealingLR, grad clip), but without
+the metadata branch or the SAE decoder normalization.
 """
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Bloque residual compartido por las tres fases del modelo propio. Puerto verbatim."""
+"""Residual block shared by the three phases of the custom model. Verbatim port."""
 from __future__ import annotations
 
 import torch.nn as nn

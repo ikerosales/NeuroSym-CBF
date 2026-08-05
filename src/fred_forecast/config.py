@@ -1,7 +1,7 @@
-"""Carga de configuración: variables de entorno (.env) + configs/*.yaml.
+"""Configuration loading: environment variables (.env) + configs/*.yaml.
 
-Todas las rutas de datos/modelos/resultados se resuelven desde aquí — ningún módulo del
-pipeline tiene rutas hardcodeadas, por diseño (para no depender de Kaggle/Colab).
+All data/model/result paths are resolved from here -- no pipeline module has hardcoded paths,
+by design (so it does not depend on Kaggle/Colab).
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ load_dotenv()
 def get_env(name: str, default: str | None = None) -> str:
     value = os.getenv(name, default)
     if value is None:
-        raise RuntimeError(f"Falta la variable de entorno {name!r} (créala en tu .env, ver el README)")
+        raise RuntimeError(f"Missing environment variable {name!r} (add it to your .env, see the README)")
     return value
 
 

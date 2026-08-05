@@ -1,7 +1,7 @@
-"""Métricas puntuales compartidas por las tres fases del modelo propio.
+"""Point metrics shared by the three phases of the custom model.
 
-Funciones `masked_*` definidas de forma idéntica en las tres variantes de origen del modelo
-(Unimodal-ablation, NeuroSym-CBF, NeuroSym-CBF pinball), factorizadas aquí en un único módulo.
+`masked_*` functions defined identically in the three source variants of the model
+(Unimodal-ablation, NeuroSym-CBF, NeuroSym-CBF pinball), factored here into a single module.
 """
 from __future__ import annotations
 
@@ -33,10 +33,10 @@ def masked_mase_per_sample(
     min_naive: float = 1e-3,
     padding_value: float = -1,
 ) -> torch.Tensor:
-    """MASE por muestra frente a un baseline naive estacional calculado sobre el propio
-    contexto (excluyendo el padding). `padding_value` era una variable global implícita en el
-    código original (siempre -1) — aquí es un parámetro explícito con ese mismo valor por
-    defecto, sin cambio de comportamiento.
+    """Per-sample MASE against a seasonal naive baseline computed on the context itself
+    (excluding padding). `padding_value` was an implicit global variable in the original
+    code (always -1) -- here it is an explicit parameter with the same default value,
+    with no behavior change.
     """
     mae_fc = (torch.abs(pred - target) * mask).sum(dim=(1, 2)) / (mask.sum(dim=(1, 2)) + 1e-8)
 

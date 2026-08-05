@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-"""Fase 2 del pipeline: limpieza y homogeneización temporal de los releases descargados.
+"""Phase 2 of the pipeline: temporal cleaning and homogenization of the downloaded releases.
 
-Determina la ventana de contexto (por defecto 48 meses, ver configs/data.yaml:cleaning) que
-maximiza el nº de series utilizables, descarta las que tienen demasiado NaN o NaN justo en el
-borde de la ventana, y hace forward-fill del resto. Escribe el resultado bajo
+Determines the context window (48 months by default, see configs/data.yaml:cleaning) that
+maximizes the number of usable series, discards those with too much NaN or NaN right at the
+window boundary, and forward-fills the rest. Writes the result under
 `<DATA_DIR>/interim/final_dataset_<freq>/`.
 
-Uso:
+Usage:
     python scripts/03_clean_releases.py
     python scripts/03_clean_releases.py --freq Monthly
 """
@@ -29,14 +29,14 @@ def main() -> None:
     parser.add_argument(
         "--freq",
         default="Monthly",
-        help="Frecuencia a limpiar. El TFG usa 'Monthly' (el valor por defecto).",
+        help="Frequency to clean. The thesis uses 'Monthly' (the default value).",
     )
     args = parser.parse_args()
 
     raw_dir = data_dir() / config["paths"]["raw_dir"] / f"parquet_{args.freq.strip().lower()}"
     output_dir = data_dir() / config["paths"]["interim_dir"] / f"final_dataset_{args.freq.strip().lower()}"
 
-    logger.info("Limpiando %s -> %s", raw_dir, output_dir)
+    logger.info("Cleaning %s -> %s", raw_dir, output_dir)
     clean_releases(
         parquet_dir=raw_dir,
         output_dir=output_dir,

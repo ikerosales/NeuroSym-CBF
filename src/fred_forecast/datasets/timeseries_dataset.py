@@ -1,9 +1,9 @@
-"""Dataset compartido por las tres fases del modelo propio (Fase 6).
+"""Dataset shared by the three phases of the custom model (Phase 6).
 
-Ventana deslizante (train) o ventana única (test), normalización min-max por ventana,
-padding por la izquierda, y clip del horizonte. Código idéntico en las tres variantes de
-origen del modelo (Unimodal-ablation, NeuroSym-CBF, NeuroSym-CBF pinball), factorizado en un único
-módulo para no triplicarlo, sin tocar ni una línea de la lógica.
+Sliding window (train) or single window (test), per-window min-max normalization,
+left padding, and horizon clipping. Identical code in the three model variants
+(Unimodal-ablation, NeuroSym-CBF, NeuroSym-CBF pinball), factored into a single
+module so it is not triplicated, without touching a single line of logic.
 """
 from __future__ import annotations
 
@@ -14,9 +14,9 @@ from torch.utils.data import Dataset
 
 
 def split_train_test_obs(df: pd.DataFrame, cntxt_length: int, horizon_length: int):
-    """Split determinista: las últimas `horizon_length` observaciones van a test, el resto
-    (excluyendo ese horizonte) a train. Descarta series demasiado cortas para tener al
-    menos `cntxt_length + horizon_length` observaciones.
+    """Deterministic split: the last `horizon_length` observations go to test, and the rest
+    (excluding that horizon) go to train. Drops series that are too short to have at
+    least `cntxt_length + horizon_length` observations.
     """
     df = df[df["observations"].apply(lambda x: len(x) >= cntxt_length + horizon_length)]
     df = df.copy()
@@ -35,7 +35,7 @@ class TimeSeriesDataset(Dataset):
         horizon  (H, 1)
         mask     (H, 1)
         metadata (D_meta,)
-        stats    (2,)  = [c_min, denom] for later denormalisation
+        stats    (2,)  = [c_min, denom] for later denormalization
     """
 
     def __init__(

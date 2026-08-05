@@ -1,10 +1,10 @@
-"""Utilidad LOCAL de conveniencia: consolida la base de datos + tags en un único parquet/jsonl.
+"""Local convenience utility: consolidates the database + tags into a single parquet/jsonl.
 
-NO PUBLICAR NUNCA el resultado de este módulo. A diferencia del resto de `src/fred_forecast`,
-esto no es parte del pipeline reproducible que se documenta/publica del TFG — es un atajo para
-tener el dataset completo (observaciones incluidas) en un solo fichero en vez de 114 parquets
-sueltos, útil solo para trabajo local. El resultado son las observaciones de FRED completas, que
-las condiciones de uso de FRED no permiten redistribuir (ver README).
+DO NOT PUBLISH the output of this module. Unlike the rest of `src/fred_forecast`,
+this is not part of the reproducible pipeline documented/published in the thesis -- it is a shortcut
+for having the full dataset (including observations) in a single file instead of 114 separate
+parquets, useful only for local work. The result is the full FRED observations, which FRED's
+terms of use do not allow to redistribute (see README).
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ PARQUET_SCHEMA = pa.schema(
 
 
 def _load_series_full(database_json_path: Path) -> pd.DataFrame:
-    """Carga todos los campos de la base de datos (incluidas las observaciones)."""
+    """Load all fields from the database (including observations)."""
     with open(database_json_path) as f:
         data = json.load(f)
 
@@ -61,8 +61,8 @@ def build_consolidated_dataset(
     notes_lookup_path: Path,
     frequency_label: str = "monthly",
 ) -> pd.DataFrame:
-    """Fusiona la base de datos (Fase 3) con los tags expandidos (Fase 1) en un DataFrame tipado,
-    listo para exportar a parquet/jsonl con `save_parquet`/`save_jsonl_gz`.
+    """Merge the database (Phase 3) with the expanded tags (Phase 1) into a typed DataFrame,
+    ready to export to parquet/jsonl with `save_parquet`/`save_jsonl_gz`.
     """
     df = _load_series_full(database_json_path)
     df_tags = load_tags_with_expanded_notes(tags_parquet_path, notes_lookup_path)
@@ -85,14 +85,14 @@ def save_parquet(df: pd.DataFrame, output_file: Path) -> None:
     output_file.parent.mkdir(parents=True, exist_ok=True)
     table = pa.Table.from_pandas(df, schema=PARQUET_SCHEMA, preserve_index=False)
     pq.write_table(table, output_file, compression="zstd", compression_level=7)
-    logger.info("Guardado %s", output_file)
+    logger.info("Saved %s", output_file)
 
 
 def save_jsonl_gz(df: pd.DataFrame, output_file: Path) -> None:
     output_file.parent.mkdir(parents=True, exist_ok=True)
     df = df.copy()
-    df["start_date"] = df["start_date"].astype(str)  # JSON no acepta timestamps
+    df["start_date"] = df["start_date"].astype(str)  # JSON does not accept timestamps
     with gzip.open(output_file, "wt", encoding="utf-8") as f:
         for record in df.to_dict(orient="records"):
             f.write(json.dumps(record) + "\n")
-    logger.info("Guardado %s", output_file)
+    logger.info("Saved %s", output_file)

@@ -1,8 +1,8 @@
-"""Baselines Chronos-Bolt-Base y Chronos-2 (Amazon) — zero-shot, sin fine-tuning.
+"""Chronos-Bolt-Base and Chronos-2 (Amazon) baselines -- zero-shot, without fine-tuning.
 
-Ambos reutilizan `UnivariateTestDataset` (misma normalización/padding que el resto del
-pipeline) y las métricas de `forecasting_metrics`. El contexto usado en el TFG fue 8 para
-Chronos-Bolt y 30 para Chronos-2; aquí es un parámetro, no un valor fijo, ver
+Both reuse `UnivariateTestDataset` (same normalization/padding as the rest of the
+pipeline) and the metrics from `forecasting_metrics`. The context used in the thesis was 8 for
+Chronos-Bolt and 30 for Chronos-2; here it is a parameter, not a fixed value, see
 `configs/baselines.yaml`.
 """
 from __future__ import annotations
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 @torch.no_grad()
 def evaluate_chronos_bolt(pipeline, loader, device, seasonality: int, padding_value: float, max_batches=None):
-    """Evalúa Chronos-Bolt-Base. `pipeline` = `BaseChronosPipeline.from_pretrained("amazon/chronos-bolt-base", ...)`."""
+    """Evaluate Chronos-Bolt-Base. `pipeline` = `BaseChronosPipeline.from_pretrained("amazon/chronos-bolt-base", ...)`."""
     all_mae, all_smape, all_mase = [], [], []
     all_preds, all_targets, all_contexts = [], [], []
 
@@ -55,13 +55,13 @@ def evaluate_chronos_bolt(pipeline, loader, device, seasonality: int, padding_va
 
 @torch.no_grad()
 def evaluate_chronos2(pipeline, loader, device, seasonality: int, padding_value: float, max_batches=None):
-    """Evalúa Chronos-2. `pipeline` = `BaseChronosPipeline.from_pretrained("amazon/chronos-2", device_map=...)`.
+    """Evaluate Chronos-2. `pipeline` = `BaseChronosPipeline.from_pretrained("amazon/chronos-2", device_map=...)`.
 
-    Chronos-2 necesita el contexto con forma (B, n_variates, L) y devuelve una lista de
-    tensores por muestra en vez de un único tensor batched — de ahí el `unsqueeze`/`stack`
-    extra frente a Chronos-Bolt. El parche de `torch.Tensor.pin_memory` reproduce un
-    workaround necesario de la implementación original (incompatibilidad puntual entre el
-    `DataLoader` y el pipeline de Chronos-2, no un bug a "arreglar").
+    Chronos-2 needs the context shaped as (B, n_variates, L) and returns a list of
+    tensors per sample instead of a single batched tensor -- hence the extra `unsqueeze`/`stack`
+    compared to Chronos-Bolt. The `torch.Tensor.pin_memory` patch reproduces a
+    workaround needed by the original implementation (a one-off incompatibility between the
+    `DataLoader` and the Chronos-2 pipeline, not a bug to "fix").
     """
     all_mae, all_smape, all_mase = [], [], []
     all_preds, all_targets, all_contexts = [], [], []
@@ -73,7 +73,7 @@ def evaluate_chronos2(pipeline, loader, device, seasonality: int, padding_value:
             if max_batches is not None and batch_idx >= max_batches:
                 break
             ctx_in = context.squeeze(-1).to(device)  # (B, L)
-            ctx_in = ctx_in.unsqueeze(1)  # (B, 1, L) — Chronos-2 quiere n_variates explícito
+            ctx_in = ctx_in.unsqueeze(1)  # (B, 1, L) -- Chronos-2 needs an explicit n_variates dimension
             horizon = horizon.to(device)
             mask_f = mask.to(device, dtype=torch.float32)
 

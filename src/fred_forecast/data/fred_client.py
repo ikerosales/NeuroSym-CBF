@@ -1,18 +1,18 @@
-"""Cliente ligero para la API REST de FRED (Federal Reserve Economic Data).
+"""Lightweight client for the FRED (Federal Reserve Economic Data) REST API.
 
-Cubre las dos llamadas que usa el pipeline de descarga masiva: listar todos los release IDs
-(API v1) y descargar, paginadas, las observaciones de un release filtradas por frecuencia
+Covers the two calls used by the bulk download pipeline: list all release IDs
+(API v1) and download, in pages, the observations of a release filtered by frequency
 (API v2).
 
-Incluye `units` por defecto: aunque la última versión del driver de descarga original lo
-desactivaba (`include_units=False`), al inspeccionar la base de datos v4 real que se usó para
-todo el TFG, el campo `units` está poblado en prácticamente el 100% de las series muestreadas
-(los releases ya existían en disco de una descarga anterior con `include_units=True` y el
-driver se limitaba a saltarlos) — y además se usa en el texto de los embeddings de metadatos
-("Measured in {units}", ver la Fase 4). `notes` sí se excluye:
-en la base de datos real está poblado de forma inconsistente según cuándo se descargó cada
-release, y no lo usa ninguna fase posterior — la información de notas relevante (de tags,
-no de series) se obtiene aparte, ver `download_tags.py`.
+Includes `units` by default: although the last version of the original download driver
+disabled it (`include_units=False`), after inspecting the real v4 database used for
+the thesis, the `units` field is populated in practically 100% of sampled series
+(the releases already existed on disk from a previous download with `include_units=True` and the
+driver simply skipped them) -- and it is also used in the metadata embedding text
+("Measured in {units}", see Phase 4). `notes` is excluded:
+in the real database it is populated inconsistently depending on when each
+release was downloaded, and no later phase uses it -- the relevant note information (from tags,
+not series) is obtained separately, see `download_tags.py`.
 """
 from __future__ import annotations
 
@@ -41,7 +41,7 @@ VALID_FREQUENCIES = [
 
 
 def get_all_release_ids(api_key: str, page_size: int = 1000) -> list[int]:
-    """Devuelve todos los release IDs disponibles en FRED (paginado)."""
+    """Return all release IDs available in FRED (paginated)."""
     params: dict = {"api_key": api_key, "file_type": "json", "limit": page_size, "offset": 0}
     releases: list[dict] = []
 
@@ -56,7 +56,7 @@ def get_all_release_ids(api_key: str, page_size: int = 1000) -> list[int]:
         params["offset"] += page_size
 
     release_ids = [r["id"] for r in releases]
-    logger.info("Encontrados %d releases", len(release_ids))
+    logger.info("Found %d releases", len(release_ids))
     return release_ids
 
 
@@ -69,15 +69,15 @@ def iter_release_observations(
     include_units: bool = True,
     include_notes: bool = False,
 ) -> Iterator[pd.DataFrame]:
-    """Itera las páginas de observaciones de `release_id` filtradas a `freq`.
+    """Iterate over the `release_id` observation pages filtered to `freq`.
 
-    Cada fila es una observación (series_id, date, value, title, y opcionalmente units/notes).
-    Reintenta indefinidamente ante HTTP 429 (rate limit) esperando `rate_limit_wait_seconds`;
-    para cualquier otro error HTTP corta la descarga de ese release (se registra y se continúa
-    con el siguiente release desde el llamador).
+    Each row is an observation (series_id, date, value, title, and optionally units/notes).
+    It retries indefinitely on HTTP 429 (rate limit) while waiting `rate_limit_wait_seconds`;
+    for any other HTTP error it stops downloading that release (it logs it and the caller
+    continues with the next release).
     """
     if freq not in VALID_FREQUENCIES:
-        raise ValueError(f"Frecuencia {freq!r} no válida. Usa una de {VALID_FREQUENCIES}.")
+        raise ValueError(f"Invalid frequency {freq!r}. Use one of {VALID_FREQUENCIES}.")
 
     headers = {"Authorization": f"Bearer {api_key}"}
     params: dict = {"release_id": release_id, "format": "json", "limit": page_limit}
@@ -87,11 +87,11 @@ def iter_release_observations(
         response = requests.get(RELEASE_OBSERVATIONS_URL, params=params, headers=headers)
 
         if response.status_code == 429:
-            logger.warning("Rate limit en release %s, esperando %ds", release_id, rate_limit_wait_seconds)
+            logger.warning("Rate limit on release %s, waiting %ds", release_id, rate_limit_wait_seconds)
             time.sleep(rate_limit_wait_seconds)
             continue
         if response.status_code != 200:
-            logger.error("HTTP %d descargando release %s", response.status_code, release_id)
+            logger.error("HTTP %d downloading release %s", response.status_code, release_id)
             return
 
         data = response.json()

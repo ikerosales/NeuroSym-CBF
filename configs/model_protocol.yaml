@@ -1,6 +1,6 @@
-# Protocolo experimental compartido por Unimodal-ablation y NeuroSym-CBF (Fase 6).
-# "No cambiar estos valores entre modelos" -- criterio original del TFG, preservado: son los
-# valores exactos usados para entrenar y evaluar los modelos del TFG.
+# Experimental protocol shared by Unimodal-ablation and NeuroSym-CBF (Phase 6).
+# "Do not change these values between models" -- original thesis criterion, preserved: these are the
+# exact values used to train and evaluate the thesis models.
 
 seed: 40
 
@@ -10,10 +10,10 @@ data:
   horizon_len: 18
   padding_value: -1
   batch_size: 2048
-  num_workers: 0    # workers del DataLoader — solo rendimiento, no afecta a los resultados
-                    # (el orden de muestras lo fija el sampler seedeado en el proceso principal).
-                    # En Windows déjalo a 0: el spawn serializa el dataset entero (~1GB) por pipe
-                    # a cada worker y el pickle se trunca (OSError 22). En Linux (fork) sí compensa.
+  num_workers: 0    # DataLoader workers -- performance only, does not affect the results
+                    # (sample order is fixed by the seeded sampler in the main process).
+                    # On Windows keep this at 0: spawn serializes the entire dataset (~1GB) through the pipe
+                    # to each worker and the pickle gets truncated (OSError 22). On Linux (fork) it can pay off.
 
 backbone:
   num_blocks: 4
@@ -24,7 +24,7 @@ backbone:
   dropout: 0.1
   seasonality: 12
 
-sae_film:               # solo lo usa NeuroSym-CBF (no Unimodal-ablation)
+sae_film:               # used only by NeuroSym-CBF (not by Unimodal-ablation)
   d_ff_meta: 64
   dict_mult: 2
   top_k: 16

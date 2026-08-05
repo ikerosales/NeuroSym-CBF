@@ -1,19 +1,19 @@
-"""Baseline AutoETS (`statsforecast`): el baseline estadístico clásico del trabajo.
+"""AutoETS baseline (`statsforecast`): the classic statistical baseline of the work.
 
-A diferencia de los modelos propios (PyTorch), AutoETS trabaja sobre DataFrames pandas en
-formato "long" (`unique_id`, `ds`, `y`) y `statsforecast` vectoriza/paraleliza el ajuste por
-serie internamente — no hay bucle explícito por serie ni `DataLoader`. Las métricas se
-recalculan aquí en numpy (no se reutilizan las de `forecasting_metrics`, que son para
-tensores torch con máscara) — son la misma matemática, solo que operando sobre arrays
-numpy sin padding (cada ventana tiene garantizado el largo completo por construcción).
+Unlike the custom models (PyTorch), AutoETS works on pandas DataFrames in
+"long" format (`unique_id`, `ds`, `y`) and `statsforecast` vectorizes/parallellizes the fit per
+series internally -- there is no explicit per-series loop or `DataLoader`. The metrics are
+recomputed here in numpy (the ones from `forecasting_metrics`, which are for masked torch
+tensors, are not reused) -- it is the same math, just operating on numpy arrays
+without padding (each window is guaranteed to have the full length by construction).
 
-Existen dos variantes, controladas por CUÁNDO se normaliza respecto al ajuste del modelo:
-- `normafter`: AutoETS se ajusta en escala original; la normalización se aplica a las
-  predicciones después.
-- `normbefore`: el contexto ya se normaliza (min-max por ventana) antes de ajustar AutoETS.
+There are two variants, controlled by WHEN normalization happens relative to fitting the model:
+- `normafter`: AutoETS is fit in the original scale; normalization is applied to the
+    predictions afterward.
+- `normbefore`: the context is normalized first (per-window min-max) before fitting AutoETS.
 
-El contexto usado en el TFG fue 8 (no 30, pese a que el comentario del código decía lo
-contrario) — aquí es un parámetro, no un valor fijo; ver `configs/baselines.yaml`.
+The context used in the thesis was 8 (not 30, despite the code comment saying otherwise) --
+here it is a parameter, not a fixed value; see `configs/baselines.yaml`.
 """
 from __future__ import annotations
 
@@ -28,8 +28,8 @@ logger = logging.getLogger(__name__)
 
 
 def build_long_frames(df_test: pd.DataFrame, cntxt_len: int, horizon_len: int):
-    """Construye los DataFrames long-format (original y normalizado) + arrays auxiliares
-    (contexto/target normalizados, target en escala original, stats de normalización).
+    """Build the long-format DataFrames (original and normalized) + auxiliary arrays
+    (normalized context/target, original-scale target, normalization stats).
     """
     rows_orig = []
     rows_normed = []
@@ -39,7 +39,7 @@ def build_long_frames(df_test: pd.DataFrame, cntxt_len: int, horizon_len: int):
     stats = []
     series_ids = []
 
-    base_date = pd.Timestamp("2000-01-01")  # fechas sintéticas: a AutoETS no le importan las reales
+    base_date = pd.Timestamp("2000-01-01")  # synthetic dates: AutoETS does not care about the real ones
 
     for _, row in df_test.iterrows():
         sid = row["series_id"]
@@ -85,11 +85,11 @@ def build_long_frames(df_test: pd.DataFrame, cntxt_len: int, horizon_len: int):
 
 
 def run_autoets(df_long: pd.DataFrame, horizon_len: int, season_length: int, n_jobs: int):
-    """Ajusta AutoETS sobre todas las series de `df_long` (vectorizado por `statsforecast`).
+    """Fit AutoETS on all series in `df_long` (vectorized by `statsforecast`).
 
-    Devuelve `(preds_dict, fallback_ids)`: predicciones por `series_id`, y los IDs que
-    cayeron a SeasonalNaive (detectado por igualdad numérica con un ajuste SeasonalNaive
-    puro sobre los mismos datos, no por introspección del modelo).
+    Returns `(preds_dict, fallback_ids)`: predictions by `series_id`, and the IDs that
+    fell back to SeasonalNaive (detected by numeric equality with a pure SeasonalNaive fit
+    on the same data, not by model introspection).
     """
     sf = StatsForecast(
         models=[AutoETS(season_length=season_length, model="ZZZ")],
@@ -97,7 +97,7 @@ def run_autoets(df_long: pd.DataFrame, horizon_len: int, season_length: int, n_j
         n_jobs=n_jobs,
         fallback_model=SeasonalNaive(season_length=season_length),
     )
-    logger.info("Ajustando AutoETS sobre %d series...", df_long["unique_id"].nunique())
+    logger.info("Fitting AutoETS on %d series...", df_long["unique_id"].nunique())
     forecasts = sf.forecast(df=df_long, h=horizon_len)
 
     preds_dict = {
@@ -128,9 +128,9 @@ def smape_per_sample(pred: np.ndarray, target: np.ndarray) -> np.ndarray:
 def mase_per_sample(
     pred: np.ndarray, target: np.ndarray, context: np.ndarray, seasonality: int = 12, min_naive: float = 1e-3
 ) -> tuple[np.ndarray, np.ndarray]:
-    """MASE filtrado (`naive >= min_naive`) + el array de naive baselines usado (para
-    reutilizar en el cálculo de baseline naive general). `context` aquí ya viene sin padding
-    (ventanas de longitud completa por construcción), a diferencia de las funciones torch.
+    """Filtered MASE (`naive >= min_naive`) + the array of naive baselines used (to
+    reuse in the general naive baseline calculation). `context` here already comes without padding
+    (full-length windows by construction), unlike the torch functions.
     """
     mae_fc = np.abs(pred - target).mean(axis=1)
 
@@ -159,9 +159,9 @@ def evaluate_autoets(
     seasonality: int,
     n_jobs: int,
 ) -> dict:
-    """Evalúa una variante ('normafter' o 'normbefore') de AutoETS sobre `df_test`."""
+    """Evaluate one AutoETS variant ('normafter' or 'normbefore') on `df_test`."""
     if variant not in {"normafter", "normbefore"}:
-        raise ValueError(f"variant debe ser 'normafter' o 'normbefore', no {variant!r}")
+        raise ValueError(f"variant must be 'normafter' or 'normbefore', not {variant!r}")
 
     (df_long_orig, df_long_normed, contexts_np, targets_np, _targets_orig_np, stats_np, series_ids) = (
         build_long_frames(df_test, cntxt_len, horizon_len)
@@ -185,7 +185,7 @@ def evaluate_autoets(
     mase_arr, naive_baselines = mase_per_sample(preds_norm, targets_np, contexts_np, seasonality=seasonality)
 
     logger.info(
-        "Fallbacks a SeasonalNaive: %d (%.1f%%)", len(fallback_ids), 100 * len(fallback_ids) / len(series_ids)
+        "SeasonalNaive fallbacks: %d (%.1f%%)", len(fallback_ids), 100 * len(fallback_ids) / len(series_ids)
     )
 
     return {

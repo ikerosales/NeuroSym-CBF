@@ -1,5 +1,5 @@
-"""Métricas probabilísticas (pinball loss, cobertura, anchura de intervalo) para la variante
-por cuantiles. Trabajo preliminar/futuro, ver `experimental/README.md`.
+"""Probabilistic metrics (pinball loss, coverage, interval width) for the quantile variant.
+Preliminary/future work, see `experimental/README.md`.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ def pinball_loss_per_sample(
     target: (B, H, 1)
     mask  : (B, H, 1) — float
     quantiles: tensor de forma (Q,)
-    Devuelve pinball por muestra y por cuantil: (B, Q)
+    Returns pinball per sample and per quantile: (B, Q)
     """
     target_exp = target.expand(-1, -1, len(quantiles))  # (B, H, Q)
     diff = target_exp - pred  # (B, H, Q)
@@ -28,12 +28,12 @@ def pinball_loss_per_sample(
 def pinball_loss_mean(
     pred: torch.Tensor, target: torch.Tensor, mask: torch.Tensor, quantiles: torch.Tensor
 ) -> torch.Tensor:
-    """Pinball loss escalar, promediado sobre batch, horizonte y cuantiles."""
+    """Scalar pinball loss, averaged over batch, horizon, and quantiles."""
     return pinball_loss_per_sample(pred, target, mask, quantiles).mean()
 
 
 def coverage_per_sample(pred_upper: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
-    """Cobertura unilateral: fracción de pasos del horizonte (no enmascarados) donde
+    """One-sided coverage: fraction of horizon steps (unmasked) where
     `target <= pred_upper`. pred_upper, target, mask: (B, H, 1). Devuelve (B,).
     """
     below = (target <= pred_upper).float()
@@ -43,6 +43,6 @@ def coverage_per_sample(pred_upper: torch.Tensor, target: torch.Tensor, mask: to
 def interval_width_per_sample(
     pred_upper: torch.Tensor, pred_median: torch.Tensor, mask: torch.Tensor
 ) -> torch.Tensor:
-    """Anchura media (q0.9 - q0.5) sobre el horizonte no enmascarado. (B,)."""
+    """Mean width (q0.9 - q0.5) over the unmasked horizon. (B,).""
     w = pred_upper - pred_median
     return (w * mask.float()).sum(dim=(1, 2)) / (mask.float().sum(dim=(1, 2)) + 1e-8)

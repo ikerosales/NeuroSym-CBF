@@ -1,10 +1,10 @@
-"""Dataset de test, sin metadatos, para baselines zero-shot (Chronos-Bolt, Chronos-2, TimesFM).
+"""Test dataset, without metadata, for zero-shot baselines (Chronos-Bolt, Chronos-2, TimesFM).
 
-Estos modelos son univariantes (no consumen embeddings de metadatos), así que no necesitan
-la rama de metadatos ni el muestreo por ventana deslizante de
-`fred_forecast.datasets.timeseries_dataset.TimeSeriesDataset` — solo una ventana de test por
-serie. Es una versión reducida de ese dataset (misma normalización min-max por ventana y
-padding, sin la rama de metadatos), compartida por los tres baselines de foundation models.
+These models are univariate (they do not consume metadata embeddings), so they do not need
+the metadata branch or the sliding-window sampling of
+`fred_forecast.datasets.timeseries_dataset.TimeSeriesDataset` -- only one test window per
+series. It is a reduced version of that dataset (same per-window min-max normalization and
+padding, without the metadata branch), shared by the three foundation-model baselines.
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from torch.utils.data import Dataset
 
 class UnivariateTestDataset(Dataset):
     """
-    Una única ventana de test por serie (últimas `horizon_length` observaciones).
+    A single test window per series (the last `horizon_length` observations).
     Returns:
         context (L, 1), horizon (H, 1), mask (H, 1), stats (2,) = [c_min, denom]
     """

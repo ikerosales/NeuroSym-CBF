@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-"""Entrena y evalúa NeuroSym-CBF (pinball) — trabajo preliminar/futuro, ver
-`experimental/README.md`. A diferencia del core no se ha separado train/evaluate en dos
-scripts (no es el pipeline principal, no vale la pena esa inversión todavía), pero sí
-reutiliza el mismo formato de resultados que el core: JSON de métricas agregadas + .npz de
-arrays por muestra, bajo `<RESULTS_DIR>/metrics/`.
+"""Train and evaluate NeuroSym-CBF (pinball) -- preliminary/future work, see
+`experimental/README.md`. Unlike the core, train/evaluate has not been split into two
+scripts (it is not the main pipeline, so that investment is not worth it yet), but it does
+reuse the same result format as the core: aggregated metrics JSON + .npz of
+per-sample arrays, under `<RESULTS_DIR>/metrics/`.
 
-Ejecutar desde la raíz del repo:
+Run from the root of the repo:
     python experimental/train_neurosym_cbf_pinball.py
 """
 from __future__ import annotations
@@ -37,7 +37,7 @@ UPPER_IDX = QUANTILES.index(0.9)
 
 
 def main() -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args()  # solo para -h/--help
+    argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
 
     config = load_yaml_config("configs/model_protocol.yaml")
     data_config = load_yaml_config("configs/data.yaml")

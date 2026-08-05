@@ -1,10 +1,10 @@
-"""Guarda/carga resultados de evaluación en un formato consistente en todo el proyecto:
-métricas agregadas (escalares) en JSON, arrays por muestra en `.npz`.
+"""Save/load evaluation results in a consistent format across the project:
+aggregated scalar metrics in JSON, per-sample arrays in `.npz`.
 
-Evita el patrón del código original de volcar arrays de cientos de miles de
-elementos como listas dentro del JSON (`preds_per_sample`, `contexts_per_sample`, ...):
-JSON queda pequeño, legible y diffable en git; los arrays van en un binario comprimido,
-mucho más rápido de cargar para los scripts de agregación/comparación (`11_aggregate_results.py`).
+This avoids the pattern from the original code of dumping arrays with hundreds of thousands of
+elements as lists inside the JSON (`preds_per_sample`, `contexts_per_sample`, ...):
+the JSON stays small, readable, and git-diffable; arrays go into a compressed binary,
+much faster to load for the aggregation/comparison scripts (`11_aggregate_results.py`).
 """
 from __future__ import annotations
 
@@ -27,24 +27,24 @@ def save_results(
     npz_path: Path,
     extra_metadata: dict | None = None,
 ) -> None:
-    """Separa `results` en campos escalares (-> `json_path`) y campos array/tensor
-    (-> `npz_path`, comprimido). `extra_metadata` se añade siempre al JSON (p.ej. qué
-    modelo/contexto/seed generó el resultado).
+    """Split `results` into scalar fields (-> `json_path`) and array/tensor fields
+    (-> `npz_path`, compressed). `extra_metadata` is always added to the JSON (e.g. which
+    model/context/seed generated the result).
     """
     scalars: dict = {}
     arrays: dict = {}
 
     for key, value in results.items():
         if isinstance(value, _SCALAR_TYPES) or isinstance(value, _JSON_NATIVE_TYPES):
-            # listas/dicts pequeños (p.ej. IDs de series con fallback) van directos al JSON;
-            # para arrays numéricos grandes, usa np.ndarray/torch.Tensor (-> .npz).
+            # Small lists/dicts (e.g. fallback series IDs) go directly into the JSON;
+            # for large numeric arrays, use np.ndarray/torch.Tensor (-> .npz).
             scalars[key] = value
         elif isinstance(value, torch.Tensor):
             arrays[key] = value.numpy()
         elif isinstance(value, np.ndarray):
             arrays[key] = value
         else:
-            logger.warning("Campo %r de tipo %s ignorado (ni escalar ni array)", key, type(value))
+            logger.warning("Field %r of type %s ignored (neither scalar nor array)", key, type(value))
 
     if extra_metadata:
         scalars.update(extra_metadata)
@@ -56,12 +56,12 @@ def save_results(
     npz_path.parent.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(npz_path, **arrays)
 
-    logger.info("Métricas agregadas -> %s", json_path)
-    logger.info("Arrays por muestra -> %s", npz_path)
+    logger.info("Aggregated metrics -> %s", json_path)
+    logger.info("Per-sample arrays -> %s", npz_path)
 
 
 def load_results(json_path: Path, npz_path: Path) -> dict:
-    """Recompone el dict de resultados original a partir de los dos ficheros."""
+    """Recompose the original results dict from the two files."""
     with open(json_path) as f:
         scalars = json.load(f)
     with np.load(npz_path) as npz:

@@ -1,9 +1,9 @@
-"""Unimodal-ablation: variante unimodal del modelo propio, sin metadatos.
+"""Unimodal-ablation: unimodal variant of the custom model, without metadata.
 
-Patch encoder -> coeficientes simbólicos -> SymbolicHead. Aunque el DataLoader carga los
-embeddings de metadatos (para mantener la misma firma de batch que NeuroSym-CBF), el
-`forward` no los toca: es deliberado, para que sea exactamente NeuroSym-CBF sin la rama
-multimodal y así aislar la contribución de los metadatos en la ablación.
+Patch encoder -> symbolic coefficients -> SymbolicHead. Although the DataLoader loads the
+metadata embeddings (to keep the same batch signature as NeuroSym-CBF), the
+`forward` does not touch them: this is deliberate, so that it is exactly NeuroSym-CBF without the
+multimodal branch and therefore isolates the contribution of metadata in the ablation.
 """
 from __future__ import annotations
 

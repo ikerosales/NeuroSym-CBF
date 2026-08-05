@@ -1,10 +1,10 @@
-"""Encoder de parcheo compartido por las tres fases del modelo propio.
+"""Patch encoder shared by the three phases of the custom model.
 
-Divide el contexto en parches solapados (`unfold`), los proyecta a `d_model` y los pasa
-por `num_blocks` bloques residuales. Esta lógica (unfold + input_proj + res_blocks) estaba
-copiada de forma idéntica en las tres variantes de origen del modelo (como método
-`encode`/`encode_ts` dentro de cada clase) — factorizada aquí en una única clase para no
-triplicar el código. No se ha cambiado ninguna operación ni forma de tensor respecto al original.
+It splits the context into overlapping patches (`unfold`), projects them to `d_model`, and passes
+them through `num_blocks` residual blocks. This logic (unfold + input_proj + res_blocks) was
+copied identically in the three source model variants (as `encode`/`encode_ts` methods inside each
+class) -- factored here into a single class so the code is not triplicated. No operation or tensor
+shape has been changed relative to the original.
 """
 from __future__ import annotations
 

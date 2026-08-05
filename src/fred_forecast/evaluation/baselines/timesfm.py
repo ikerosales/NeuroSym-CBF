@@ -1,10 +1,9 @@
-"""Baseline TimesFM-200M (Google) — zero-shot, sin fine-tuning.
+"""TimesFM-200M baseline (Google) -- zero-shot, without fine-tuning.
 
-TimesFM no acepta las ventanas con padding por la izquierda tal cual — su `.forecast()` toma
-una lista de arrays 1-D de longitud variable, así
-que el padding (`padding_value`) se retira antes de la llamada (heurística de umbral:
-`c > padding_value - 0.01`, válida porque los valores reales normalizados nunca bajan de eso
-tras el min-max por ventana).
+TimesFM does not accept left-padded windows as-is -- its `.forecast()` takes
+a list of 1-D arrays of variable length, so the padding (`padding_value`) is removed before the call
+(threshold heuristic: `c > padding_value - 0.01`, valid because the real normalized values never go below that
+after per-window min-max normalization).
 """
 from __future__ import annotations
 
@@ -26,7 +25,7 @@ logger = logging.getLogger(__name__)
 def evaluate_timesfm(
     model, loader, device, horizon_len: int, seasonality: int, padding_value: float, max_batches=None
 ) -> dict:
-    """`model` = `timesfm.TimesFm(...)` ya cargado con el checkpoint de HuggingFace."""
+    """`model` = `timesfm.TimesFm(...)` already loaded with the HuggingFace checkpoint."""
     all_mae, all_smape, all_mase = [], [], []
     all_preds, all_targets, all_contexts = [], [], []
 

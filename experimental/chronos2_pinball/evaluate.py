@@ -1,13 +1,13 @@
-"""Baseline Chronos-2 en modo probabilístico (pinball). Trabajo preliminar/futuro, ver
-`experimental/README.md` — pensado específicamente para comparar contra NeuroSym-CBF (pinball).
+"""Chronos-2 baseline in probabilistic mode (pinball). Preliminary/future work, see
+`experimental/README.md` -- intended specifically for comparison against NeuroSym-CBF (pinball).
 
-A diferencia del baseline puntual de Chronos-2 (que solo extrae la mediana de las muestras),
-aquí se piden los cuantiles 0.5 y 0.9 vía `torch.quantile` sobre las muestras devueltas por
-Chronos-2, y se evalúa con las mismas métricas de pinball/cobertura/anchura de intervalo que
-`neurosym_cbf_pinball` (reutilizadas de ahí, no reimplementadas otra vez).
+Unlike the point Chronos-2 baseline (which only extracts the sample median),
+this asks for the 0.5 and 0.9 quantiles via `torch.quantile` over the samples returned by
+Chronos-2, and it is evaluated with the same pinball/coverage/interval-width metrics as
+`neurosym_cbf_pinball` (reused from there, not reimplemented again).
 
-Este módulo solo evalúa y devuelve los arrays (incluido `contexts`); la generación de figuras,
-si se hace, iría aparte a partir de ese resultado.
+This module only evaluates and returns the arrays (including `contexts`); figure generation,
+if done, would happen separately from that result.
 """
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ def evaluate_chronos2_pinball(
                 break
 
             ctx_in = context.squeeze(-1).to(device)  # (B, L)
-            ctx_in = ctx_in.unsqueeze(1)  # (B, 1, L) — Chronos-2 quiere n_variates explícito
+            ctx_in = ctx_in.unsqueeze(1)  # (B, 1, L) -- Chronos-2 needs an explicit n_variates dimension
             horizon = horizon.to(device)
             mask_f = mask.to(device, dtype=torch.float32)
 

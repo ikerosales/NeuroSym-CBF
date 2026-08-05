@@ -1,9 +1,9 @@
-"""Fase 1 del pipeline: descarga masiva de observaciones FRED por release.
+"""Phase 1 of the pipeline: bulk download of FRED observations by release.
 
-Para cada release de FRED, descarga sus observaciones filtradas por frecuencia y las escribe
-incrementalmente en un parquet por release. Es resumible: si `<output_dir>/release_<id>.parquet`
-ya existe, o si una ejecución anterior registró ese release como vacío para la frecuencia pedida
-(`_empty_releases.json`), se salta sin volver a pedirlo a la API.
+For each FRED release, it downloads its observations filtered by frequency and writes them
+incrementally into one parquet per release. It is resumable: if `<output_dir>/release_<id>.parquet`
+already exists, or if a previous run recorded that release as empty for the requested frequency
+(`_empty_releases.json`), it is skipped without requesting it from the API again.
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def download_release(
     include_units: bool = True,
     include_notes: bool = False,
 ) -> int:
-    """Descarga todas las páginas de observaciones `freq` de un release, escribiendo a `output_file`."""
+    """Download all pages of `freq` observations for a release, writing to `output_file`."""
     total = 0
     for page_df in iter_release_observations(
         release_id, api_key, freq, include_units=include_units, include_notes=include_notes
@@ -60,7 +60,7 @@ def download_all_releases(
     include_units: bool = True,
     include_notes: bool = False,
 ) -> None:
-    """Descarga las observaciones de frecuencia `freq` de todos los releases de FRED a `output_dir`."""
+    """Download the `freq` observations of all FRED releases into `output_dir`."""
     output_dir.mkdir(parents=True, exist_ok=True)
     state_file = output_dir / "_empty_releases.json"
     checked = _load_checked(state_file)
@@ -70,11 +70,11 @@ def download_all_releases(
         output_file = output_dir / f"release_{release_id}.parquet"
 
         if output_file.exists():
-            logger.info("[%d/%d] release %s ya descargado, se salta", i, len(release_ids), release_id)
+            logger.info("[%d/%d] release %s already downloaded, skipping", i, len(release_ids), release_id)
             continue
         if release_id in checked:
             logger.info(
-                "[%d/%d] release %s no tenía series %s, se salta", i, len(release_ids), release_id, freq.lower()
+                "[%d/%d] release %s had no %s series, skipping", i, len(release_ids), release_id, freq.lower()
             )
             continue
 
@@ -83,9 +83,9 @@ def download_all_releases(
         )
         if n_obs > 0:
             logger.info(
-                "[%d/%d] release %s: %d observaciones %s guardadas", i, len(release_ids), release_id, n_obs, freq.lower()
+                "[%d/%d] release %s: %d %s observations saved", i, len(release_ids), release_id, n_obs, freq.lower()
             )
         else:
-            logger.info("[%d/%d] release %s: sin series %s", i, len(release_ids), release_id, freq.lower())
+            logger.info("[%d/%d] release %s: no %s series", i, len(release_ids), release_id, freq.lower())
             checked.add(release_id)
             _save_checked(state_file, checked)

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-"""Fase 1 del pipeline: descarga masiva de observaciones FRED por release.
+"""Phase 1 of the pipeline: bulk download of FRED observations by release.
 
-Descarga, para cada frecuencia configurada en configs/data.yaml (Monthly en el TFG), las
-observaciones de TODOS los releases de FRED y las guarda incrementalmente en parquet bajo
+Downloads, for each frequency configured in configs/data.yaml (Monthly in the thesis), the
+observations from ALL FRED releases and saves them incrementally as parquet under
 `<DATA_DIR>/raw/parquet_<freq>/release_<id>.parquet`.
 
-Uso:
+Usage:
     python scripts/01_download_releases.py
     python scripts/01_download_releases.py --freq Monthly
 """
@@ -28,7 +28,7 @@ def main() -> None:
     parser.add_argument(
         "--freq",
         choices=config["frequencies"],
-        help="Si se omite, descarga todas las frecuencias listadas en configs/data.yaml",
+        help="If omitted, downloads all frequencies listed in configs/data.yaml",
     )
     args = parser.parse_args()
 
@@ -38,7 +38,7 @@ def main() -> None:
 
     for freq in freqs:
         output_dir = raw_dir / f"parquet_{freq.strip().lower()}"
-        logger.info("Descargando releases con frecuencia %s -> %s", freq, output_dir)
+        logger.info("Downloading releases at frequency %s -> %s", freq, output_dir)
         download_all_releases(freq=freq, output_dir=output_dir, api_key=api_key)
 
 

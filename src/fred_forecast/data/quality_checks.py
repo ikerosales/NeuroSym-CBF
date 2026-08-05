@@ -1,5 +1,5 @@
-"""Checks de calidad sobre los parquets de releases descargados (uso ad hoc, no es parte
-del pipeline secuencial — ver scripts/check_data_quality.py).
+"""Quality checks over the downloaded release parquets (ad hoc use, not part
+of the sequential pipeline -- see scripts/check_data_quality.py).
 """
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import pandas as pd
 
 
 def find_duplicate_series_ids(parquet_dir: Path) -> dict[str, int]:
-    """{series_id: nº de releases en los que aparece} para IDs que aparecen en más de un release."""
+    """{series_id: number of releases where it appears} for IDs that appear in more than one release."""
     counts: Counter[str] = Counter()
     for file in parquet_dir.glob("release_*.parquet"):
         ids = pd.read_parquet(file, columns=["series_id"], engine="fastparquet")["series_id"].unique()
@@ -19,7 +19,7 @@ def find_duplicate_series_ids(parquet_dir: Path) -> dict[str, int]:
 
 
 def last_update_stats(parquet_dir: Path) -> pd.Series:
-    """Fecha de última observación de cada serie, para todas las series de `parquet_dir`."""
+    """Last observation date for each series, across all series in `parquet_dir`."""
     last_dates = []
     for file in parquet_dir.glob("release_*.parquet"):
         df = pd.read_parquet(file, columns=["series_id", "date"], engine="fastparquet")
@@ -28,7 +28,7 @@ def last_update_stats(parquet_dir: Path) -> pd.Series:
 
 
 def nan_percentage_by_series(parquet_dir: Path) -> pd.Series:
-    """% de observaciones `value` NaN por serie, indexado por series_id."""
+    """% of `value` observations that are NaN by series, indexed by series_id."""
     parts = []
     for file in parquet_dir.glob("release_*.parquet"):
         df = pd.read_parquet(file, columns=["series_id", "value"], engine="fastparquet")

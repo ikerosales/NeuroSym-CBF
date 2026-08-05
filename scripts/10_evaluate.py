@@ -1,20 +1,20 @@
 #!/usr/bin/env python
-"""Evalúa un modelo (propio o baseline) sobre el test set y guarda los resultados.
+"""Evaluate a model (custom or baseline) on the test set and save the results.
 
-Un único script de evaluación reutilizable entre TODOS los modelos (no uno por modelo, como
-en el proyecto original). Guarda métricas agregadas en JSON y arrays por
-muestra en `.npz`, bajo `<RESULTS_DIR>/metrics/{modelo}_ctx{N}.{json,npz}` — ver
+One reusable evaluation script for ALL models (not one per model, as in
+the original project). Saves aggregated metrics in JSON and per-sample arrays
+in `.npz`, under `<RESULTS_DIR>/metrics/{model}_ctx{N}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
-Modelos propios (`unimodal-ablation`, `neurosym-cbf`): evalúan un checkpoint ya entrenado
-con `scripts/07_*`/`08_*`. Baselines (`autoets-normafter`, `autoets-normbefore`,
-`chronos-bolt`, `chronos-2`, `timesfm`): zero-shot, no requieren checkpoint propio.
+Custom models (`unimodal-ablation`, `neurosym-cbf`): evaluate an already trained checkpoint
+from `scripts/07_*`/`08_*`. Baselines (`autoets-normafter`, `autoets-normbefore`,
+`chronos-bolt`, `chronos-2`, `timesfm`): zero-shot, no custom checkpoint required.
 
-El contexto (`context_len`) de cada baseline se lee de `configs/baselines.yaml` — en el TFG
-AutoETS/Chronos-Bolt se evaluaron con ctx=8 y Chronos-2/TimesFM con ctx=30 (inconsistencia
-real del protocolo original); cámbialo ahí si quieres relanzar cualquiera con otro contexto.
+The context length (`context_len`) for each baseline is read from `configs/baselines.yaml` -- in the thesis
+AutoETS/Chronos-Bolt were evaluated with ctx=8 and Chronos-2/TimesFM with ctx=30 (a real
+inconsistency in the original protocol); change it there if you want to rerun any of them with another context.
 
-Uso:
+Usage:
     python scripts/10_evaluate.py --model unimodal-ablation
     python scripts/10_evaluate.py --model neurosym-cbf
     python scripts/10_evaluate.py --model autoets-normafter
@@ -126,7 +126,7 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
             model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
         )
 
-    logger.info("Checkpoint cargado <- %s", checkpoint_path)
+    logger.info("Checkpoint loaded <- %s", checkpoint_path)
     return results, d["context_len"]
 
 
@@ -237,7 +237,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--model", choices=MODEL_CHOICES, required=True)
     parser.add_argument(
-        "--checkpoint", type=str, default=None, help="Ruta al checkpoint (solo modelos propios); por defecto se deriva de --model"
+        "--checkpoint", type=str, default=None, help="Path to the checkpoint (custom models only); by default it is derived from --model"
     )
     args = parser.parse_args()
 

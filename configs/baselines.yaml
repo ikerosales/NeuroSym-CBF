@@ -1,22 +1,22 @@
-# Hiperparámetros por baseline (Fase 7). El contexto es un parámetro por baseline, no un
-# valor fijo compartido: en el TFG, AutoETS y Chronos-Bolt se ejecutaron con
-# ctx=8 (pese a que sus propios comentarios decían "debe coincidir con ctx=30"), mientras que
-# Chronos-2 y TimesFM sí usaron ctx=30, igual que Unimodal-ablation/NeuroSym-CBF. Cambia estos
-# valores libremente para relanzar cualquier baseline con otro contexto -- no hay ningún
-# "valor correcto" hardcodeado en el código, solo lo que pongas aquí.
+# Baseline hyperparameters (Phase 7). The context length is a per-baseline parameter, not a
+# shared fixed value: in the thesis, AutoETS and Chronos-Bolt were run with
+# ctx=8 (despite their own comments saying it "must match ctx=30"), while
+# Chronos-2 and TimesFM used ctx=30, just like Unimodal-ablation/NeuroSym-CBF. Feel free to
+# change these values to rerun any baseline with a different context -- there is no hardcoded
+# "correct" value in the code, only what you set here.
 
 seasonality: 12
 horizon_len: 18
 padding_value: -1
 
 autoets:
-  # La variante reportada en el TFG (tabla 6.1) es 'normafter' -- verificado por coincidencia
-  # numérica exacta con el paper a ctx=8 (MAE 0.7808, MASE 3.2380, sMAPE med 91.23%). La otra
-  # variante ('normbefore', normalizar el contexto antes de ajustar) queda disponible en el
-  # código como alternativa, pero NO es la del trabajo. Usa: 10_evaluate.py --model autoets-normafter
+  # The variant reported in the thesis (Table 6.1) is 'normafter' -- verified by exact
+  # numerical match with the paper at ctx=8 (MAE 0.7808, MASE 3.2380, median sMAPE 91.23%). The other
+  # variant ('normbefore', normalize the context before fitting) remains available in the
+  # code as an alternative, but it is NOT the one used in the work. Use: 10_evaluate.py --model autoets-normafter
   variant: normafter
   context_len: 8
-  n_jobs: 4       # min(4, os.cpu_count()) en la implementación original
+  n_jobs: 4       # min(4, os.cpu_count()) in the original implementation
 
 chronos_bolt:
   context_len: 8

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-"""Fase 4 del pipeline: genera embeddings T5 de los metadatos (título+tags+unidades) de cada serie.
+"""Phase 4 of the pipeline: generate T5 embeddings from each series' metadata (title+tags+units).
 
-Requiere haber corrido antes las Fases 1-3 (base de datos JSON) y la descarga de tags
-(`scripts/02_download_tags.py`). Escribe `metadata_embeddings.pkl` — artefacto derivado del
-dataset FRED, nunca se publica (por las condiciones de uso de FRED, ver README).
+Requires running Phases 1-3 first (JSON database) and the tag download
+(`scripts/02_download_tags.py`). Writes `metadata_embeddings.pkl` -- a derived artifact of the
+FRED dataset, never published (because of FRED's terms of use, see README).
 
-Uso:
+Usage:
     python scripts/05_build_metadata_embeddings.py
 """
 from __future__ import annotations
@@ -33,7 +33,7 @@ def main() -> None:
     tags_dir = data_dir() / config["paths"]["tags_dir"]
     output_file = data_dir() / config["paths"]["embeddings_dir"] / "metadata_embeddings.pkl"
 
-    logger.info("Generando embeddings de metadatos -> %s", output_file)
+    logger.info("Generating metadata embeddings -> %s", output_file)
     df_embeddings = build_metadata_embeddings(
         database_json_path=database_json,
         tags_parquet_path=tags_dir / "fred_tags_output.parquet",

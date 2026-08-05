@@ -1,8 +1,8 @@
-"""NeuroSym-CBF (pinball): entrena y evalúa `NeuroSymCBFQuantileModel`.
+"""NeuroSym-CBF (pinball): train and evaluate `NeuroSymCBFQuantileModel`.
 
-La pérdida es pinball puro sobre los cuantiles configurados (igual que NeuroSym-CBF con MAE,
-el SAE no añade ningún término de reconstrucción/sparsity a la loss). Trabajo
-preliminar/futuro, ver `experimental/README.md`.
+The loss is pure pinball over the configured quantiles (just like NeuroSym-CBF with MAE,
+the SAE does not add any reconstruction/sparsity term to the loss). Preliminary/future
+work, see `experimental/README.md`.
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 def train_neurosym_cbf_pinball(
     model, loader, optimizer, scheduler, device, quantiles, num_epochs=3, max_batches=None
 ):
-    """`quantiles`: tensor 1-D con los cuantiles a predecir, p.ej. `torch.tensor([0.5, 0.9])`."""
+    """`quantiles`: 1-D tensor with the quantiles to predict, e.g. `torch.tensor([0.5, 0.9])`."""
     quantiles = quantiles.to(device)
     model.train()
     for epoch in range(num_epochs):
@@ -70,9 +70,9 @@ def train_neurosym_cbf_pinball(
 def evaluate_neurosym_cbf_pinball(
     model, loader, device, quantiles, median_idx, upper_idx, seasonality=12, padding_value=-1, max_batches=None
 ):
-    """`quantiles`: tensor 1-D de cuantiles. `median_idx`/`upper_idx`: posiciones dentro de
-    `quantiles` del cuantil mediano (0.5) y del cuantil superior usado para cobertura/anchura
-    de intervalo (0.9 en la configuración del TFG).
+    """`quantiles`: 1-D tensor of quantiles. `median_idx`/`upper_idx`: positions within
+    `quantiles` for the median quantile (0.5) and the upper quantile used for interval
+    coverage/width (0.9 in the thesis configuration).
     """
     quantiles = quantiles.to(device)
     num_quantiles = len(quantiles)

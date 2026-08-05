@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-"""Informe de calidad de datos para un directorio de parquets de releases descargados.
+"""Data quality report for a directory of downloaded release parquets.
 
-No es un paso numerado del pipeline (es una utilidad de diagnóstico ad hoc, ejecutable en
-cualquier momento tras la Fase 1) — comprueba series_id duplicados entre releases, la
-distribución de fechas de última actualización, y el % de NaN por serie.
+It is not a numbered pipeline step (it is an ad hoc diagnostic utility, runnable at
+any time after Phase 1) -- it checks duplicate series_ids across releases, the
+distribution of last-update dates, and the % of NaN by series.
 
-Uso:
+Usage:
     python scripts/check_data_quality.py --parquet-dir data/raw/parquet_monthly
 """
 from __future__ import annotations
@@ -30,18 +30,18 @@ def main() -> None:
     args = parser.parse_args()
 
     duplicates = find_duplicate_series_ids(args.parquet_dir)
-    logger.info("series_id duplicados entre releases: %d", len(duplicates))
+    logger.info("Duplicate series_ids across releases: %d", len(duplicates))
     for sid, count in list(duplicates.items())[:10]:
-        logger.info("  %s aparece %d veces", sid, count)
+        logger.info("  %s appears %d times", sid, count)
 
     last_dates = last_update_stats(args.parquet_dir)
-    logger.info("Fecha de última actualización más antigua: %s", last_dates.iloc[0])
-    logger.info("Percentil 5 de fechas de última actualización: %s", last_dates.iloc[int(0.05 * len(last_dates))])
-    logger.info("Percentil 10 de fechas de última actualización: %s", last_dates.iloc[int(0.10 * len(last_dates))])
+    logger.info("Oldest last-update date: %s", last_dates.iloc[0])
+    logger.info("5th percentile of last-update dates: %s", last_dates.iloc[int(0.05 * len(last_dates))])
+    logger.info("10th percentile of last-update dates: %s", last_dates.iloc[int(0.10 * len(last_dates))])
 
     nan_pct = nan_percentage_by_series(args.parquet_dir)
     logger.info(
-        "%% NaN por serie — describe():\n%s",
+        "%% NaN by series -- describe():\n%s",
         nan_pct.describe(percentiles=[0.5, 0.75, 0.85, 0.9, 0.95, 0.99]),
     )
 

@@ -1,11 +1,11 @@
-"""Cabeza simbólica: evalúa el forecast como intercepto + tendencia + base estacional a
-partir de coeficientes predichos por el encoder.
+"""Symbolic head: evaluates the forecast as intercept + trend + seasonal basis from
+coefficients predicted by the encoder.
 
     ŷ(t) = c₀ + c₁·t̃ + Σₖ aₖ·φₖ(t mod S)      num_coeffs = 1 + 1 + (S - 1)
 
-Usada por Unimodal-ablation y NeuroSym-CBF (MAE).
-La variante vectorizada por cuantil (`QuantileSymbolicHead`, para NeuroSym-CBF con pérdida
-pinball) vive en `experimental/neurosym_cbf_pinball/model.py` — ver `experimental/README.md`.
+Used by Unimodal-ablation and NeuroSym-CBF (MAE).
+The quantile-vectorized variant (`QuantileSymbolicHead`, for NeuroSym-CBF with pinball loss) lives
+in `experimental/neurosym_cbf_pinball/model.py` -- see `experimental/README.md`.
 """
 from __future__ import annotations
 

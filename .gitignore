@@ -4,15 +4,15 @@
 .claude/
 .idea/
 
-# Documentos internos de trabajo — NUNCA se publican (se borran al terminar la limpieza)
+# Internal working documents -- NEVER published (deleted once cleanup is finished)
 CLAUDE.md
 FILE_INVENTORY.md
 
-# Notebooks: el repo es 100% CLI (src/ + scripts/), no se publica ningún .ipynb.
-# Los originales viven en temp-trash/. Guard por si alguno reaparece en la raíz.
+# Notebooks: the repo is 100% CLI (src/ + scripts/), so no .ipynb files are published.
+# The originals live in temp-trash/. Kept in case any of them reappear in the root.
 *.ipynb
 
-# Raw / intermediate FRED datasets — nunca se publican (ver CLAUDE.md, seccion "Publishing rules")
+# Raw / intermediate FRED datasets -- never published (see CLAUDE.md, section "Publishing rules")
 fred_data_releases/
 temp-trash/
 fred_database_v3_context_48.json
@@ -24,11 +24,11 @@ fred_tags_output.parquet
 fred_tags_output_faltantes.parquet
 tags_notes_lookup.json
 
-# Exports HTML renderizados de notebooks (redundantes con el .ipynb fuente)
+# Rendered HTML exports of notebooks (redundant with the source .ipynb)
 *.html
 
-# Runtime local: datos descargados/procesados y checkpoints entrenados — nunca se publican.
-# Se mantiene la estructura de carpetas via .gitkeep, se ignora todo lo demás.
+# Local runtime: downloaded/processed data and trained checkpoints -- never published.
+# The folder structure is kept via .gitkeep; everything else is ignored.
 data/**
 !data/**/
 !**/.gitkeep

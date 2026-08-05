@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-"""Evalúa Chronos-2 en modo probabilístico (pinball) — trabajo preliminar/futuro, ver
-`experimental/README.md`. Baseline zero-shot pensado para compararse contra
-`experimental/train_neurosym_cbf_pinball.py`, no contra los modelos core.
+"""Evaluate Chronos-2 in probabilistic mode (pinball) -- preliminary/future work, see
+`experimental/README.md`. Zero-shot baseline intended for comparison against
+`experimental/train_neurosym_cbf_pinball.py`, not against the core models.
 
-Ejecutar desde la raíz del repo:
+Run from the root of the repo:
     python experimental/evaluate_chronos2_pinball.py
 """
 from __future__ import annotations
@@ -33,13 +33,13 @@ QUANTILES = [0.5, 0.9]
 
 
 def main() -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args()  # solo para -h/--help
+    argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
 
     from chronos import BaseChronosPipeline
 
     data_config = load_yaml_config("configs/data.yaml")
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["chronos2"]  # mismo contexto que el baseline puntual (ctx=30)
+    cfg = baselines_config["chronos2"]  # same context as the point baseline (ctx=30)
     context_months = data_config["cleaning"]["context_months"]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -73,7 +73,7 @@ def main() -> None:
         padding_value=baselines_config["padding_value"],
     )
     logger.info(
-        "Pinball q50: %.4f | q90: %.4f | Coverage 90: %.4f | Cruces de cuantil: %.2f%%",
+        "Pinball q50: %.4f | q90: %.4f | Coverage 90: %.4f | Quantile crossings: %.2f%%",
         results["pinball_q50_mean"], results["pinball_q90_mean"],
         results["coverage_90_mean"], 100 * results["quantile_crossing_frac"],
     )

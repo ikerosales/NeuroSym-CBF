@@ -1,8 +1,8 @@
-"""NeuroSym-CBF (MAE): entrena y evalúa `NeuroSymCBFModel`.
+"""NeuroSym-CBF (MAE): train and evaluate `NeuroSymCBFModel`.
 
-La pérdida es MAE puro — el SAE no añade ningún término de reconstrucción/sparsity a la loss
-(ver docstring de `TopKSAE`); lo único nuevo respecto a Unimodal-ablation es la llamada a
-`model.sae.normalize_decoder()` tras cada `optimizer.step()`.
+The loss is pure MAE -- the SAE does not add any reconstruction/sparsity term to the loss
+(see `TopKSAE` docstring); the only thing new relative to Unimodal-ablation is the call to
+`model.sae.normalize_decoder()` after each `optimizer.step()`.
 """
 from __future__ import annotations
 

@@ -1,9 +1,9 @@
-"""Modulador FiLM: produce (γ, β) a partir de los conceptos dispersos del SAE, usados para
-modular multiplicativa/aditivamente los coeficientes simbólicos (`coeffs_mod = γ⊙coeffs_ns + β`).
+"""FiLM modulator: produces (γ, β) from the sparse SAE concepts, used to
+multiply/additively modulate the symbolic coefficients (`coeffs_mod = γ⊙coeffs_ns + β`).
 
-Puerto verbatim, usado por NeuroSym-CBF (MAE). La variante por cuantil
-(`QuantileFiLMModulator`, para NeuroSym-CBF con pérdida pinball) vive en
-`experimental/neurosym_cbf_pinball/model.py` — ver `experimental/README.md`.
+Verbatim port, used by NeuroSym-CBF (MAE). The quantile variant
+(`QuantileFiLMModulator`, for NeuroSym-CBF with pinball loss) lives in
+`experimental/neurosym_cbf_pinball/model.py` -- see `experimental/README.md`.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ class FiLMModulator(nn.Module):
         nn.init.zeros_(self.net[-1].weight)
         with torch.no_grad():
             bias_init = torch.zeros(2 * num_coeffs)
-            bias_init[:num_coeffs] = 1.0  # γ → 1
+            bias_init[:num_coeffs] = 1.0  # γ -> 1
             self.net[-1].bias.copy_(bias_init)
 
     def forward(self, z):

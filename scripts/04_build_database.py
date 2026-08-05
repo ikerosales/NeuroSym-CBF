@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-"""Fase 3 del pipeline: empaqueta los parquets limpios (Fase 2) en la base de datos JSON final.
+"""Phase 3 of the pipeline: package the cleaned parquets (Phase 2) into the final JSON database.
 
-Uso:
+Usage:
     python scripts/04_build_database.py
     python scripts/04_build_database.py --freq Monthly
 """
@@ -24,7 +24,7 @@ def main() -> None:
     parser.add_argument(
         "--freq",
         default="Monthly",
-        help="Frecuencia cuyo dataset limpio (Fase 2) se empaqueta en la base de datos.",
+        help="Frequency whose cleaned dataset (Phase 2) is packaged into the database.",
     )
     args = parser.parse_args()
 
@@ -34,7 +34,7 @@ def main() -> None:
         data_dir() / config["paths"]["processed_dir"] / f"fred_database_context_{context_months}.json"
     )
 
-    logger.info("Empaquetando %s -> %s", processed_input_dir, output_file)
+    logger.info("Packaging %s -> %s", processed_input_dir, output_file)
     database = build_database(processed_input_dir, context_months=context_months)
     save_database(database, output_file)
 

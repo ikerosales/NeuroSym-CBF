@@ -1,12 +1,12 @@
-"""NeuroSym-CBF: modelo propio multimodal (Concept Bottleneck Model + FiLM).
+"""NeuroSym-CBF: custom multimodal model (Concept Bottleneck Model + FiLM).
 
-Fusiona la codificación de la serie con los embeddings de metadatos, extrae conceptos
-dispersos vía un Top-K Sparse Autoencoder, y usa esos conceptos para modular (FiLM) los
-coeficientes simbólicos. Es el modelo principal del TFG.
+It fuses the series encoding with metadata embeddings, extracts sparse concepts
+via a Top-K Sparse Autoencoder, and uses those concepts to modulate (FiLM) the
+symbolic coefficients. It is the main model of the thesis.
 
-La variante con pérdida pinball (`NeuroSymCBFQuantileModel`, forecast por cuantil en vez de
-puntual) es trabajo preliminar/futuro y vive aparte, en
-`experimental/neurosym_cbf_pinball/model.py` — ver `experimental/README.md`.
+The pinball-loss variant (`NeuroSymCBFQuantileModel`, quantile forecast instead of
+point forecast) is preliminary/future work and lives separately in
+`experimental/neurosym_cbf_pinball/model.py` -- see `experimental/README.md`.
 """
 from __future__ import annotations
 

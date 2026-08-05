@@ -1,14 +1,14 @@
 #!/usr/bin/env python
-"""Utilidad LOCAL de conveniencia: consolida el dataset FRED completo en un solo parquet/jsonl.
+"""Local convenience utility: consolidates the full FRED dataset into a single parquet/jsonl.
 
-ATENCION: el resultado de este script NUNCA debe publicarse ni commitearse — son las
-observaciones completas de FRED redistribuidas en otro formato, lo que las condiciones de uso
-de FRED no permiten. Solo pensado como atajo de trabajo local (un fichero en vez de 114
-parquets sueltos). Escribe bajo `<DATA_DIR>/processed/`, que ya está gitignorado por completo.
+WARNING: the result of this script should NEVER be published or committed -- it is the complete
+FRED observations redistributed in another format, which FRED's terms of use do not allow.
+It is only intended as a local-work shortcut (one file instead of 114 separate parquets).
+It writes under `<DATA_DIR>/processed/`, which is already fully gitignored.
 
-No es un paso numerado del pipeline: es opcional y no lo usa ningún otro script.
+It is not a numbered pipeline step: it is optional and not used by any other script.
 
-Uso:
+Usage:
     python scripts/export_local_dataset.py
 """
 from __future__ import annotations
@@ -24,10 +24,10 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args()  # solo para -h/--help
+    argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
     logger.warning(
-        "Este export consolida el dataset FRED COMPLETO (observaciones incluidas) en un solo "
-        "fichero. NO lo publiques ni lo commitees (las condiciones de uso de FRED no lo permiten)."
+        "This export consolidates the FULL FRED dataset (observations included) into a single "
+        "file. DO NOT publish or commit it (FRED's terms of use do not allow it)."
     )
 
     config = load_yaml_config("configs/data.yaml")

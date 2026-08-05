@@ -1,8 +1,8 @@
-"""NeuroSym-CBF (pinball): variante probabilística de NeuroSym-CBF, un forecast por cuantil
-en vez de un forecast puntual. Trabajo preliminar/futuro, ver `experimental/README.md`.
+"""NeuroSym-CBF (pinball): probabilistic variant of NeuroSym-CBF, one forecast per quantile
+instead of a point forecast. Preliminary/future work, see `experimental/README.md`.
 
-Reutiliza los componentes ya validados de `fred_forecast` (patch encoder, TopK-SAE); solo lo
-específico de la vectorización por cuantil vive aquí (`QuantileSymbolicHead`,
+Reuses the already validated `fred_forecast` components (patch encoder, TopK-SAE); only the
+quantile-vectorization-specific pieces live here (`QuantileSymbolicHead`,
 `QuantileFiLMModulator`, `NeuroSymCBFQuantileModel`).
 """
 from __future__ import annotations
@@ -15,8 +15,8 @@ from fred_forecast.models.topk_sae import TopKSAE
 
 
 class QuantileSymbolicHead(nn.Module):
-    """Igual que `fred_forecast.models.symbolic_head.SymbolicHead`, vectorizada sobre una
-    dimensión de cuantiles Q. coeffs: (B, Q, num_coeffs) -> forecast (B, H, Q).
+    """Same as `fred_forecast.models.symbolic_head.SymbolicHead`, vectorized over a
+    quantile dimension Q. coeffs: (B, Q, num_coeffs) -> forecast (B, H, Q).
     """
 
     def __init__(self, horizon_len, seasonality=12):
@@ -87,7 +87,7 @@ class NeuroSymCBFQuantileModel(nn.Module):
         6. coeffs_mod = γ ⊙ coeffs_ns + β
         7. coeffs_mod -> [QuantileSymbolicHead]        -> forecast  (B, H, Q)
 
-    Loss (calculada fuera del modelo): pinball loss sobre los Q cuantiles.
+    Loss (computed outside the model): pinball loss over the Q quantiles.
     """
 
     def __init__(

@@ -1,11 +1,11 @@
-"""Sparse Autoencoder con activación Top-K dura.
+"""Sparse Autoencoder with hard Top-K activation.
 
-Compartido por NeuroSym-CBF (MAE) y NeuroSym-CBF (pinball), con el mismo código. La
-reconstrucción (`x_hat`) se calcula pero no se usa en ninguna pérdida de entrenamiento: la
-sparsity se impone solo estructuralmente vía Top-K, no con una penalización L1/reconstrucción.
-(La documentación original decía que esta reconstrucción se usaba "para la pérdida auxiliar",
-pero no es lo que hace el código; se ha portado el comportamiento real, sin añadir ninguna
-pérdida auxiliar que no estaba.)
+Shared by NeuroSym-CBF (MAE) and NeuroSym-CBF (pinball), with the same code. The
+reconstruction (`x_hat`) is computed but not used in any training loss: sparsity is enforced
+structurally only via Top-K, not with an L1/reconstruction penalty.
+(The original documentation said this reconstruction was used "for the auxiliary loss",
+but that is not what the code does; the real behavior has been ported, without adding any
+auxiliary loss that was not there.)
 """
 from __future__ import annotations
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-"""Entrena NeuroSym-CBF (modelo multimodal, MAE) y guarda el checkpoint.
+"""Train NeuroSym-CBF (multimodal model, MAE) and save the checkpoint.
 
-Solo entrena — no evalúa ni exporta resultados/figuras. Una vez tengas el checkpoint, usa:
+Trains only -- it does not evaluate or export results/figures. Once you have the checkpoint, use:
     python scripts/10_evaluate.py --model neurosym-cbf
 
-Uso:
+Usage:
     python scripts/08_train_neurosym_cbf.py
 """
 from __future__ import annotations
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args()  # solo para -h/--help
+    argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
 
     config = load_yaml_config("configs/model_protocol.yaml")
     data_config = load_yaml_config("configs/data.yaml")
@@ -45,7 +45,7 @@ def main() -> None:
     df = load_series_observations(database_json)
     metadata_df = load_metadata_embeddings(embeddings_pkl)
     df_train, _df_test = split_train_test_obs(df, d["context_len"], d["horizon_len"])
-    logger.info("Series de train: %d", len(df_train))
+    logger.info("Training series: %d", len(df_train))
 
     train_set = TimeSeriesDataset(
         df_train,
@@ -70,7 +70,7 @@ def main() -> None:
     logger.info("Train windows: %d", len(train_set))
 
     d_meta = metadata_df["embeddings"].iloc[0].shape[0]
-    logger.info("Dim. embeddings de metadatos: %d", d_meta)
+    logger.info("Metadata embedding dim: %d", d_meta)
 
     model = NeuroSymCBFModel(
         seq_len=d["context_len"],
@@ -111,7 +111,7 @@ def main() -> None:
         },
         checkpoint_path,
     )
-    logger.info("Checkpoint guardado -> %s", checkpoint_path)
+    logger.info("Checkpoint saved -> %s", checkpoint_path)
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
-"""Fase 1 del pipeline (metadatos): descarga los tags de cada series_id desde FRED.
+"""Phase 1 of the pipeline (metadata): download the tags for each series_id from FRED.
 
-Async, con rate limiting de ventana deslizante, reintentos con backoff exponencial y
-checkpointing en disco para poder reanudar si se corta a mitad de la descarga masiva
-(~194k series). También construye un lookup tag -> nota descriptiva, usado más adelante para
-expandir tags cortos (p.ej. "GDP") a texto completo antes de pasarlos al T5 encoder — ver
+Async, with sliding-window rate limiting, exponential backoff retries, and
+disk checkpointing so it can resume if interrupted halfway through the bulk download
+(~194k series). It also builds a tag -> descriptive note lookup, used later to
+expand short tags (e.g. "GDP") into full text before passing them to the T5 encoder -- see
 `src/fred_forecast/embeddings/text_encoder.py`.
 """
 from __future__ import annotations
@@ -24,7 +24,7 @@ TAGS_URL = "https://api.stlouisfed.org/fred/series/tags"
 
 
 class RateLimiter:
-    """Ventana deslizante de `period` segundos — respeta el límite de requests/min de FRED."""
+    """Sliding window of `period` seconds -- respects FRED's requests/min limit."""
 
     def __init__(self, max_calls: int, period: float = 60.0):
         self.max_calls = max_calls
@@ -57,7 +57,7 @@ async def fetch_tags_for_series(
     api_key: str,
     max_retries: int,
 ) -> dict:
-    """Obtiene los tags de un series_id, con reintentos y backoff exponencial."""
+    """Fetch the tags for a series_id, with retries and exponential backoff."""
     params = {"series_id": series_id, "api_key": api_key, "file_type": "json"}
 
     async with semaphore:
@@ -78,12 +78,12 @@ async def fetch_tags_for_series(
                         }
                     if resp.status == 429:
                         wait = 60 * (attempt + 1)
-                        logger.warning("[%s] 429 recibido, esperando %ds", series_id, wait)
+                        logger.warning("[%s] 429 received, waiting %ds", series_id, wait)
                         await asyncio.sleep(wait)
                     elif resp.status in (500, 502, 503, 504):
                         wait = 2**attempt
                         logger.warning(
-                            "[%s] HTTP %d, reintento %d en %ds", series_id, resp.status, attempt + 1, wait
+                            "[%s] HTTP %d, retry %d in %ds", series_id, resp.status, attempt + 1, wait
                         )
                         await asyncio.sleep(wait)
                     else:
@@ -96,14 +96,14 @@ async def fetch_tags_for_series(
                         }
             except (aiohttp.ClientError, asyncio.TimeoutError) as exc:
                 wait = 2**attempt
-                logger.warning("[%s] error de red (%s), reintento %d en %ds", series_id, exc, attempt + 1, wait)
+                logger.warning("[%s] network error (%s), retry %d in %ds", series_id, exc, attempt + 1, wait)
                 await asyncio.sleep(wait)
 
     return {
         "series_id": series_id,
         "tags": [],
         "tags_detail": [],
-        "error": f"Falló tras {max_retries} intentos",
+        "error": f"Failed after {max_retries} attempts",
     }
 
 
@@ -120,7 +120,7 @@ def _save_json(path: Path, obj) -> None:
 
 
 def _update_notes_lookup(results: list[dict], lookup: dict) -> dict:
-    """Añade al lookup solo pares tag-nota nuevos que tengan una nota no vacía."""
+    """Add only new tag-note pairs with a non-empty note to the lookup."""
     for r in results:
         for tag, note in zip(r["tags"], r["tags_detail"]):
             if tag not in lookup and note and note.strip():
@@ -158,14 +158,14 @@ async def download_all_tags(
     max_retries: int = 5,
     batch_size: int = 5000,
 ) -> None:
-    """Descarga los tags de `series_ids`, reanudando desde `checkpoint_file` si ya existe."""
+    """Download the tags for `series_ids`, resuming from `checkpoint_file` if it already exists."""
     done_ids = set(_load_json(checkpoint_file, []))
     notes_lookup = _load_json(notes_file, {})
     pending = [s for s in series_ids if s not in done_ids]
-    logger.info("Total: %d | ya procesados: %d | pendientes: %d", len(series_ids), len(done_ids), len(pending))
+    logger.info("Total: %d | already processed: %d | pending: %d", len(series_ids), len(done_ids), len(pending))
 
     if not pending:
-        logger.info("Todo ya estaba procesado. Nada que hacer.")
+        logger.info("Everything was already processed. Nothing to do.")
         return
 
     limiter = RateLimiter(max_calls=max_requests_per_minute)
@@ -176,7 +176,7 @@ async def download_all_tags(
     async with aiohttp.ClientSession(connector=connector) as session:
         for i in range(0, len(pending), batch_size):
             chunk = pending[i : i + batch_size]
-            logger.info("Procesando chunk %d (%d series)...", i // batch_size + 1, len(chunk))
+            logger.info("Processing chunk %d (%d series)...", i // batch_size + 1, len(chunk))
 
             tasks = [
                 fetch_tags_for_series(session, limiter, sid, semaphore, api_key, max_retries) for sid in chunk
@@ -190,7 +190,7 @@ async def download_all_tags(
             done_ids.update(r["series_id"] for r in results)
             _save_json(checkpoint_file, sorted(done_ids))
             _save_results(all_results, output_file, append=(i > 0))
-            logger.info("Chunk guardado. Total acumulado: %d", len(all_results))
+            logger.info("Chunk saved. Total accumulated: %d", len(all_results))
 
     ok = sum(1 for r in all_results if not r["error"])
-    logger.info("Extracción completada. Éxitos: %d | Errores: %d", ok, len(all_results) - ok)
+    logger.info("Extraction complete. Successes: %d | Errors: %d", ok, len(all_results) - ok)
