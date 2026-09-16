@@ -16,7 +16,7 @@ import json
 import logging
 from pathlib import Path
 
-from fred_forecast.config import data_dir, get_env, load_yaml_config
+from fred_forecast.config import data_dir, fred_api_key, load_yaml_config
 from fred_forecast.data.download_tags import download_all_tags
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 def main() -> None:
     argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
     config = load_yaml_config("configs/data.yaml")
-    api_key = get_env("FRED_API_KEY")
+    api_key = fred_api_key()
 
     series_ids_file = Path(config["paths"]["series_ids_file"])
     series_ids = json.loads(series_ids_file.read_text())

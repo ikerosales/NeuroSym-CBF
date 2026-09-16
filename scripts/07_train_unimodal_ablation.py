@@ -86,7 +86,7 @@ def main() -> None:
 
     train_unimodal_ablation(model, train_loader, optimizer, scheduler, device, num_epochs=t["num_epochs"])
 
-    checkpoint_path = models_dir() / f"unimodal_ablation_ctx{d['context_len']}_seed{config['seed']}.pt"
+    checkpoint_path = models_dir() / "local" / f"unimodal_ablation_ctx{d['context_len']}_seed{config['seed']}.pt"
     checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
         {

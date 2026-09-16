@@ -14,7 +14,7 @@ from __future__ import annotations
 import argparse
 import logging
 
-from fred_forecast.config import data_dir, get_env, load_yaml_config
+from fred_forecast.config import data_dir, fred_api_key, load_yaml_config
 from fred_forecast.data.download_releases import download_all_releases
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -32,7 +32,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    api_key = get_env("FRED_API_KEY")
+    api_key = fred_api_key()
     freqs = [args.freq] if args.freq else config["frequencies"]
     raw_dir = data_dir() / config["paths"]["raw_dir"]
 
