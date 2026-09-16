@@ -1,5 +1,5 @@
 {
-  "npz": "results\\metrics\\neurosym-cbf-kaggle_ctx30.npz",
+  "npz": "results/metrics/ctx30/npz/neurosym-cbf.npz",
   "context_len": 30,
   "horizon_len": 18,
   "n_series": 194442,

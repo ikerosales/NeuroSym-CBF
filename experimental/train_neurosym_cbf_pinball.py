@@ -114,11 +114,11 @@ def main() -> None:
         results["pinball_mean"], results["coverage_90_mean"], results["interval_width_mean"],
     )
 
-    metrics_dir = results_dir() / "metrics"
+    ctx_dir = results_dir() / "metrics" / f"ctx{d['context_len']}"
     save_results(
         results,
-        metrics_dir / f"neurosym-cbf-pinball_ctx{d['context_len']}.json",
-        metrics_dir / f"neurosym-cbf-pinball_ctx{d['context_len']}.npz",
+        ctx_dir / "json" / "neurosym-cbf-pinball.json",
+        ctx_dir / "npz" / "neurosym-cbf-pinball.npz",
         extra_metadata={
             "model": "neurosym-cbf-pinball",
             "context_len": d["context_len"],

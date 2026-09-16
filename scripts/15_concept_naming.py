@@ -7,7 +7,7 @@ atom of the dictionary, computes which FRED tags appear disproportionately among
 activate it (one-tailed hypergeometric test) -- see `interpretability/concept_naming.py`.
 
 Usage:
-    python scripts/15_concept_naming.py --npz results/metrics/neurosym-cbf-kaggle_ctx30.npz \\
+    python scripts/15_concept_naming.py --npz results/metrics/ctx30/npz/neurosym-cbf.npz \\
         --context-len 30
 """
 from __future__ import annotations
@@ -82,7 +82,9 @@ def main() -> None:
         len(results), n_dead, n_named, n_selective,
     )
 
-    label = args.label or args.npz.stem
+    # `args.npz.stem` alone no longer encodes context (results/metrics/ctx{N}/npz/{model}.npz),
+    # so the default label re-adds it to keep output filenames self-describing.
+    label = args.label or f"{args.npz.stem}_ctx{args.context_len}"
     output_dir = results_dir() / "concepts"
     output_dir.mkdir(parents=True, exist_ok=True)
     output_file = output_dir / f"concept_naming_{label}.json"

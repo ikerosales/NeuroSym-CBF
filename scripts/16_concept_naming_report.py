@@ -9,7 +9,7 @@ well-known macro tags (scripts/17_concept_tag_deep_dive.py, optional).
 
 Usage:
     python scripts/16_concept_naming_report.py \\
-        --input results/concepts/concept_naming_neurosym-cbf-kaggle_ctx30.json
+        --input results/concepts/concept_naming_neurosym-cbf_ctx30.json
 """
 from __future__ import annotations
 
@@ -640,11 +640,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
         "--input", type=Path,
-        default=Path("results/concepts/concept_naming_neurosym-cbf-kaggle_ctx30.json"),
+        default=Path("results/concepts/concept_naming_neurosym-cbf_ctx30.json"),
     )
     parser.add_argument(
         "--tag-deep-dive", type=Path,
-        default=Path("results/concepts/tag_deep_dive_neurosym-cbf-kaggle_ctx30.json"),
+        default=Path("results/concepts/tag_deep_dive_neurosym-cbf_ctx30.json"),
         help="Output of scripts/17_concept_tag_deep_dive.py; skipped if it does not exist",
     )
     data_config = load_yaml_config("configs/data.yaml")

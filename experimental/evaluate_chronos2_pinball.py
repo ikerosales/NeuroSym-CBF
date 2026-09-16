@@ -78,11 +78,11 @@ def main() -> None:
         results["coverage_90_mean"], 100 * results["quantile_crossing_frac"],
     )
 
-    metrics_dir = results_dir() / "metrics"
+    ctx_dir = results_dir() / "metrics" / f"ctx{cfg['context_len']}"
     save_results(
         results,
-        metrics_dir / f"chronos2-pinball_ctx{cfg['context_len']}.json",
-        metrics_dir / f"chronos2-pinball_ctx{cfg['context_len']}.npz",
+        ctx_dir / "json" / "chronos2-pinball.json",
+        ctx_dir / "npz" / "chronos2-pinball.npz",
         extra_metadata={
             "model": "chronos2-pinball",
             "context_len": cfg["context_len"],

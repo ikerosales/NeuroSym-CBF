@@ -3,7 +3,7 @@
 
 One reusable evaluation script for ALL models (not one per model, as in
 the original project). Saves aggregated metrics in JSON and per-sample arrays
-in `.npz`, under `<RESULTS_DIR>/metrics/{model}_ctx{N}.{json,npz}` -- see
+in `.npz`, under `<RESULTS_DIR>/metrics/ctx{N}/{json,npz}/{model}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
 Custom models (`unimodal-ablation`, `neurosym-cbf`): by default evaluate the checkpoint under
@@ -277,11 +277,11 @@ def main() -> None:
     )
 
     label = args.label or args.model
-    metrics_dir = results_dir() / "metrics"
+    ctx_dir = results_dir() / "metrics" / f"ctx{context_len}"
     save_results(
         results,
-        metrics_dir / f"{label}_ctx{context_len}.json",
-        metrics_dir / f"{label}_ctx{context_len}.npz",
+        ctx_dir / "json" / f"{label}.json",
+        ctx_dir / "npz" / f"{label}.npz",
         extra_metadata={"model": args.model, "label": label, "context_len": context_len},
     )
 
