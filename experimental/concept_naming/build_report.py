@@ -658,11 +658,11 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=None, help="Defaults to next to the input")
     args = parser.parse_args()
 
-    data = json.loads(args.input.read_text())
-    tag_deep_dive = json.loads(args.tag_deep_dive.read_text()) if args.tag_deep_dive.exists() else None
+    data = json.loads(args.input.read_text(encoding="utf-8"))
+    tag_deep_dive = json.loads(args.tag_deep_dive.read_text(encoding="utf-8")) if args.tag_deep_dive.exists() else None
     if tag_deep_dive is None:
         logger.warning("%s not found, the well-known macro tags section is skipped", args.tag_deep_dive)
-    tag_map = json.loads(args.notes_lookup.read_text()) if args.notes_lookup.exists() else {}
+    tag_map = json.loads(args.notes_lookup.read_text(encoding="utf-8")) if args.notes_lookup.exists() else {}
     if not tag_map:
         logger.warning("%s not found, the expanded-tag column will be left empty", args.notes_lookup)
     html_out = build_html(data, tag_deep_dive, tag_map)

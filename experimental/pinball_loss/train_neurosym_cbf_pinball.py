@@ -6,7 +6,7 @@ reuse the same result format as the core: aggregated metrics JSON + .npz of
 per-sample arrays, under `<RESULTS_DIR>/metrics/`.
 
 Run from the root of the repo:
-    python experimental/train_neurosym_cbf_pinball.py
+    python experimental/pinball_loss/train_neurosym_cbf_pinball.py
 """
 from __future__ import annotations
 

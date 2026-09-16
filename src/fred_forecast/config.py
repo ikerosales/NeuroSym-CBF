@@ -14,13 +14,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def get_env(name: str, default: str | None = None) -> str:
-    value = os.getenv(name, default)
-    if value is None:
-        raise RuntimeError(f"Missing environment variable {name!r} (add it to your .env, see the README)")
-    return value
-
-
 def fred_api_key() -> str:
     """FRED API key.
 

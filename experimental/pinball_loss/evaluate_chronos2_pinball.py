@@ -4,7 +4,7 @@
 `experimental/train_neurosym_cbf_pinball.py`, not against the core models.
 
 Run from the root of the repo:
-    python experimental/evaluate_chronos2_pinball.py
+    python experimental/pinball_loss/evaluate_chronos2_pinball.py
 """
 from __future__ import annotations
 
