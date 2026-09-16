@@ -1,15 +1,16 @@
 #!/usr/bin/env python
-"""Tables and summary of the concept-naming experiment (scripts/15_concept_naming.py).
+"""Tables and summary of the concept-naming experiment (run_concept_naming.py).
 
-Reads the already-generated JSON (recomputes nothing) and renders a bilingual (ES/EN, with a
-language toggle) HTML with: the methodology explained in plain language, the specificity
+Preliminary/future work, see `experimental/README.md` -- not part of the main reproducible
+pipeline. Reads the already-generated JSON (recomputes nothing) and renders a bilingual (ES/EN,
+with a language toggle) HTML with: the methodology explained in plain language, the specificity
 distribution of the 128 atoms of NeuroSym-CBF's SAE dictionary, the clearest examples at each
-extreme (very specific atoms vs. generic "always active" atoms), and the deep dive into ten
-well-known macro tags (scripts/17_concept_tag_deep_dive.py, optional).
+extreme (very specific atoms vs. generic "always active" atoms), and an optional deep dive into
+ten well-known macro tags (not included here; see `--tag-deep-dive`).
 
-Usage:
-    python scripts/16_concept_naming_report.py \\
-        --input results/concepts/concept_naming_neurosym-cbf_ctx30.json
+Run from the root of the repo:
+    python experimental/concept_naming/build_report.py \\
+        --input experimental/concept_naming/results/concept_naming_neurosym-cbf_ctx30.json
 """
 from __future__ import annotations
 
@@ -637,15 +638,16 @@ def build_html(data: dict, tag_deep_dive: dict | None, tag_map: dict[str, str]) 
 
 
 def main() -> None:
+    results_dir = Path(__file__).resolve().parent / "results"
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
         "--input", type=Path,
-        default=Path("results/concepts/concept_naming_neurosym-cbf_ctx30.json"),
+        default=results_dir / "concept_naming_neurosym-cbf_ctx30.json",
     )
     parser.add_argument(
         "--tag-deep-dive", type=Path,
-        default=Path("results/concepts/tag_deep_dive_neurosym-cbf_ctx30.json"),
-        help="Output of scripts/17_concept_tag_deep_dive.py; skipped if it does not exist",
+        default=results_dir / "tag_deep_dive_neurosym-cbf_ctx30.json",
+        help="Output of a tag-deep-dive companion script (not included here); skipped if it does not exist",
     )
     data_config = load_yaml_config("configs/data.yaml")
     parser.add_argument(

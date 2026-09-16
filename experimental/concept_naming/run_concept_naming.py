@@ -1,30 +1,32 @@
 #!/usr/bin/env python
 """Names the atoms of NeuroSym-CBF's SAE dictionary via FRED tag enrichment.
 
-Uses the `z` activations already saved by `scripts/10_evaluate.py` (does not re-evaluate the
-model) and aligns them with `series_id` by reconstructing the same deterministic split. For each
-atom of the dictionary, computes which FRED tags appear disproportionately among the series that
-activate it (one-tailed hypergeometric test) -- see `interpretability/concept_naming.py`.
+Preliminary/future work, see `experimental/README.md` -- not part of the main reproducible
+pipeline. Uses the `z` activations already saved by `scripts/10_evaluate.py` (does not
+re-evaluate the model) and aligns them with `series_id` by reconstructing the same deterministic
+split. For each atom of the dictionary, computes which FRED tags appear disproportionately among
+the series that activate it (one-tailed hypergeometric test) -- see
+`experimental/concept_naming/concept_naming.py`.
 
-Usage:
-    python scripts/15_concept_naming.py --npz results/metrics/ctx30/npz/neurosym-cbf.npz \\
-        --context-len 30
+Run from the root of the repo:
+    python experimental/concept_naming/run_concept_naming.py \\
+        --npz results/metrics/ctx30/npz/neurosym-cbf.npz --context-len 30
 """
 from __future__ import annotations
 
 import argparse
 import json
 import logging
+import sys
 from pathlib import Path
 
 import numpy as np
 
-from fred_forecast.config import data_dir, load_yaml_config, results_dir
-from fred_forecast.interpretability.concept_naming import (
-    load_tag_sets,
-    name_all_concepts,
-    reconstruct_test_series_order,
-)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from fred_forecast.config import data_dir, load_yaml_config
+
+from concept_naming import load_tag_sets, name_all_concepts, reconstruct_test_series_order
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -85,7 +87,7 @@ def main() -> None:
     # `args.npz.stem` alone no longer encodes context (results/metrics/ctx{N}/npz/{model}.npz),
     # so the default label re-adds it to keep output filenames self-describing.
     label = args.label or f"{args.npz.stem}_ctx{args.context_len}"
-    output_dir = results_dir() / "concepts"
+    output_dir = Path(__file__).resolve().parent / "results"
     output_dir.mkdir(parents=True, exist_ok=True)
     output_file = output_dir / f"concept_naming_{label}.json"
     with open(output_file, "w") as f:

@@ -43,6 +43,6 @@ def coverage_per_sample(pred_upper: torch.Tensor, target: torch.Tensor, mask: to
 def interval_width_per_sample(
     pred_upper: torch.Tensor, pred_median: torch.Tensor, mask: torch.Tensor
 ) -> torch.Tensor:
-    """Mean width (q0.9 - q0.5) over the unmasked horizon. (B,).""
+    """Mean width (q0.9 - q0.5) over the unmasked horizon. (B,)."""
     w = pred_upper - pred_median
     return (w * mask.float()).sum(dim=(1, 2)) / (mask.float().sum(dim=(1, 2)) + 1e-8)
