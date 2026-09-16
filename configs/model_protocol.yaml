@@ -4,6 +4,13 @@
 
 seed: 40
 
+# Number of PyTorch CPU threads. NOT just a performance knob: it changes the reduction order of
+# matmuls and, with it, the training result. Measured on this machine, same seed and same data,
+# batch-501 loss goes from 0.3361 (4 threads) to 0.3373 (1 thread), and two runs with the same
+# value match exactly. Without pinning it, the repo would not even reproduce its own results
+# across machines. Evaluation is insensitive to this (MAE identical to 8 decimals).
+num_threads: 4
+
 data:
   min_context_len: 13
   context_len: 30

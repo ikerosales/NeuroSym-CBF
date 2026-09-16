@@ -1,0 +1,5639 @@
+{
+  "npz": "results\\metrics\\neurosym-cbf-kaggle_ctx30.npz",
+  "context_len": 30,
+  "horizon_len": 18,
+  "n_series": 194442,
+  "n_with_tags": 194442,
+  "dict_size": 128,
+  "n_dead_atoms": 16,
+  "n_named_atoms": 109,
+  "atoms": [
+    {
+      "atom": 0,
+      "n_active": 24142,
+      "top_tags": [
+        {
+          "tag": "persons",
+          "n_in_active": 6270,
+          "n_active": 24142,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.2597133626045895,
+          "lift": 6.814085231623478,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 6635,
+          "n_active": 24142,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.2748322425648248,
+          "lift": 5.728259289183156,
+          "p_value": 0.0
+        },
+        {
+          "tag": "civilian",
+          "n_in_active": 3206,
+          "n_active": 24142,
+          "base_rate": 0.024655167093529176,
+          "active_rate": 0.1327976141164775,
+          "lift": 5.386198098463938,
+          "p_value": 0.0
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 6126,
+          "n_active": 24142,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.2537486537983597,
+          "lift": 4.536538777295022,
+          "p_value": 0.0
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 3374,
+          "n_active": 24142,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.13975644105707896,
+          "lift": 4.465087399280405,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 1,
+      "n_active": 25386,
+      "top_tags": [
+        {
+          "tag": "eurostat",
+          "n_in_active": 3218,
+          "n_active": 25386,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.12676278263609864,
+          "lift": 3.6279082986941846,
+          "p_value": 0.0
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 4109,
+          "n_active": 25386,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.16186086819506815,
+          "lift": 3.5735836191195003,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 3303,
+          "n_active": 25386,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.13011108484991726,
+          "lift": 3.565256420573226,
+          "p_value": 0.0
+        },
+        {
+          "tag": "equipment",
+          "n_in_active": 1188,
+          "n_active": 25386,
+          "base_rate": 0.013155593956038304,
+          "active_rate": 0.04679744741195935,
+          "lift": 3.5572280178562155,
+          "p_value": 0.0
+        },
+        {
+          "tag": "ppi",
+          "n_in_active": 4088,
+          "n_active": 25386,
+          "base_rate": 0.04931033418705835,
+          "active_rate": 0.1610336405893012,
+          "lift": 3.2657178914752714,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 2,
+      "n_active": 21,
+      "top_tags": [
+        {
+          "tag": "mxp",
+          "n_in_active": 17,
+          "n_active": 21,
+          "base_rate": 0.003785190442394133,
+          "active_rate": 0.8095238095238095,
+          "lift": 213.86607142857144,
+          "p_value": 3.2955276026241085e-38
+        },
+        {
+          "tag": "naics",
+          "n_in_active": 13,
+          "n_active": 21,
+          "base_rate": 0.0013371596671501013,
+          "active_rate": 0.6190476190476191,
+          "lift": 462.95714285714286,
+          "p_value": 6.494877663817582e-33
+        },
+        {
+          "tag": "imports",
+          "n_in_active": 16,
+          "n_active": 21,
+          "base_rate": 0.0066600837267668505,
+          "active_rate": 0.7619047619047619,
+          "lift": 114.39867622724765,
+          "p_value": 2.6952270278376213e-31
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 19,
+          "n_active": 21,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.9047619047619048,
+          "lift": 8.023154753760856,
+          "p_value": 1.631092488737873e-16
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 19,
+          "n_active": 21,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 0.9047619047619048,
+          "lift": 7.331071145797987,
+          "p_value": 8.856388039589578e-16
+        }
+      ]
+    },
+    {
+      "atom": 3,
+      "n_active": 2344,
+      "top_tags": [
+        {
+          "tag": "rate",
+          "n_in_active": 965,
+          "n_active": 2344,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.41168941979522183,
+          "lift": 10.557862590849712,
+          "p_value": 0.0
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 1170,
+          "n_active": 2344,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.4991467576791809,
+          "lift": 8.92378575364613,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 1071,
+          "n_active": 2344,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.4569112627986348,
+          "lift": 2.5903939050381126,
+          "p_value": 3.001034323084498e-218
+        },
+        {
+          "tag": "active listing",
+          "n_in_active": 301,
+          "n_active": 2344,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.12841296928327645,
+          "lift": 4.229145422320264,
+          "p_value": 3.4006953415204866e-98
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 297,
+          "n_active": 2344,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.12670648464163822,
+          "lift": 3.2575779831666556,
+          "p_value": 1.2374934603631903e-70
+        }
+      ]
+    },
+    {
+      "atom": 4,
+      "n_active": 58,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 58,
+          "n_active": 58,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 1.0,
+          "lift": 17.87808017653549,
+          "p_value": 2.008898582266621e-73
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 58,
+          "n_active": 58,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 1.0,
+          "lift": 5.6693588360498,
+          "p_value": 1.895746652539405e-44
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 40,
+          "n_active": 58,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.6896551724137931,
+          "lift": 17.686353341398412,
+          "p_value": 8.878538290777825e-43
+        },
+        {
+          "tag": "state",
+          "n_in_active": 50,
+          "n_active": 58,
+          "base_rate": 0.09818866294319128,
+          "active_rate": 0.8620689655172413,
+          "lift": 8.779719976592471,
+          "p_value": 3.234043890010184e-42
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 58,
+          "n_active": 58,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 1.0,
+          "lift": 2.619700092963098,
+          "p_value": 5.437840675062125e-25
+        }
+      ]
+    },
+    {
+      "atom": 5,
+      "n_active": 975,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 332,
+          "n_active": 975,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.3405128205128205,
+          "lift": 11.214429851990827,
+          "p_value": 1.0880658429168639e-246
+        },
+        {
+          "tag": "durable goods",
+          "n_in_active": 140,
+          "n_active": 975,
+          "base_rate": 0.01747564826529248,
+          "active_rate": 0.14358974358974358,
+          "lift": 8.216561778421696,
+          "p_value": 2.3823947643564576e-81
+        },
+        {
+          "tag": "mi",
+          "n_in_active": 167,
+          "n_active": 975,
+          "base_rate": 0.02719577046111437,
+          "active_rate": 0.1712820512820513,
+          "lift": 6.298113580821599,
+          "p_value": 3.442339539357193e-80
+        },
+        {
+          "tag": "detroit",
+          "n_in_active": 80,
+          "n_active": 975,
+          "base_rate": 0.003826333816767982,
+          "active_rate": 0.08205128205128205,
+          "lift": 21.44383788254756,
+          "p_value": 1.649796679885931e-78
+        },
+        {
+          "tag": "goods",
+          "n_in_active": 200,
+          "n_active": 975,
+          "base_rate": 0.050704065993972494,
+          "active_rate": 0.20512820512820512,
+          "lift": 4.045596760476566,
+          "p_value": 2.6963724133977188e-64
+        }
+      ]
+    },
+    {
+      "atom": 6,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 7,
+      "n_active": 5041,
+      "top_tags": [
+        {
+          "tag": "sae",
+          "n_in_active": 3423,
+          "n_active": 5041,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.6790319381075184,
+          "lift": 3.58725012523779,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 3615,
+          "n_active": 5041,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.7171196191231899,
+          "lift": 3.458459570949732,
+          "p_value": 0.0
+        },
+        {
+          "tag": "services",
+          "n_in_active": 1389,
+          "n_active": 5041,
+          "base_rate": 0.08509992697051048,
+          "active_rate": 0.27554056734774846,
+          "lift": 3.2378472832677168,
+          "p_value": 0.0
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 4281,
+          "n_active": 5041,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.8492362626463004,
+          "lift": 3.180415974219413,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 4338,
+          "n_active": 5041,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.8605435429478279,
+          "lift": 2.254365999459218,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 8,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 9,
+      "n_active": 42,
+      "top_tags": [
+        {
+          "tag": "msio",
+          "n_in_active": 33,
+          "n_active": 42,
+          "base_rate": 0.0038983347219222184,
+          "active_rate": 0.7857142857142857,
+          "lift": 201.55126272144742,
+          "p_value": 6.734594976425246e-72
+        },
+        {
+          "tag": "shipments",
+          "n_in_active": 22,
+          "n_active": 42,
+          "base_rate": 0.001424589337694531,
+          "active_rate": 0.5238095238095238,
+          "lift": 367.69159360495104,
+          "p_value": 5.124447203442144e-52
+        },
+        {
+          "tag": "census",
+          "n_in_active": 35,
+          "n_active": 42,
+          "base_rate": 0.025411176597648657,
+          "active_rate": 0.8333333333333334,
+          "lift": 32.7939688322202,
+          "p_value": 3.0218776405106396e-49
+        },
+        {
+          "tag": "industry",
+          "n_in_active": 33,
+          "n_active": 42,
+          "base_rate": 0.035702163112907706,
+          "active_rate": 0.7857142857142857,
+          "lift": 22.007470058031856,
+          "p_value": 5.2366948089199565e-40
+        },
+        {
+          "tag": "manufacturing",
+          "n_in_active": 34,
+          "n_active": 42,
+          "base_rate": 0.050894354100451546,
+          "active_rate": 0.8095238095238095,
+          "lift": 15.905964892019865,
+          "p_value": 7.93987144518333e-37
+        }
+      ]
+    },
+    {
+      "atom": 10,
+      "n_active": 16,
+      "top_tags": [
+        {
+          "tag": "civilian",
+          "n_in_active": 12,
+          "n_active": 16,
+          "base_rate": 0.024655167093529176,
+          "active_rate": 0.75,
+          "lift": 30.419586983729662,
+          "p_value": 8.265034490378995e-17
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 12,
+          "n_active": 16,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.75,
+          "lift": 23.961797568189287,
+          "p_value": 1.41641480105231e-15
+        },
+        {
+          "tag": "labor",
+          "n_in_active": 12,
+          "n_active": 16,
+          "base_rate": 0.031613540284506435,
+          "active_rate": 0.75,
+          "lift": 23.724011713030745,
+          "p_value": 1.5947573255355821e-15
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 16,
+          "n_active": 16,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 1.0,
+          "lift": 2.619700092963098,
+          "p_value": 2.030208444289565e-07
+        },
+        {
+          "tag": "public domain: citation requested",
+          "n_in_active": 16,
+          "n_active": 16,
+          "base_rate": 0.4292591106859629,
+          "active_rate": 1.0,
+          "lift": 2.329595284307383,
+          "p_value": 1.3278711868579314e-06
+        }
+      ]
+    },
+    {
+      "atom": 11,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 12,
+      "n_active": 1171,
+      "top_tags": [
+        {
+          "tag": "duration",
+          "n_in_active": 122,
+          "n_active": 1171,
+          "base_rate": 0.0007817241131031361,
+          "active_rate": 0.10418445772843724,
+          "lift": 133.2752258528473,
+          "p_value": 8.714801614338123e-243
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 388,
+          "n_active": 1171,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.33134073441502987,
+          "lift": 7.50105426488849,
+          "p_value": 2.2422357160360408e-223
+        },
+        {
+          "tag": "business applications",
+          "n_in_active": 133,
+          "n_active": 1171,
+          "base_rate": 0.003908620565515681,
+          "active_rate": 0.11357813834329633,
+          "lift": 29.058368915456875,
+          "p_value": 3.4102310017283666e-149
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 1011,
+          "n_active": 1171,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.8633646456020495,
+          "lift": 1.510721085115042,
+          "p_value": 2.3211243098772677e-104
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 877,
+          "n_active": 1171,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.748932536293766,
+          "lift": 1.6977631942317304,
+          "p_value": 3.463490329687018e-102
+        }
+      ]
+    },
+    {
+      "atom": 13,
+      "n_active": 1238,
+      "top_tags": [
+        {
+          "tag": "urban",
+          "n_in_active": 398,
+          "n_active": 1238,
+          "base_rate": 0.007904670801575791,
+          "active_rate": 0.32148626817447495,
+          "lift": 40.67041831905092,
+          "p_value": 0.0
+        },
+        {
+          "tag": "energy",
+          "n_in_active": 301,
+          "n_active": 1238,
+          "base_rate": 0.006629226195986464,
+          "active_rate": 0.2431340872374798,
+          "lift": 36.67608858854154,
+          "p_value": 0.0
+        },
+        {
+          "tag": "consumer",
+          "n_in_active": 333,
+          "n_active": 1238,
+          "base_rate": 0.009894981536910749,
+          "active_rate": 0.2689822294022617,
+          "lift": 27.18370200074562,
+          "p_value": 0.0
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 558,
+          "n_active": 1238,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.4507269789983845,
+          "lift": 9.95120418421754,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 535,
+          "n_active": 1238,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.4321486268174475,
+          "lift": 7.384466411427905,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 14,
+      "n_active": 4371,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 1618,
+          "n_active": 4371,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.3701670098375658,
+          "lift": 12.191059235575198,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 2907,
+          "n_active": 4371,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.6650652024708305,
+          "lift": 2.8191979092834796,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 3934,
+          "n_active": 4371,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.9000228780599405,
+          "lift": 2.0402715094985773,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 2835,
+          "n_active": 4371,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.6485929993136582,
+          "lift": 1.9179335407580613,
+          "p_value": 0.0
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 4173,
+          "n_active": 4371,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.9547014413177762,
+          "lift": 1.670542805679443,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 15,
+      "n_active": 36,
+      "top_tags": [
+        {
+          "tag": "ca",
+          "n_in_active": 20,
+          "n_active": 36,
+          "base_rate": 0.0406856543339402,
+          "active_rate": 0.5555555555555556,
+          "lift": 13.654826612733325,
+          "p_value": 5.873003745015097e-19
+        },
+        {
+          "tag": "san francisco",
+          "n_in_active": 9,
+          "n_active": 36,
+          "base_rate": 0.0029623229549171474,
+          "active_rate": 0.25,
+          "lift": 84.39322916666667,
+          "p_value": 1.4470263046901098e-15
+        },
+        {
+          "tag": "logging",
+          "n_in_active": 9,
+          "n_active": 36,
+          "base_rate": 0.004109194515588196,
+          "active_rate": 0.25,
+          "lift": 60.83917396745932,
+          "p_value": 2.7233464508887978e-14
+        },
+        {
+          "tag": "metropolitan division",
+          "n_in_active": 12,
+          "n_active": 36,
+          "base_rate": 0.01743964781271536,
+          "active_rate": 0.3333333333333333,
+          "lift": 19.113535830138602,
+          "p_value": 6.595519980523103e-13
+        },
+        {
+          "tag": "mining",
+          "n_in_active": 9,
+          "n_active": 36,
+          "base_rate": 0.010054412112609415,
+          "active_rate": 0.25,
+          "lift": 24.864705882352943,
+          "p_value": 7.604846198403906e-11
+        }
+      ]
+    },
+    {
+      "atom": 16,
+      "n_active": 71,
+      "top_tags": [
+        {
+          "tag": "gas",
+          "n_in_active": 47,
+          "n_active": 71,
+          "base_rate": 0.011237284125857581,
+          "active_rate": 0.6619718309859155,
+          "lift": 58.90852483320979,
+          "p_value": 6.005242554056963e-74
+        },
+        {
+          "tag": "energy",
+          "n_in_active": 41,
+          "n_active": 71,
+          "base_rate": 0.006629226195986464,
+          "active_rate": 0.5774647887323944,
+          "lift": 87.10892820070148,
+          "p_value": 2.0056565287865342e-70
+        },
+        {
+          "tag": "retail",
+          "n_in_active": 40,
+          "n_active": 71,
+          "base_rate": 0.024300305489554724,
+          "active_rate": 0.5633802816901409,
+          "lift": 23.18408227140622,
+          "p_value": 1.3710022773462357e-45
+        },
+        {
+          "tag": "eia",
+          "n_in_active": 18,
+          "n_active": 71,
+          "base_rate": 0.00047829172709599777,
+          "active_rate": 0.2535211267605634,
+          "lift": 530.0554293502953,
+          "p_value": 9.010324531794733e-45
+        },
+        {
+          "tag": "diesel",
+          "n_in_active": 14,
+          "n_active": 71,
+          "base_rate": 0.0002160027154627087,
+          "active_rate": 0.19718309859154928,
+          "lift": 912.8732394366197,
+          "p_value": 9.973854624736037e-39
+        }
+      ]
+    },
+    {
+      "atom": 17,
+      "n_active": 2210,
+      "top_tags": [
+        {
+          "tag": "bls",
+          "n_in_active": 1723,
+          "n_active": 2210,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.7796380090497738,
+          "lift": 2.042417764785257,
+          "p_value": 0.0
+        },
+        {
+          "tag": "public domain: citation requested",
+          "n_in_active": 1764,
+          "n_active": 2210,
+          "base_rate": 0.4292591106859629,
+          "active_rate": 0.7981900452488688,
+          "lift": 1.8594597653928613,
+          "p_value": 3.3061718866854634e-279
+        },
+        {
+          "tag": "federal",
+          "n_in_active": 263,
+          "n_active": 2210,
+          "base_rate": 0.005358924512193867,
+          "active_rate": 0.11900452488687782,
+          "lift": 22.206792541318904,
+          "p_value": 2.2789727246375726e-268
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 1047,
+          "n_active": 2210,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.47375565610859727,
+          "lift": 2.284785884346145,
+          "p_value": 1.4710792412122494e-173
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 1209,
+          "n_active": 2210,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.5470588235294118,
+          "lift": 2.04875215263301,
+          "p_value": 6.924825536050497e-172
+        }
+      ]
+    },
+    {
+      "atom": 18,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 19,
+      "n_active": 79185,
+      "top_tags": [
+        {
+          "tag": "leisure",
+          "n_in_active": 1862,
+          "n_active": 79185,
+          "base_rate": 0.010589275979469456,
+          "active_rate": 0.023514554524215445,
+          "lift": 2.220600782320301,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hospitality",
+          "n_in_active": 1848,
+          "n_active": 79185,
+          "base_rate": 0.01051727507431522,
+          "active_rate": 0.023337753362379237,
+          "lift": 2.218992390849752,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 6023,
+          "n_active": 79185,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.07606238555281934,
+          "lift": 2.1768799487284807,
+          "p_value": 0.0
+        },
+        {
+          "tag": "health",
+          "n_in_active": 3136,
+          "n_active": 79185,
+          "base_rate": 0.01836537373612697,
+          "active_rate": 0.03960346025131022,
+          "lift": 2.156420055498533,
+          "p_value": 0.0
+        },
+        {
+          "tag": "food",
+          "n_in_active": 2514,
+          "n_active": 79185,
+          "base_rate": 0.01561905349667253,
+          "active_rate": 0.03174843720401591,
+          "lift": 2.032673568265809,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 20,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 21,
+      "n_active": 139717,
+      "top_tags": [
+        {
+          "tag": "rank",
+          "n_in_active": 3776,
+          "n_active": 139717,
+          "base_rate": 0.02001625163287767,
+          "active_rate": 0.027026059820923723,
+          "lift": 1.350205838566303,
+          "p_value": 0.0
+        },
+        {
+          "tag": "reduced count",
+          "n_in_active": 5693,
+          "n_active": 139717,
+          "base_rate": 0.030188950946811902,
+          "active_rate": 0.040746652161154334,
+          "lift": 1.3497207051991773,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hours",
+          "n_in_active": 5506,
+          "n_active": 139717,
+          "base_rate": 0.029453513129879347,
+          "active_rate": 0.03940823235540414,
+          "lift": 1.3379807081629984,
+          "p_value": 0.0
+        },
+        {
+          "tag": "earnings",
+          "n_in_active": 4652,
+          "n_active": 139717,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.033295876664972766,
+          "lift": 1.3376274484484783,
+          "p_value": 0.0
+        },
+        {
+          "tag": "new",
+          "n_in_active": 6414,
+          "n_active": 139717,
+          "base_rate": 0.034771294267699364,
+          "active_rate": 0.045907083604715244,
+          "lift": 1.3202581201402221,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 22,
+      "n_active": 77059,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1179,
+          "n_active": 77059,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.0152999649619123,
+          "lift": 2.2901892125667063,
+          "p_value": 0.0
+        },
+        {
+          "tag": "households",
+          "n_in_active": 1862,
+          "n_active": 77059,
+          "base_rate": 0.011705290009360117,
+          "active_rate": 0.024163303442816544,
+          "lift": 2.0643062601178097,
+          "p_value": 0.0
+        },
+        {
+          "tag": "earnings",
+          "n_in_active": 3587,
+          "n_active": 77059,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.04654874836164497,
+          "lift": 1.8700478778791265,
+          "p_value": 0.0
+        },
+        {
+          "tag": "discontinued",
+          "n_in_active": 3999,
+          "n_active": 77059,
+          "base_rate": 0.028898077575832383,
+          "active_rate": 0.051895301003127475,
+          "lift": 1.7958046125022447,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 4693,
+          "n_active": 77059,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.06090138724873149,
+          "lift": 1.742977265148344,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 23,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 24,
+      "n_active": 78,
+      "top_tags": [
+        {
+          "tag": "trough",
+          "n_in_active": 66,
+          "n_active": 78,
+          "base_rate": 0.0006942944425587064,
+          "active_rate": 0.8461538461538461,
+          "lift": 1218.7247863247865,
+          "p_value": 5.986108260657614e-204
+        },
+        {
+          "tag": "peak",
+          "n_in_active": 66,
+          "n_active": 78,
+          "base_rate": 0.0006942944425587064,
+          "active_rate": 0.8461538461538461,
+          "lift": 1218.7247863247865,
+          "p_value": 5.986108260657614e-204
+        },
+        {
+          "tag": "recession indicators",
+          "n_in_active": 66,
+          "n_active": 78,
+          "base_rate": 0.0007097232079489,
+          "active_rate": 0.8461538461538461,
+          "lift": 1192.2307692307693,
+          "p_value": 4.300460657728006e-203
+        },
+        {
+          "tag": "discontinued",
+          "n_in_active": 73,
+          "n_active": 78,
+          "base_rate": 0.028898077575832383,
+          "active_rate": 0.9358974358974359,
+          "lift": 32.38614864402371,
+          "p_value": 5.102905969877648e-106
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 66,
+          "n_active": 78,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.8461538461538461,
+          "lift": 21.754309950263934,
+          "p_value": 1.781819775531543e-80
+        }
+      ]
+    },
+    {
+      "atom": 25,
+      "n_active": 114,
+      "top_tags": [
+        {
+          "tag": "commodities",
+          "n_in_active": 107,
+          "n_active": 114,
+          "base_rate": 0.025051172071877476,
+          "active_rate": 0.9385964912280702,
+          "lift": 37.467168743044226,
+          "p_value": 5.218094073826968e-162
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 110,
+          "n_active": 114,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.9649122807017544,
+          "lift": 21.303448811651016,
+          "p_value": 4.228737573983088e-142
+        },
+        {
+          "tag": "ppi",
+          "n_in_active": 111,
+          "n_active": 114,
+          "base_rate": 0.04931033418705835,
+          "active_rate": 0.9736842105263158,
+          "lift": 19.74604769119294,
+          "p_value": 9.303762374535361e-141
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 111,
+          "n_active": 114,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.9736842105263158,
+          "lift": 8.634336902593054,
+          "p_value": 8.18250809139435e-101
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 111,
+          "n_active": 114,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 0.9736842105263158,
+          "lift": 7.889532244162099,
+          "p_value": 1.805138766453719e-96
+        }
+      ]
+    },
+    {
+      "atom": 26,
+      "n_active": 2758,
+      "top_tags": [
+        {
+          "tag": "secondary schooling",
+          "n_in_active": 309,
+          "n_active": 2758,
+          "base_rate": 0.002782320692031557,
+          "active_rate": 0.112037708484409,
+          "lift": 40.267719247921356,
+          "p_value": 0.0
+        },
+        {
+          "tag": "tertiary schooling",
+          "n_in_active": 392,
+          "n_active": 2758,
+          "base_rate": 0.004407483979798604,
+          "active_rate": 0.14213197969543148,
+          "lift": 32.247872107280145,
+          "p_value": 0.0
+        },
+        {
+          "tag": "16 years +",
+          "n_in_active": 273,
+          "n_active": 2758,
+          "base_rate": 0.0031834685921765873,
+          "active_rate": 0.09898477157360407,
+          "lift": 31.093371493238646,
+          "p_value": 0.0
+        },
+        {
+          "tag": "secondary",
+          "n_in_active": 309,
+          "n_active": 2758,
+          "base_rate": 0.00372861830263009,
+          "active_rate": 0.112037708484409,
+          "lift": 30.048049811207523,
+          "p_value": 0.0
+        },
+        {
+          "tag": "males",
+          "n_in_active": 593,
+          "n_active": 2758,
+          "base_rate": 0.009725265117618622,
+          "active_rate": 0.21501087744742567,
+          "lift": 22.10848494586586,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 27,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 28,
+      "n_active": 13038,
+      "top_tags": [
+        {
+          "tag": "persons",
+          "n_in_active": 2548,
+          "n_active": 13038,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.1954287467402976,
+          "lift": 5.1274532955980225,
+          "p_value": 0.0
+        },
+        {
+          "tag": "ratio",
+          "n_in_active": 959,
+          "n_active": 13038,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.07355422610829881,
+          "lift": 4.544655491881105,
+          "p_value": 0.0
+        },
+        {
+          "tag": "civilian",
+          "n_in_active": 1366,
+          "n_active": 13038,
+          "base_rate": 0.024655167093529176,
+          "active_rate": 0.10477067034821291,
+          "lift": 4.249440693334838,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 2590,
+          "n_active": 13038,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.19865009970854425,
+          "lift": 4.1404140516163315,
+          "p_value": 0.0
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 1405,
+          "n_active": 13038,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.10776192667587053,
+          "lift": 3.442892630087022,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 29,
+      "n_active": 5529,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 4906,
+          "n_active": 5529,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.8873213962741906,
+          "lift": 15.863603064945401,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 2424,
+          "n_active": 5529,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.43841562669560497,
+          "lift": 11.502686720543359,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 2437,
+          "n_active": 5529,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.4407668656176524,
+          "lift": 11.303559863416982,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 2538,
+          "n_active": 5529,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.45903418339663593,
+          "lift": 9.567534000215316,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 4731,
+          "n_active": 5529,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.8556701030927835,
+          "lift": 2.5302745979099233,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 30,
+      "n_active": 38796,
+      "top_tags": [
+        {
+          "tag": "business applications",
+          "n_in_active": 752,
+          "n_active": 38796,
+          "base_rate": 0.003908620565515681,
+          "active_rate": 0.019383441591916694,
+          "lift": 4.959151513178244,
+          "p_value": 0.0
+        },
+        {
+          "tag": "business formations",
+          "n_in_active": 861,
+          "n_active": 38796,
+          "base_rate": 0.0044846278067495705,
+          "active_rate": 0.022193009588617384,
+          "lift": 4.948684828474703,
+          "p_value": 0.0
+        },
+        {
+          "tag": "permits",
+          "n_in_active": 685,
+          "n_active": 38796,
+          "base_rate": 0.0042583392476933995,
+          "active_rate": 0.017656459428807093,
+          "lift": 4.146325222531533,
+          "p_value": 0.0
+        },
+        {
+          "tag": "census",
+          "n_in_active": 3651,
+          "n_active": 38796,
+          "base_rate": 0.025411176597648657,
+          "active_rate": 0.09410763996288277,
+          "lift": 3.7033956141798927,
+          "p_value": 0.0
+        },
+        {
+          "tag": "ratio",
+          "n_in_active": 2020,
+          "n_active": 38796,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.05206722342509537,
+          "lift": 3.217049589203176,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 31,
+      "n_active": 77993,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1299,
+          "n_active": 77993,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.016655340863923687,
+          "lift": 2.493069890887644,
+          "p_value": 0.0
+        },
+        {
+          "tag": "information",
+          "n_in_active": 1422,
+          "n_active": 77993,
+          "base_rate": 0.008192674422192736,
+          "active_rate": 0.018232405472285974,
+          "lift": 2.2254522189844503,
+          "p_value": 0.0
+        },
+        {
+          "tag": "financial",
+          "n_in_active": 2338,
+          "n_active": 77993,
+          "base_rate": 0.014256179220538772,
+          "active_rate": 0.02997704922236611,
+          "lift": 2.1027407665567504,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hours",
+          "n_in_active": 4296,
+          "n_active": 77993,
+          "base_rate": 0.029453513129879347,
+          "active_rate": 0.05508186632133653,
+          "lift": 1.8701289071509197,
+          "p_value": 0.0
+        },
+        {
+          "tag": "earnings",
+          "n_in_active": 3582,
+          "n_active": 77993,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.045927198594745686,
+          "lift": 1.8450777580908142,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 32,
+      "n_active": 336,
+      "top_tags": [
+        {
+          "tag": "transnational",
+          "n_in_active": 90,
+          "n_active": 336,
+          "base_rate": 0.010100698408779996,
+          "active_rate": 0.26785714285714285,
+          "lift": 26.5186754437009,
+          "p_value": 9.250472640096911e-99
+        },
+        {
+          "tag": "europe",
+          "n_in_active": 81,
+          "n_active": 336,
+          "base_rate": 0.007770954834860781,
+          "active_rate": 0.24107142857142858,
+          "lift": 31.022111657369763,
+          "p_value": 4.789178169949519e-94
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 114,
+          "n_active": 336,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.3392857142857143,
+          "lift": 8.722913243044143,
+          "p_value": 1.9518482611844138e-73
+        },
+        {
+          "tag": "establishment survey",
+          "n_in_active": 56,
+          "n_active": 336,
+          "base_rate": 0.0040526223758241536,
+          "active_rate": 0.16666666666666666,
+          "lift": 41.12563451776649,
+          "p_value": 1.695310958403672e-71
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 201,
+          "n_active": 336,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.5982142857142857,
+          "lift": 3.3914914465655053,
+          "p_value": 1.0829851747251654e-66
+        }
+      ]
+    },
+    {
+      "atom": 33,
+      "n_active": 28,
+      "top_tags": [
+        {
+          "tag": "moving average",
+          "n_in_active": 13,
+          "n_active": 28,
+          "base_rate": 0.00034971868217771883,
+          "active_rate": 0.4642857142857143,
+          "lift": 1327.5976890756301,
+          "p_value": 1.2833048669351217e-38
+        },
+        {
+          "tag": "growth",
+          "n_in_active": 13,
+          "n_active": 28,
+          "base_rate": 0.0003754332911613746,
+          "active_rate": 0.4642857142857143,
+          "lift": 1236.6663405088063,
+          "p_value": 3.5281003840426046e-38
+        },
+        {
+          "tag": "frb atl",
+          "n_in_active": 13,
+          "n_active": 28,
+          "base_rate": 0.0004988634142829224,
+          "active_rate": 0.4642857142857143,
+          "lift": 930.6870397643594,
+          "p_value": 1.902867284065502e-36
+        },
+        {
+          "tag": "1-year",
+          "n_in_active": 12,
+          "n_active": 28,
+          "base_rate": 0.0003137182296006007,
+          "active_rate": 0.42857142857142855,
+          "lift": 1366.1030444964872,
+          "p_value": 8.662311893234152e-36
+        },
+        {
+          "tag": "wages",
+          "n_in_active": 13,
+          "n_active": 28,
+          "base_rate": 0.0034509005256066075,
+          "active_rate": 0.4642857142857143,
+          "lift": 134.54045135192678,
+          "p_value": 3.128626482431507e-25
+        }
+      ]
+    },
+    {
+      "atom": 34,
+      "n_active": 2933,
+      "top_tags": [
+        {
+          "tag": "all items",
+          "n_in_active": 311,
+          "n_active": 2933,
+          "base_rate": 0.004165766655352239,
+          "active_rate": 0.1060347766791681,
+          "lift": 25.453844502531854,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 1037,
+          "n_active": 2933,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.35356290487555403,
+          "lift": 10.118851685282968,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 1734,
+          "n_active": 2933,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.5912035458574838,
+          "lift": 10.102363991881612,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 1005,
+          "n_active": 2933,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.34265257415615413,
+          "lift": 9.389240674192632,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 1247,
+          "n_active": 2933,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.42516195022161607,
+          "lift": 9.296001340941356,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 35,
+      "n_active": 104,
+      "top_tags": [
+        {
+          "tag": "core",
+          "n_in_active": 29,
+          "n_active": 104,
+          "base_rate": 0.0015428765390193477,
+          "active_rate": 0.27884615384615385,
+          "lift": 180.73134615384615,
+          "p_value": 3.040437943097141e-57
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 57,
+          "n_active": 104,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.5480769230769231,
+          "lift": 12.100507900184294,
+          "p_value": 2.4427653792192354e-48
+        },
+        {
+          "tag": "ppi",
+          "n_in_active": 57,
+          "n_active": 104,
+          "base_rate": 0.04931033418705835,
+          "active_rate": 0.5480769230769231,
+          "lift": 11.114849090208915,
+          "p_value": 2.589222928612754e-46
+        },
+        {
+          "tag": "commodities",
+          "n_in_active": 44,
+          "n_active": 104,
+          "base_rate": 0.025051172071877476,
+          "active_rate": 0.4230769230769231,
+          "lift": 16.88850812500987,
+          "p_value": 3.1164682663163683e-42
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 72,
+          "n_active": 104,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.6923076923076923,
+          "lift": 4.267895510849127,
+          "p_value": 3.060178542222582e-33
+        }
+      ]
+    },
+    {
+      "atom": 36,
+      "n_active": 1,
+      "top_tags": []
+    },
+    {
+      "atom": 37,
+      "n_active": 735,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 451,
+          "n_active": 735,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.6136054421768707,
+          "lift": 10.970087291996608,
+          "p_value": 0.0
+        },
+        {
+          "tag": "food stamps",
+          "n_in_active": 44,
+          "n_active": 735,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.05986394557823129,
+          "lift": 228.23657462985196,
+          "p_value": 7.846718789498616e-100
+        },
+        {
+          "tag": "saipe",
+          "n_in_active": 44,
+          "n_active": 735,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.05986394557823129,
+          "lift": 228.23657462985196,
+          "p_value": 7.846718789498616e-100
+        },
+        {
+          "tag": "snap",
+          "n_in_active": 44,
+          "n_active": 735,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.05986394557823129,
+          "lift": 228.23657462985196,
+          "p_value": 7.846718789498616e-100
+        },
+        {
+          "tag": "nutrition",
+          "n_in_active": 44,
+          "n_active": 735,
+          "base_rate": 0.0002674319334300203,
+          "active_rate": 0.05986394557823129,
+          "lift": 223.84740973312398,
+          "p_value": 5.0826401040720985e-99
+        }
+      ]
+    },
+    {
+      "atom": 38,
+      "n_active": 8275,
+      "top_tags": [
+        {
+          "tag": "ratio",
+          "n_in_active": 1388,
+          "n_active": 8275,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.16773413897280967,
+          "lift": 10.363699221528776,
+          "p_value": 0.0
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 2987,
+          "n_active": 8275,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.3609667673716012,
+          "lift": 6.453392808134322,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 1702,
+          "n_active": 8275,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.2056797583081571,
+          "lift": 5.396408523135162,
+          "p_value": 0.0
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 1842,
+          "n_active": 8275,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.22259818731117825,
+          "lift": 5.039287080819667,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 1831,
+          "n_active": 8275,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.22126888217522658,
+          "lift": 4.611851644111416,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 39,
+      "n_active": 13877,
+      "top_tags": [
+        {
+          "tag": "ratio",
+          "n_in_active": 1471,
+          "n_active": 13877,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.10600273834402249,
+          "lift": 6.549534302220661,
+          "p_value": 0.0
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 2666,
+          "n_active": 13877,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.19211645168264033,
+          "lift": 4.349226580285941,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 10584,
+          "n_active": 13877,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.7627008719463861,
+          "lift": 1.7289747819035979,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 5537,
+          "n_active": 13877,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.39900554874972977,
+          "lift": 1.691376431436559,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 7774,
+          "n_active": 13877,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.5602075376522303,
+          "lift": 1.6565717289358217,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 40,
+      "n_active": 85,
+      "top_tags": [
+        {
+          "tag": "growth",
+          "n_in_active": 69,
+          "n_active": 85,
+          "base_rate": 0.0003754332911613746,
+          "active_rate": 0.8117647058823529,
+          "lift": 2162.207574536664,
+          "p_value": 1.7561753066869243e-244
+        },
+        {
+          "tag": "moving average",
+          "n_in_active": 67,
+          "n_active": 85,
+          "base_rate": 0.00034971868217771883,
+          "active_rate": 0.788235294117647,
+          "lift": 2253.9124567474046,
+          "p_value": 1.3549858527887584e-240
+        },
+        {
+          "tag": "frb atl",
+          "n_in_active": 69,
+          "n_active": 85,
+          "base_rate": 0.0004988634142829224,
+          "active_rate": 0.8117647058823529,
+          "lift": 1627.2283808368709,
+          "p_value": 2.969040356077751e-226
+        },
+        {
+          "tag": "wages",
+          "n_in_active": 69,
+          "n_active": 85,
+          "base_rate": 0.0034509005256066075,
+          "active_rate": 0.8117647058823529,
+          "lift": 235.23271675287106,
+          "p_value": 2.6565339721718207e-155
+        },
+        {
+          "tag": "1-year",
+          "n_in_active": 46,
+          "n_active": 85,
+          "base_rate": 0.0003137182296006007,
+          "active_rate": 0.5411764705882353,
+          "lift": 1725.0399228543877,
+          "p_value": 5.0739028383273496e-148
+        }
+      ]
+    },
+    {
+      "atom": 41,
+      "n_active": 995,
+      "top_tags": [
+        {
+          "tag": "25 years +",
+          "n_in_active": 260,
+          "n_active": 995,
+          "base_rate": 0.003270898262721017,
+          "active_rate": 0.2613065326633166,
+          "lift": 79.88830947188774,
+          "p_value": 0.0
+        },
+        {
+          "tag": "mei",
+          "n_in_active": 841,
+          "n_active": 995,
+          "base_rate": 0.03164439781528682,
+          "active_rate": 0.8452261306532663,
+          "lift": 26.710134779210534,
+          "p_value": 0.0
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 848,
+          "n_active": 995,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.8522613065326633,
+          "lift": 21.911330552006362,
+          "p_value": 0.0
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 869,
+          "n_active": 995,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.8733668341708543,
+          "lift": 15.61412228483351,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 441,
+          "n_active": 995,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.44321608040201005,
+          "lift": 12.144845138884953,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 42,
+      "n_active": 361,
+      "top_tags": [
+        {
+          "tag": "federal",
+          "n_in_active": 141,
+          "n_active": 361,
+          "base_rate": 0.005358924512193867,
+          "active_rate": 0.39058171745152354,
+          "lift": 72.88434770125637,
+          "p_value": 3.884816646848192e-222
+        },
+        {
+          "tag": "government",
+          "n_in_active": 166,
+          "n_active": 361,
+          "base_rate": 0.026465475565978544,
+          "active_rate": 0.4598337950138504,
+          "lift": 17.374854794030917,
+          "p_value": 4.2661794907658446e-159
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 267,
+          "n_active": 361,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.739612188365651,
+          "lift": 3.566934697410435,
+          "p_value": 2.836799336477139e-104
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 291,
+          "n_active": 361,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.8060941828254847,
+          "lift": 3.0188475557964733,
+          "p_value": 2.185616274070441e-101
+        },
+        {
+          "tag": "sae",
+          "n_in_active": 249,
+          "n_active": 361,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.6897506925207756,
+          "lift": 3.6438761113710982,
+          "p_value": 2.2861550696111492e-95
+        }
+      ]
+    },
+    {
+      "atom": 43,
+      "n_active": 669,
+      "top_tags": [
+        {
+          "tag": "eurostat",
+          "n_in_active": 486,
+          "n_active": 669,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.726457399103139,
+          "lift": 20.790966970328608,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 451,
+          "n_active": 669,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.6741405082212257,
+          "lift": 18.472551958786863,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 523,
+          "n_active": 669,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.7817638266068759,
+          "lift": 17.092963226480848,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 487,
+          "n_active": 669,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.7279521674140508,
+          "lift": 12.439096171572446,
+          "p_value": 0.0
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 514,
+          "n_active": 669,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.7683109118086696,
+          "lift": 6.81314864385923,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 44,
+      "n_active": 6143,
+      "top_tags": [
+        {
+          "tag": "median",
+          "n_in_active": 3341,
+          "n_active": 6143,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.5438710727657496,
+          "lift": 2.8988070264169816,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 4495,
+          "n_active": 6143,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.7317271691356015,
+          "lift": 1.6587601629988649,
+          "p_value": 0.0
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 5022,
+          "n_active": 6143,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.8175158717239134,
+          "lift": 1.4304946016967044,
+          "p_value": 0.0
+        },
+        {
+          "tag": "u.s. treasury",
+          "n_in_active": 203,
+          "n_active": 6143,
+          "base_rate": 0.0010491560465331563,
+          "active_rate": 0.033045743122252974,
+          "lift": 31.4974528636133,
+          "p_value": 1.964139885240899e-304
+        },
+        {
+          "tag": "bonds",
+          "n_in_active": 204,
+          "n_active": 6143,
+          "base_rate": 0.0013680171979304882,
+          "active_rate": 0.03320853003418525,
+          "lift": 24.27493607859793,
+          "p_value": 1.3730652776841054e-247
+        }
+      ]
+    },
+    {
+      "atom": 45,
+      "n_active": 216,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 126,
+          "n_active": 216,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.5833333333333334,
+          "lift": 10.428880102979038,
+          "p_value": 1.4344933155923814e-98
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 100,
+          "n_active": 216,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.46296296296296297,
+          "lift": 9.649420564309619,
+          "p_value": 9.086223812941434e-72
+        },
+        {
+          "tag": "tertiary schooling",
+          "n_in_active": 51,
+          "n_active": 216,
+          "base_rate": 0.004407483979798604,
+          "active_rate": 0.2361111111111111,
+          "lift": 53.570497860754564,
+          "p_value": 9.576870051204795e-72
+        },
+        {
+          "tag": "16 years +",
+          "n_in_active": 45,
+          "n_active": 216,
+          "base_rate": 0.0031834685921765873,
+          "active_rate": 0.20833333333333334,
+          "lift": 65.44224555735057,
+          "p_value": 3.4298948659484274e-67
+        },
+        {
+          "tag": "25 years +",
+          "n_in_active": 37,
+          "n_active": 216,
+          "base_rate": 0.003270898262721017,
+          "active_rate": 0.1712962962962963,
+          "lift": 52.369802585604475,
+          "p_value": 1.4495867328907708e-51
+        }
+      ]
+    },
+    {
+      "atom": 46,
+      "n_active": 154536,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 10702,
+          "n_active": 154536,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.06925247191592897,
+          "lift": 1.2381012453362505,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 7210,
+          "n_active": 154536,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.046655795413366466,
+          "lift": 1.2241055420005131,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 8773,
+          "n_active": 154536,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.05676994357301859,
+          "lift": 1.1832416516480737,
+          "p_value": 0.0
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 20923,
+          "n_active": 154536,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.13539240047626444,
+          "lift": 1.1282235850435336,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 56288,
+          "n_active": 154536,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.3642387534296216,
+          "lift": 1.0770787270072615,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 47,
+      "n_active": 27738,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1299,
+          "n_active": 27738,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.04683106208089985,
+          "lift": 7.009950248756219,
+          "p_value": 0.0
+        },
+        {
+          "tag": "secondary schooling",
+          "n_in_active": 534,
+          "n_active": 27738,
+          "base_rate": 0.002782320692031557,
+          "active_rate": 0.019251568245727883,
+          "lift": 6.919248489530168,
+          "p_value": 0.0
+        },
+        {
+          "tag": "business formations",
+          "n_in_active": 846,
+          "n_active": 27738,
+          "base_rate": 0.0044846278067495705,
+          "active_rate": 0.030499675535366644,
+          "lift": 6.800937970696974,
+          "p_value": 0.0
+        },
+        {
+          "tag": "16 years +",
+          "n_in_active": 572,
+          "n_active": 27738,
+          "base_rate": 0.0031834685921765873,
+          "active_rate": 0.0206215300310044,
+          "lift": 6.477692313874891,
+          "p_value": 0.0
+        },
+        {
+          "tag": "tertiary schooling",
+          "n_in_active": 720,
+          "n_active": 27738,
+          "base_rate": 0.004407483979798604,
+          "active_rate": 0.025957170668397145,
+          "lift": 5.889339765582821,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 48,
+      "n_active": 8981,
+      "top_tags": [
+        {
+          "tag": "eurostat",
+          "n_in_active": 1490,
+          "n_active": 8981,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.165905801135731,
+          "lift": 4.748168352139213,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 1462,
+          "n_active": 8981,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.16278810822848236,
+          "lift": 4.460660279053349,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 1692,
+          "n_active": 8981,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.18839772853802472,
+          "lift": 4.119243352343484,
+          "p_value": 0.0
+        },
+        {
+          "tag": "goods",
+          "n_in_active": 1768,
+          "n_active": 8981,
+          "base_rate": 0.050704065993972494,
+          "active_rate": 0.1968600378576996,
+          "lift": 3.8825296156939677,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 1838,
+          "n_active": 8981,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.20465427012582119,
+          "lift": 3.497089866579218,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 49,
+      "n_active": 1562,
+      "top_tags": [
+        {
+          "tag": "harmonized",
+          "n_in_active": 566,
+          "n_active": 1562,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.36235595390524966,
+          "lift": 9.92914548890143,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 663,
+          "n_active": 1562,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.42445582586427655,
+          "lift": 9.280562205408936,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 506,
+          "n_active": 1562,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.323943661971831,
+          "lift": 9.271158893306854,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 631,
+          "n_active": 1562,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.4039692701664533,
+          "lift": 6.902943389551411,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 911,
+          "n_active": 1562,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.5832266325224071,
+          "lift": 3.5954393608611617,
+          "p_value": 7.788343925e-315
+        }
+      ]
+    },
+    {
+      "atom": 50,
+      "n_active": 6380,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 5408,
+          "n_active": 6380,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.8476489028213167,
+          "lift": 15.154335046191841,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 2566,
+          "n_active": 6380,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.40219435736677117,
+          "lift": 10.3143596986428,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 2413,
+          "n_active": 6380,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.37821316614420064,
+          "lift": 9.923158069276841,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 2889,
+          "n_active": 6380,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.45282131661442004,
+          "lift": 9.438040780913395,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 5410,
+          "n_active": 6380,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.8479623824451411,
+          "lift": 2.221407132120746,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 51,
+      "n_active": 4,
+      "top_tags": []
+    },
+    {
+      "atom": 52,
+      "n_active": 7261,
+      "top_tags": [
+        {
+          "tag": "secondary schooling",
+          "n_in_active": 510,
+          "n_active": 7261,
+          "base_rate": 0.002782320692031557,
+          "active_rate": 0.07023825919294863,
+          "lift": 25.244487234741804,
+          "p_value": 0.0
+        },
+        {
+          "tag": "associate degree",
+          "n_in_active": 305,
+          "n_active": 7261,
+          "base_rate": 0.0018565947686199483,
+          "active_rate": 0.04200523343892026,
+          "lift": 22.624879779308955,
+          "p_value": 0.0
+        },
+        {
+          "tag": "local govt",
+          "n_in_active": 1184,
+          "n_active": 7261,
+          "base_rate": 0.007827526974624823,
+          "active_rate": 0.16306293898911994,
+          "lift": 20.831986848175074,
+          "p_value": 0.0
+        },
+        {
+          "tag": "55 to 64 years",
+          "n_in_active": 357,
+          "n_active": 7261,
+          "base_rate": 0.0024686024624309562,
+          "active_rate": 0.04916678143506404,
+          "lift": 19.916848574576505,
+          "p_value": 0.0
+        },
+        {
+          "tag": "secondary",
+          "n_in_active": 530,
+          "n_active": 7261,
+          "base_rate": 0.00372861830263009,
+          "active_rate": 0.072992700729927,
+          "lift": 19.57634029700478,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 53,
+      "n_active": 5680,
+      "top_tags": [
+        {
+          "tag": "ratio",
+          "n_in_active": 706,
+          "n_active": 5680,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.12429577464788732,
+          "lift": 7.679796318425328,
+          "p_value": 0.0
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 1549,
+          "n_active": 5680,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.2727112676056338,
+          "lift": 6.173771602721463,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 5373,
+          "n_active": 5680,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.9459507042253521,
+          "lift": 2.1443857909271564,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 3324,
+          "n_active": 5680,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.5852112676056338,
+          "lift": 1.73050945625085,
+          "p_value": 0.0
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 5555,
+          "n_active": 5680,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.9779929577464789,
+          "lift": 1.7112984529628774,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 54,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 55,
+      "n_active": 77,
+      "top_tags": [
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 77,
+          "n_active": 77,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 1.0,
+          "lift": 1.7498065189611418,
+          "p_value": 1.9269287828164613e-19
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 24,
+          "n_active": 77,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.3116883116883117,
+          "lift": 5.326065445232332,
+          "p_value": 6.594844651229247e-12
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 19,
+          "n_active": 77,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.24675324675324675,
+          "lift": 7.061995114099912,
+          "p_value": 1.4879694474149423e-11
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 21,
+          "n_active": 77,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.2727272727272727,
+          "lift": 5.963076168181306,
+          "p_value": 2.3829808526980705e-11
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 19,
+          "n_active": 77,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.24675324675324675,
+          "lift": 6.761442334441207,
+          "p_value": 3.1165420157229954e-11
+        }
+      ]
+    },
+    {
+      "atom": 56,
+      "n_active": 3654,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 3535,
+          "n_active": 3654,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.9674329501915708,
+          "lift": 17.29584384894717,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 1765,
+          "n_active": 3654,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.48303229337712095,
+          "lift": 12.387465733161982,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 1635,
+          "n_active": 3654,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.44745484400656815,
+          "lift": 11.739848168712067,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 1800,
+          "n_active": 3654,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.49261083743842365,
+          "lift": 10.267363753157033,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 3367,
+          "n_active": 3654,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.921455938697318,
+          "lift": 2.4139382082667624,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 57,
+      "n_active": 1,
+      "top_tags": []
+    },
+    {
+      "atom": 58,
+      "n_active": 186847,
+      "top_tags": [
+        {
+          "tag": "listing",
+          "n_in_active": 45855,
+          "n_active": 186847,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.24541469758679563,
+          "lift": 1.0403079273636737,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 65690,
+          "n_active": 186847,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.3515710715184081,
+          "lift": 1.0396195314148324,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 85632,
+          "n_active": 186847,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.4583001065042521,
+          "lift": 1.0389254238918528,
+          "p_value": 0.0
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 23292,
+          "n_active": 186847,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.12465814275851365,
+          "lift": 1.0387751176073932,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 36367,
+          "n_active": 186847,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.1946351827966197,
+          "lift": 1.037396294326919,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 59,
+      "n_active": 52,
+      "top_tags": [
+        {
+          "tag": "g17",
+          "n_in_active": 49,
+          "n_active": 52,
+          "base_rate": 0.005842359161086596,
+          "active_rate": 0.9423076923076923,
+          "lift": 161.2889016793066,
+          "p_value": 2.796142122879734e-106
+        },
+        {
+          "tag": "frb",
+          "n_in_active": 49,
+          "n_active": 52,
+          "base_rate": 0.011088139393752378,
+          "active_rate": 0.9423076923076923,
+          "lift": 84.98339160839161,
+          "p_value": 1.961085308989065e-92
+        },
+        {
+          "tag": "ip",
+          "n_in_active": 39,
+          "n_active": 52,
+          "base_rate": 0.0049474907684553746,
+          "active_rate": 0.75,
+          "lift": 151.59199584199584,
+          "p_value": 3.3126693767917323e-79
+        },
+        {
+          "tag": "nondurable goods",
+          "n_in_active": 35,
+          "n_active": 52,
+          "base_rate": 0.00825438948375351,
+          "active_rate": 0.6730769230769231,
+          "lift": 81.54169662113587,
+          "p_value": 1.6080053461385335e-60
+        },
+        {
+          "tag": "industry",
+          "n_in_active": 46,
+          "n_active": 52,
+          "base_rate": 0.035702163112907706,
+          "active_rate": 0.8846153846153846,
+          "lift": 24.77764111428761,
+          "p_value": 3.7847666817611807e-60
+        }
+      ]
+    },
+    {
+      "atom": 60,
+      "n_active": 34087,
+      "top_tags": [
+        {
+          "tag": "civilian",
+          "n_in_active": 2506,
+          "n_active": 34087,
+          "base_rate": 0.024655167093529176,
+          "active_rate": 0.07351776337019979,
+          "lift": 2.981839996918729,
+          "p_value": 0.0
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 2789,
+          "n_active": 34087,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.08182004869891747,
+          "lift": 2.614073925257133,
+          "p_value": 0.0
+        },
+        {
+          "tag": "labor",
+          "n_in_active": 2795,
+          "n_active": 34087,
+          "base_rate": 0.031613540284506435,
+          "active_rate": 0.0819960688825652,
+          "lift": 2.593700931456604,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 3259,
+          "n_active": 34087,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.09560829641798926,
+          "lift": 2.5084696224675036,
+          "p_value": 0.0
+        },
+        {
+          "tag": "retail trade",
+          "n_in_active": 1858,
+          "n_active": 34087,
+          "base_rate": 0.022052848664383208,
+          "active_rate": 0.05450758353624549,
+          "lift": 2.4716799342244977,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 61,
+      "n_active": 18,
+      "top_tags": [
+        {
+          "tag": "fl",
+          "n_in_active": 14,
+          "n_active": 18,
+          "base_rate": 0.029474084817066273,
+          "active_rate": 0.7777777777777778,
+          "lift": 26.388530215785494,
+          "p_value": 1.0065965514863492e-18
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 9,
+          "n_active": 18,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.5,
+          "lift": 8.939040088267745,
+          "p_value": 1.6341354216961251e-07
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 7,
+          "n_active": 18,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.3888888888888889,
+          "lift": 9.973138134177438,
+          "p_value": 2.9739855414690697e-06
+        },
+        {
+          "tag": "msa",
+          "n_in_active": 12,
+          "n_active": 18,
+          "base_rate": 0.29957519465959,
+          "active_rate": 0.6666666666666666,
+          "lift": 2.22537339055794,
+          "p_value": 0.0014094667309567659
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 6,
+          "n_active": 18,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.3333333333333333,
+          "lift": 2.7776634953287047,
+          "p_value": 0.015362318285678994
+        }
+      ]
+    },
+    {
+      "atom": 62,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 63,
+      "n_active": 3967,
+      "top_tags": [
+        {
+          "tag": "median",
+          "n_in_active": 2092,
+          "n_active": 3967,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.5273506428031258,
+          "lift": 2.8107539181471286,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 2478,
+          "n_active": 3967,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.624653390471389,
+          "lift": 2.647893057554781,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 3722,
+          "n_active": 3967,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.9382404839929418,
+          "lift": 2.126907410037489,
+          "p_value": 0.0
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 3860,
+          "n_active": 3967,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.9730274766826317,
+          "lift": 1.7026098218275794,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nsa",
+          "n_in_active": 3961,
+          "n_active": 3967,
+          "base_rate": 0.8235977823721212,
+          "active_rate": 0.99848752205697,
+          "lift": 1.2123484829951003,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 64,
+      "n_active": 45,
+      "top_tags": [
+        {
+          "tag": "ca",
+          "n_in_active": 24,
+          "n_active": 45,
+          "base_rate": 0.0406856543339402,
+          "active_rate": 0.5333333333333333,
+          "lift": 13.108633548223992,
+          "p_value": 6.71037839761983e-22
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 25,
+          "n_active": 45,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.5555555555555556,
+          "lift": 9.932266764741941,
+          "p_value": 5.0462197263974673e-20
+        },
+        {
+          "tag": "county",
+          "n_in_active": 41,
+          "n_active": 45,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.9111111111111111,
+          "lift": 2.6942174232631233,
+          "p_value": 1.4756010775376115e-15
+        },
+        {
+          "tag": "san francisco",
+          "n_in_active": 8,
+          "n_active": 45,
+          "base_rate": 0.0029623229549171474,
+          "active_rate": 0.17777777777777778,
+          "lift": 60.012962962962966,
+          "p_value": 1.1058929021637352e-12
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 15,
+          "n_active": 45,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.3333333333333333,
+          "lift": 8.548404115009232,
+          "p_value": 8.19538496827352e-11
+        }
+      ]
+    },
+    {
+      "atom": 65,
+      "n_active": 1083,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 1003,
+          "n_active": 1083,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.9261311172668514,
+          "lift": 16.557446368481163,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 567,
+          "n_active": 1083,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.5235457063711911,
+          "lift": 13.426440812216716,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 373,
+          "n_active": 1083,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.3444136657433056,
+          "lift": 9.036362433471844,
+          "p_value": 4.5095882593246387e-244
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 932,
+          "n_active": 1083,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.8605724838411819,
+          "lift": 2.254441815920228,
+          "p_value": 8.902041325419416e-235
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 377,
+          "n_active": 1083,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.3481071098799631,
+          "lift": 7.2555089140615046,
+          "p_value": 2.9710308747377934e-213
+        }
+      ]
+    },
+    {
+      "atom": 66,
+      "n_active": 151124,
+      "top_tags": [
+        {
+          "tag": "earnings",
+          "n_in_active": 4788,
+          "n_active": 151124,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.0316825917789365,
+          "lift": 1.2728153947685892,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hours",
+          "n_in_active": 5642,
+          "n_active": 151124,
+          "base_rate": 0.029453513129879347,
+          "active_rate": 0.03733358037108599,
+          "lift": 1.2675425239243412,
+          "p_value": 0.0
+        },
+        {
+          "tag": "square feet",
+          "n_in_active": 11407,
+          "n_active": 151124,
+          "base_rate": 0.059915038931918,
+          "active_rate": 0.07548106190942537,
+          "lift": 1.2598015999821879,
+          "p_value": 0.0
+        },
+        {
+          "tag": "average",
+          "n_in_active": 6116,
+          "n_active": 151124,
+          "base_rate": 0.032888984890095764,
+          "active_rate": 0.04047007755220878,
+          "lift": 1.2305055229720998,
+          "p_value": 0.0
+        },
+        {
+          "tag": "services",
+          "n_in_active": 15689,
+          "n_active": 151124,
+          "base_rate": 0.08509992697051048,
+          "active_rate": 0.1038154098621,
+          "lift": 1.219923606962377,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 67,
+      "n_active": 11953,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 8934,
+          "n_active": 11953,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.7474274240776374,
+          "lift": 13.362567413801395,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 4792,
+          "n_active": 11953,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.4009035388605371,
+          "lift": 10.281256383951536,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 3685,
+          "n_active": 11953,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.308290805655484,
+          "lift": 8.088608937156069,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 4382,
+          "n_active": 11953,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.3666025265623693,
+          "lift": 7.641004230875786,
+          "p_value": 0.0
+        },
+        {
+          "tag": "county",
+          "n_in_active": 7929,
+          "n_active": 11953,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.6633481134443237,
+          "lift": 1.9615654151675337,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 68,
+      "n_active": 9457,
+      "top_tags": [
+        {
+          "tag": "fl",
+          "n_in_active": 1064,
+          "n_active": 9457,
+          "base_rate": 0.029474084817066273,
+          "active_rate": 0.11250925240562547,
+          "lift": 3.817226322850223,
+          "p_value": 0.0
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 4211,
+          "n_active": 9457,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.4452786295865496,
+          "lift": 3.7105025839576533,
+          "p_value": 0.0
+        },
+        {
+          "tag": "ca",
+          "n_in_active": 1377,
+          "n_active": 9457,
+          "base_rate": 0.0406856543339402,
+          "active_rate": 0.14560642910013746,
+          "lift": 3.5788149775109255,
+          "p_value": 0.0
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 1448,
+          "n_active": 9457,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.15311409537908427,
+          "lift": 3.4662720844917803,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 4746,
+          "n_active": 9457,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.5018504811250926,
+          "lift": 2.674839265670493,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 69,
+      "n_active": 177,
+      "top_tags": [
+        {
+          "tag": "oecd",
+          "n_in_active": 177,
+          "n_active": 177,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 1.0,
+          "lift": 25.709639032130106,
+          "p_value": 3.518374911711323e-251
+        },
+        {
+          "tag": "leading indicator",
+          "n_in_active": 89,
+          "n_active": 177,
+          "base_rate": 0.0038417625821581757,
+          "active_rate": 0.5028248587570622,
+          "lift": 130.88389717060332,
+          "p_value": 3.8891100169527244e-166
+        },
+        {
+          "tag": "business sentiment",
+          "n_in_active": 72,
+          "n_active": 177,
+          "base_rate": 0.002849178675389062,
+          "active_rate": 0.4067796610169492,
+          "lift": 142.7708499051582,
+          "p_value": 1.825278495800013e-135
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 174,
+          "n_active": 177,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.9830508474576272,
+          "lift": 5.5732680083201425,
+          "p_value": 2.7296445430819643e-126
+        },
+        {
+          "tag": "composite",
+          "n_in_active": 39,
+          "n_active": 177,
+          "base_rate": 0.0012034437004350912,
+          "active_rate": 0.22033898305084745,
+          "lift": 183.09039548022596,
+          "p_value": 1.0396612900170215e-76
+        }
+      ]
+    },
+    {
+      "atom": 70,
+      "n_active": 36166,
+      "top_tags": [
+        {
+          "tag": "local govt",
+          "n_in_active": 1105,
+          "n_active": 36166,
+          "base_rate": 0.007827526974624823,
+          "active_rate": 0.03055355859094177,
+          "lift": 3.903347594967083,
+          "p_value": 0.0
+        },
+        {
+          "tag": "government",
+          "n_in_active": 3019,
+          "n_active": 36166,
+          "base_rate": 0.026465475565978544,
+          "active_rate": 0.0834761931095504,
+          "lift": 3.1541542830561986,
+          "p_value": 0.0
+        },
+        {
+          "tag": "retail trade",
+          "n_in_active": 2252,
+          "n_active": 36166,
+          "base_rate": 0.022052848664383208,
+          "active_rate": 0.062268428911132004,
+          "lift": 2.8236002458811402,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sales",
+          "n_in_active": 2497,
+          "n_active": 36166,
+          "base_rate": 0.02534431861429115,
+          "active_rate": 0.06904274733174805,
+          "lift": 2.7241903158846905,
+          "p_value": 0.0
+        },
+        {
+          "tag": "payrolls",
+          "n_in_active": 1962,
+          "n_active": 36166,
+          "base_rate": 0.020453399985599818,
+          "active_rate": 0.054249847923464024,
+          "lift": 2.6523633215826483,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 71,
+      "n_active": 475,
+      "top_tags": [
+        {
+          "tag": "leading indicator",
+          "n_in_active": 124,
+          "n_active": 475,
+          "base_rate": 0.0038417625821581757,
+          "active_rate": 0.26105263157894737,
+          "lift": 67.95126611709998,
+          "p_value": 2.367762401443959e-188
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 139,
+          "n_active": 475,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.2926315789473684,
+          "lift": 7.5234522641391255,
+          "p_value": 1.3255674122495862e-79
+        },
+        {
+          "tag": "gdp",
+          "n_in_active": 32,
+          "n_active": 475,
+          "base_rate": 0.0007817241131031361,
+          "active_rate": 0.06736842105263158,
+          "lift": 86.17927977839335,
+          "p_value": 5.093307406470681e-52
+        },
+        {
+          "tag": "transnational",
+          "n_in_active": 65,
+          "n_active": 475,
+          "base_rate": 0.010100698408779996,
+          "active_rate": 0.1368421052631579,
+          "lift": 13.547786472290708,
+          "p_value": 1.4944219563630374e-51
+        },
+        {
+          "tag": "adjusted",
+          "n_in_active": 19,
+          "n_active": 475,
+          "base_rate": 0.00024686024624309563,
+          "active_rate": 0.04,
+          "lift": 162.035,
+          "p_value": 1.7632538160267208e-37
+        }
+      ]
+    },
+    {
+      "atom": 72,
+      "n_active": 35362,
+      "top_tags": [
+        {
+          "tag": "nonfarm",
+          "n_in_active": 1507,
+          "n_active": 35362,
+          "base_rate": 0.0099361249112846,
+          "active_rate": 0.042616367852497034,
+          "lift": 4.289033021726309,
+          "p_value": 0.0
+        },
+        {
+          "tag": "leisure",
+          "n_in_active": 1470,
+          "n_active": 35362,
+          "base_rate": 0.010589275979469456,
+          "active_rate": 0.04157004694304621,
+          "lift": 3.9256741465273395,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hospitality",
+          "n_in_active": 1458,
+          "n_active": 35362,
+          "base_rate": 0.01051727507431522,
+          "active_rate": 0.041230699621062156,
+          "lift": 3.9202834697890308,
+          "p_value": 0.0
+        },
+        {
+          "tag": "payrolls",
+          "n_in_active": 2525,
+          "n_active": 35362,
+          "base_rate": 0.020453399985599818,
+          "active_rate": 0.07140433233414399,
+          "lift": 3.491073972269456,
+          "p_value": 0.0
+        },
+        {
+          "tag": "health",
+          "n_in_active": 2194,
+          "n_active": 35362,
+          "base_rate": 0.01836537373612697,
+          "active_rate": 0.062044002036083935,
+          "lift": 3.378314153990544,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 73,
+      "n_active": 3411,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 2383,
+          "n_active": 3411,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.6986221049545588,
+          "lift": 23.008380645591856,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 3258,
+          "n_active": 3411,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.9551451187335093,
+          "lift": 4.04884079304079,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 3387,
+          "n_active": 3411,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.9929639401934917,
+          "lift": 2.2509605994719015,
+          "p_value": 0.0
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 3387,
+          "n_active": 3411,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.9929639401934917,
+          "lift": 1.7374947756439132,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nsa",
+          "n_in_active": 3406,
+          "n_active": 3411,
+          "base_rate": 0.8235977823721212,
+          "active_rate": 0.9985341542069774,
+          "lift": 1.2124051030480019,
+          "p_value": 9.399025382060601e-279
+        }
+      ]
+    },
+    {
+      "atom": 74,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 75,
+      "n_active": 1453,
+      "top_tags": [
+        {
+          "tag": "leading indicator",
+          "n_in_active": 540,
+          "n_active": 1453,
+          "base_rate": 0.0038417625821581757,
+          "active_rate": 0.3716448726772196,
+          "lift": 96.73811557309763,
+          "p_value": 0.0
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 717,
+          "n_active": 1453,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.49346180316586374,
+          "lift": 12.686724835538394,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 1259,
+          "n_active": 1453,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.8664831383344804,
+          "lift": 4.9124038366047476,
+          "p_value": 0.0
+        },
+        {
+          "tag": "gdp",
+          "n_in_active": 138,
+          "n_active": 1453,
+          "base_rate": 0.0007817241131031361,
+          "active_rate": 0.09497591190640055,
+          "lift": 121.4954359401601,
+          "p_value": 8.670331925276571e-278
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 416,
+          "n_active": 1453,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.28630419821059877,
+          "lift": 9.147150987260146,
+          "p_value": 8.036719865536444e-270
+        }
+      ]
+    },
+    {
+      "atom": 76,
+      "n_active": 90520,
+      "top_tags": [
+        {
+          "tag": "harmonized",
+          "n_in_active": 5659,
+          "n_active": 90520,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.06251657092355281,
+          "lift": 1.7130562406309828,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 5212,
+          "n_active": 90520,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.05757843570481661,
+          "lift": 1.647875507111562,
+          "p_value": 0.0
+        },
+        {
+          "tag": "fl",
+          "n_in_active": 4353,
+          "n_active": 90520,
+          "base_rate": 0.029474084817066273,
+          "active_rate": 0.04808882015024304,
+          "lift": 1.631562793169352,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 6506,
+          "n_active": 90520,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.07187361908970394,
+          "lift": 1.5714888387541002,
+          "p_value": 0.0
+        },
+        {
+          "tag": "reduced count",
+          "n_in_active": 4246,
+          "n_active": 90520,
+          "base_rate": 0.030188950946811902,
+          "active_rate": 0.046906760936809545,
+          "lift": 1.5537724719037687,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 77,
+      "n_active": 314,
+      "top_tags": [
+        {
+          "tag": "15 to 24 years",
+          "n_in_active": 118,
+          "n_active": 314,
+          "base_rate": 0.00417090957714897,
+          "active_rate": 0.37579617834394907,
+          "lift": 90.09933478366726,
+          "p_value": 8.917547730954895e-197
+        },
+        {
+          "tag": "mei",
+          "n_in_active": 173,
+          "n_active": 314,
+          "base_rate": 0.03164439781528682,
+          "active_rate": 0.5509554140127388,
+          "lift": 17.410835789284082,
+          "p_value": 1.2302500569369802e-170
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 173,
+          "n_active": 314,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.5509554140127388,
+          "lift": 14.164864817065313,
+          "p_value": 2.155563964254257e-155
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 253,
+          "n_active": 314,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.8057324840764332,
+          "lift": 4.967129630284069,
+          "p_value": 1.1063815860791185e-139
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 171,
+          "n_active": 314,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.5445859872611465,
+          "lift": 9.736151943272512,
+          "p_value": 2.7399103629498223e-126
+        }
+      ]
+    },
+    {
+      "atom": 78,
+      "n_active": 24,
+      "top_tags": [
+        {
+          "tag": "s&p dow jones indices llc",
+          "n_in_active": 10,
+          "n_active": 24,
+          "base_rate": 0.0009205830016148775,
+          "active_rate": 0.4166666666666667,
+          "lift": 452.6117318435754,
+          "p_value": 6.565890155291924e-25
+        },
+        {
+          "tag": "s&p cotality case-shiller home price indices",
+          "n_in_active": 10,
+          "n_active": 24,
+          "base_rate": 0.0009205830016148775,
+          "active_rate": 0.4166666666666667,
+          "lift": 452.6117318435754,
+          "p_value": 6.565890155291924e-25
+        },
+        {
+          "tag": "copyrighted: pre-approval required",
+          "n_in_active": 10,
+          "n_active": 24,
+          "base_rate": 0.0009771551413789202,
+          "active_rate": 0.4166666666666667,
+          "lift": 426.4078947368421,
+          "p_value": 1.2092976990727975e-24
+        },
+        {
+          "tag": "hpi",
+          "n_in_active": 10,
+          "n_active": 24,
+          "base_rate": 0.001038870202939694,
+          "active_rate": 0.4166666666666667,
+          "lift": 401.0767326732674,
+          "p_value": 2.261960615376398e-24
+        },
+        {
+          "tag": "housing",
+          "n_in_active": 10,
+          "n_active": 24,
+          "base_rate": 0.010496703387128296,
+          "active_rate": 0.4166666666666667,
+          "lift": 39.695002449779516,
+          "p_value": 2.726393697276139e-14
+        }
+      ]
+    },
+    {
+      "atom": 79,
+      "n_active": 93301,
+      "top_tags": [
+        {
+          "tag": "nonfarm",
+          "n_in_active": 1781,
+          "n_active": 93301,
+          "base_rate": 0.0099361249112846,
+          "active_rate": 0.01908875574752682,
+          "lift": 1.921146917733235,
+          "p_value": 0.0
+        },
+        {
+          "tag": "retail trade",
+          "n_in_active": 3685,
+          "n_active": 93301,
+          "base_rate": 0.022052848664383208,
+          "active_rate": 0.03949582533949261,
+          "lift": 1.7909625164789233,
+          "p_value": 0.0
+        },
+        {
+          "tag": "retail",
+          "n_in_active": 4051,
+          "n_active": 93301,
+          "base_rate": 0.024300305489554724,
+          "active_rate": 0.04341861287660368,
+          "lift": 1.7867517301486928,
+          "p_value": 0.0
+        },
+        {
+          "tag": "private",
+          "n_in_active": 5547,
+          "n_active": 93301,
+          "base_rate": 0.03344956336593946,
+          "active_rate": 0.0594527389845768,
+          "lift": 1.7773846054180629,
+          "p_value": 0.0
+        },
+        {
+          "tag": "food",
+          "n_in_active": 2562,
+          "n_active": 93301,
+          "base_rate": 0.01561905349667253,
+          "active_rate": 0.027459512759777493,
+          "lift": 1.7580778992547432,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 80,
+      "n_active": 39576,
+      "top_tags": [
+        {
+          "tag": "ratio",
+          "n_in_active": 1809,
+          "n_active": 39576,
+          "base_rate": 0.016184774894312956,
+          "active_rate": 0.04570952092177077,
+          "lift": 2.8242296368194952,
+          "p_value": 0.0
+        },
+        {
+          "tag": "square feet",
+          "n_in_active": 6327,
+          "n_active": 39576,
+          "base_rate": 0.059915038931918,
+          "active_rate": 0.15986961795027288,
+          "lift": 2.6682719530890093,
+          "p_value": 0.0
+        },
+        {
+          "tag": "average",
+          "n_in_active": 3319,
+          "n_active": 39576,
+          "base_rate": 0.032888984890095764,
+          "active_rate": 0.08386395795431574,
+          "lift": 2.549910197428156,
+          "p_value": 0.0
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 2992,
+          "n_active": 39576,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.07560137457044673,
+          "lift": 1.9436840505390456,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 14177,
+          "n_active": 39576,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.358222154841318,
+          "lift": 1.90930709771266,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 81,
+      "n_active": 184909,
+      "top_tags": [
+        {
+          "tag": "sa",
+          "n_in_active": 33781,
+          "n_active": 184909,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.1826898636626665,
+          "lift": 1.0357343928126717,
+          "p_value": 1.7274239970279535e-290
+        },
+        {
+          "tag": "usa",
+          "n_in_active": 163930,
+          "n_active": 184909,
+          "base_rate": 0.8804116394606104,
+          "active_rate": 0.8865441920079606,
+          "lift": 1.0069655514221818,
+          "p_value": 2.283212487044552e-241
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 82847,
+          "n_active": 184909,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.4480420098534955,
+          "lift": 1.0156712346390908,
+          "p_value": 1.4820894107102395e-166
+        },
+        {
+          "tag": "median",
+          "n_in_active": 35567,
+          "n_active": 184909,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.19234866880465526,
+          "lift": 1.0252092831806907,
+          "p_value": 3.40049468298183e-142
+        },
+        {
+          "tag": "discontinued",
+          "n_in_active": 5585,
+          "n_active": 184909,
+          "base_rate": 0.028898077575832383,
+          "active_rate": 0.030204046314673706,
+          "lift": 1.045192235899232,
+          "p_value": 1.3964988741954903e-79
+        }
+      ]
+    },
+    {
+      "atom": 82,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 83,
+      "n_active": 155,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 144,
+          "n_active": 155,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.9290322580645162,
+          "lift": 16.609313196265234,
+          "p_value": 2.193373828919045e-165
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 132,
+          "n_active": 155,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.8516129032258064,
+          "lift": 4.828099137797249,
+          "p_value": 5.585108422509845e-75
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 81,
+          "n_active": 155,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.5225806451612903,
+          "lift": 13.40169161256286,
+          "p_value": 6.9164466688764595e-71
+        },
+        {
+          "tag": "state",
+          "n_in_active": 106,
+          "n_active": 155,
+          "base_rate": 0.09818866294319128,
+          "active_rate": 0.6838709677419355,
+          "lift": 6.964866892398775,
+          "p_value": 5.188229779147351e-69
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 154,
+          "n_active": 155,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.9935483870967742,
+          "lift": 2.602798802040755,
+          "p_value": 3.389835929647599e-63
+        }
+      ]
+    },
+    {
+      "atom": 84,
+      "n_active": 20328,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 8521,
+          "n_active": 20328,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.4191755214482487,
+          "lift": 7.494053580492863,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rate",
+          "n_in_active": 4447,
+          "n_active": 20328,
+          "base_rate": 0.03899363306281565,
+          "active_rate": 0.21876229830775284,
+          "lift": 5.610205593188614,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 3648,
+          "n_active": 20328,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.179456906729634,
+          "lift": 4.708401006385575,
+          "p_value": 0.0
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 4390,
+          "n_active": 20328,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.21595828414010232,
+          "lift": 4.50116418531137,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 14635,
+          "n_active": 20328,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.7199429358520267,
+          "lift": 1.88603457597968,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 85,
+      "n_active": 15392,
+      "top_tags": [
+        {
+          "tag": "square feet",
+          "n_in_active": 3319,
+          "n_active": 15392,
+          "base_rate": 0.059915038931918,
+          "active_rate": 0.21563149688149688,
+          "lift": 3.5989544649469543,
+          "p_value": 0.0
+        },
+        {
+          "tag": "average",
+          "n_in_active": 1691,
+          "n_active": 15392,
+          "base_rate": 0.032888984890095764,
+          "active_rate": 0.10986226611226611,
+          "lift": 3.3403969894294363,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 11363,
+          "n_active": 15392,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.7382406444906445,
+          "lift": 3.1293871243961173,
+          "p_value": 0.0
+        },
+        {
+          "tag": "pending",
+          "n_in_active": 1959,
+          "n_active": 15392,
+          "base_rate": 0.044172555312123926,
+          "active_rate": 0.12727390852390852,
+          "lift": 2.8812892445227405,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 6855,
+          "n_active": 15392,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.4453612266112266,
+          "lift": 2.373754217941946,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 86,
+      "n_active": 91082,
+      "top_tags": [
+        {
+          "tag": "reduced count",
+          "n_in_active": 5870,
+          "n_active": 91082,
+          "base_rate": 0.030188950946811902,
+          "active_rate": 0.06444742100524802,
+          "lift": 2.1348016073428338,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nielsen",
+          "n_in_active": 1285,
+          "n_active": 91082,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.014108166267758723,
+          "lift": 2.1117937378256673,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rank",
+          "n_in_active": 3718,
+          "n_active": 91082,
+          "base_rate": 0.02001625163287767,
+          "active_rate": 0.040820359675896443,
+          "lift": 2.039360836613735,
+          "p_value": 0.0
+        },
+        {
+          "tag": "new",
+          "n_in_active": 6049,
+          "n_active": 91082,
+          "base_rate": 0.034771294267699364,
+          "active_rate": 0.06641268307678795,
+          "lift": 1.9099859374081944,
+          "p_value": 0.0
+        },
+        {
+          "tag": "active listing",
+          "n_in_active": 5163,
+          "n_active": 91082,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.056685184778551195,
+          "lift": 1.8668666495106794,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 87,
+      "n_active": 443,
+      "top_tags": [
+        {
+          "tag": "price index",
+          "n_in_active": 283,
+          "n_active": 443,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.6388261851015802,
+          "lift": 5.6649172747535665,
+          "p_value": 2.0810682677483774e-153
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 283,
+          "n_active": 443,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 0.6388261851015802,
+          "lift": 5.176257077281387,
+          "p_value": 4.352437740121371e-143
+        },
+        {
+          "tag": "energy",
+          "n_in_active": 96,
+          "n_active": 443,
+          "base_rate": 0.006629226195986464,
+          "active_rate": 0.21670428893905191,
+          "lift": 32.68922835522663,
+          "p_value": 4.0057999291989497e-113
+        },
+        {
+          "tag": "price",
+          "n_in_active": 345,
+          "n_active": 443,
+          "base_rate": 0.2833492763909032,
+          "active_rate": 0.7787810383747178,
+          "lift": 2.74848430281617,
+          "p_value": 9.683732812445226e-104
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 271,
+          "n_active": 443,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.6117381489841986,
+          "lift": 3.771205388693623,
+          "p_value": 3.496387301815754e-101
+        }
+      ]
+    },
+    {
+      "atom": 88,
+      "n_active": 292,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 228,
+          "n_active": 292,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.7808219178082192,
+          "lift": 25.715544604076175,
+          "p_value": 5.293372482198865e-284
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 287,
+          "n_active": 292,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.9828767123287672,
+          "lift": 4.166394456041642,
+          "p_value": 2.1495975648317823e-171
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 292,
+          "n_active": 292,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 1.0,
+          "lift": 2.266910718865857,
+          "p_value": 1.2380303453106967e-104
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 292,
+          "n_active": 292,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 1.0,
+          "lift": 1.7498065189611418,
+          "p_value": 9.454986300904133e-72
+        },
+        {
+          "tag": "nsa",
+          "n_in_active": 292,
+          "n_active": 292,
+          "base_rate": 0.8235977823721212,
+          "active_rate": 1.0,
+          "lift": 1.2141849108915839,
+          "p_value": 2.3360480853494726e-25
+        }
+      ]
+    },
+    {
+      "atom": 89,
+      "n_active": 6,
+      "top_tags": [
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 6,
+          "n_active": 6,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 1.0,
+          "lift": 1.7498065189611418,
+          "p_value": 0.034836514613398845
+        },
+        {
+          "tag": "monthly",
+          "n_in_active": 6,
+          "n_active": 6,
+          "base_rate": 0.9999845712346098,
+          "active_rate": 1.0,
+          "lift": 1.0000154290034406,
+          "p_value": 0.999907429788123
+        }
+      ]
+    },
+    {
+      "atom": 90,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 91,
+      "n_active": 7717,
+      "top_tags": [
+        {
+          "tag": "europe",
+          "n_in_active": 691,
+          "n_active": 7717,
+          "base_rate": 0.007770954834860781,
+          "active_rate": 0.0895425683555786,
+          "lift": 11.522724074252425,
+          "p_value": 0.0
+        },
+        {
+          "tag": "euro area",
+          "n_in_active": 440,
+          "n_active": 7717,
+          "base_rate": 0.005127493031340966,
+          "active_rate": 0.05701697550861734,
+          "lift": 11.119854314790945,
+          "p_value": 0.0
+        },
+        {
+          "tag": "transnational",
+          "n_in_active": 790,
+          "n_active": 7717,
+          "base_rate": 0.010100698408779996,
+          "active_rate": 0.1023713878450175,
+          "lift": 10.13508014020412,
+          "p_value": 0.0
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 1857,
+          "n_active": 7717,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.24063755345341453,
+          "lift": 6.886966024225615,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 1781,
+          "n_active": 7717,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.23078916677465336,
+          "lift": 6.324000446166452,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 92,
+      "n_active": 236,
+      "top_tags": [
+        {
+          "tag": "unemployment",
+          "n_in_active": 230,
+          "n_active": 236,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.9745762711864406,
+          "lift": 17.423552714420182,
+          "p_value": 1.4860697178093848e-278
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 227,
+          "n_active": 236,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.961864406779661,
+          "lift": 5.929642020958462,
+          "p_value": 2.7421980098287644e-165
+        },
+        {
+          "tag": "education",
+          "n_in_active": 140,
+          "n_active": 236,
+          "base_rate": 0.023338579113566,
+          "active_rate": 0.5932203389830508,
+          "lift": 25.418014357104973,
+          "p_value": 4.338749859612856e-163
+        },
+        {
+          "tag": "tertiary schooling",
+          "n_in_active": 96,
+          "n_active": 236,
+          "base_rate": 0.004407483979798604,
+          "active_rate": 0.4067796610169492,
+          "lift": 92.29294147894706,
+          "p_value": 1.543463162868797e-161
+        },
+        {
+          "tag": "males",
+          "n_in_active": 91,
+          "n_active": 236,
+          "base_rate": 0.009725265117618622,
+          "active_rate": 0.3855932203389831,
+          "lift": 39.64860758812932,
+          "p_value": 2.7251614287709333e-118
+        }
+      ]
+    },
+    {
+      "atom": 93,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 94,
+      "n_active": 7148,
+      "top_tags": [
+        {
+          "tag": "eurostat",
+          "n_in_active": 1195,
+          "n_active": 7148,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.16717963066592054,
+          "lift": 4.784624925808496,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 1229,
+          "n_active": 7148,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.17193620593172915,
+          "lift": 4.711333110735242,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 1366,
+          "n_active": 7148,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.1911024062674874,
+          "lift": 4.178380083151105,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 1347,
+          "n_active": 7148,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.18844432008953554,
+          "lift": 3.220097590899857,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nsa",
+          "n_in_active": 6927,
+          "n_active": 7148,
+          "base_rate": 0.8235977823721212,
+          "active_rate": 0.969082260772244,
+          "lift": 1.1766450584423616,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 95,
+      "n_active": 13439,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 1389,
+          "n_active": 13439,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.10335590445717688,
+          "lift": 3.40391747534932,
+          "p_value": 0.0
+        },
+        {
+          "tag": "square feet",
+          "n_in_active": 2388,
+          "n_active": 13439,
+          "base_rate": 0.059915038931918,
+          "active_rate": 0.1776917925440881,
+          "lift": 2.9657294013611657,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 7350,
+          "n_active": 13439,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.5469156931319294,
+          "lift": 2.3183645346404758,
+          "p_value": 0.0
+        },
+        {
+          "tag": "price",
+          "n_in_active": 7162,
+          "n_active": 13439,
+          "base_rate": 0.2833492763909032,
+          "active_rate": 0.5329265570354937,
+          "lift": 1.8808114275904435,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 4662,
+          "n_active": 13439,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.3469008110722524,
+          "lift": 1.8489648723036898,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 96,
+      "n_active": 5379,
+      "top_tags": [
+        {
+          "tag": "sa",
+          "n_in_active": 2173,
+          "n_active": 5379,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.40397843465328126,
+          "lift": 2.290298708075147,
+          "p_value": 0.0
+        },
+        {
+          "tag": "earnings",
+          "n_in_active": 668,
+          "n_active": 5379,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.12418665179401375,
+          "lift": 4.989070443828847,
+          "p_value": 5.5860566960453464e-263
+        },
+        {
+          "tag": "discontinued",
+          "n_in_active": 711,
+          "n_active": 5379,
+          "base_rate": 0.028898077575832383,
+          "active_rate": 0.13218070273284996,
+          "lift": 4.574031002096603,
+          "p_value": 5.487480814880941e-257
+        },
+        {
+          "tag": "price",
+          "n_in_active": 2462,
+          "n_active": 5379,
+          "base_rate": 0.2833492763909032,
+          "active_rate": 0.45770589328871536,
+          "lift": 1.6153416698946257,
+          "p_value": 5.503417630669977e-167
+        },
+        {
+          "tag": "maintenance",
+          "n_in_active": 214,
+          "n_active": 5379,
+          "base_rate": 0.0048189177235370955,
+          "active_rate": 0.03978434653281279,
+          "lift": 8.255867565136803,
+          "p_value": 2.913269271540794e-127
+        }
+      ]
+    },
+    {
+      "atom": 97,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 98,
+      "n_active": 6745,
+      "top_tags": [
+        {
+          "tag": "leisure",
+          "n_in_active": 651,
+          "n_active": 6745,
+          "base_rate": 0.010589275979469456,
+          "active_rate": 0.09651593773165308,
+          "lift": 9.11449828286454,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hospitality",
+          "n_in_active": 644,
+          "n_active": 6745,
+          "base_rate": 0.01051727507431522,
+          "active_rate": 0.09547813194959229,
+          "lift": 9.078219526915708,
+          "p_value": 0.0
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 4808,
+          "n_active": 6745,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.712824314306894,
+          "lift": 2.669549023930298,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 2892,
+          "n_active": 6745,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.42876204595997036,
+          "lift": 2.4308058938259482,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 2992,
+          "n_active": 6745,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.443587842846553,
+          "lift": 2.139295285945966,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 99,
+      "n_active": 350,
+      "top_tags": [
+        {
+          "tag": "food stamps",
+          "n_in_active": 49,
+          "n_active": 350,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.14,
+          "lift": 533.7623529411766,
+          "p_value": 1.2125755114485005e-133
+        },
+        {
+          "tag": "saipe",
+          "n_in_active": 49,
+          "n_active": 350,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.14,
+          "lift": 533.7623529411766,
+          "p_value": 1.2125755114485005e-133
+        },
+        {
+          "tag": "snap",
+          "n_in_active": 49,
+          "n_active": 350,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.14,
+          "lift": 533.7623529411766,
+          "p_value": 1.2125755114485005e-133
+        },
+        {
+          "tag": "nutrition",
+          "n_in_active": 49,
+          "n_active": 350,
+          "base_rate": 0.0002674319334300203,
+          "active_rate": 0.14,
+          "lift": 523.4976923076923,
+          "p_value": 2.0986081701844076e-132
+        },
+        {
+          "tag": "benefits",
+          "n_in_active": 49,
+          "n_active": 350,
+          "base_rate": 0.0005811501630306209,
+          "active_rate": 0.14,
+          "lift": 240.90159292035403,
+          "p_value": 2.5021767369791977e-104
+        }
+      ]
+    },
+    {
+      "atom": 100,
+      "n_active": 110030,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1299,
+          "n_active": 110030,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.01180587112605653,
+          "lift": 1.767172589293829,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rank",
+          "n_in_active": 3724,
+          "n_active": 110030,
+          "base_rate": 0.02001625163287767,
+          "active_rate": 0.033845314914114334,
+          "lift": 1.6908917581012897,
+          "p_value": 0.0
+        },
+        {
+          "tag": "persons",
+          "n_in_active": 7083,
+          "n_active": 110030,
+          "base_rate": 0.038114193435574616,
+          "active_rate": 0.06437335272198491,
+          "lift": 1.6889601200874633,
+          "p_value": 0.0
+        },
+        {
+          "tag": "civilian",
+          "n_in_active": 4395,
+          "n_active": 110030,
+          "base_rate": 0.024655167093529176,
+          "active_rate": 0.039943651731345994,
+          "lift": 1.620092517719311,
+          "p_value": 0.0
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 5415,
+          "n_active": 110030,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.04921385076797237,
+          "lift": 1.572336439537641,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 101,
+      "n_active": 5808,
+      "top_tags": [
+        {
+          "tag": "u.s. treasury",
+          "n_in_active": 204,
+          "n_active": 5808,
+          "base_rate": 0.0010491560465331563,
+          "active_rate": 0.03512396694214876,
+          "lift": 33.47830578512397,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bonds",
+          "n_in_active": 244,
+          "n_active": 5808,
+          "base_rate": 0.0013680171979304882,
+          "active_rate": 0.04201101928374656,
+          "lift": 30.709423351767853,
+          "p_value": 0.0
+        },
+        {
+          "tag": "business sentiment",
+          "n_in_active": 393,
+          "n_active": 5808,
+          "base_rate": 0.002849178675389062,
+          "active_rate": 0.06766528925619834,
+          "lift": 23.749050854790106,
+          "p_value": 0.0
+        },
+        {
+          "tag": "leading indicator",
+          "n_in_active": 364,
+          "n_active": 5808,
+          "base_rate": 0.0038417625821581757,
+          "active_rate": 0.06267217630853994,
+          "lift": 16.313391306271917,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb dal",
+          "n_in_active": 568,
+          "n_active": 5808,
+          "base_rate": 0.00665494080497012,
+          "active_rate": 0.09779614325068871,
+          "lift": 14.695268690842669,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 102,
+      "n_active": 2603,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 754,
+          "n_active": 2603,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.2896657702650788,
+          "lift": 9.539835992866267,
+          "p_value": 0.0
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 2091,
+          "n_active": 2603,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.803303880138302,
+          "lift": 1.82101817639205,
+          "p_value": 1.53976e-318
+        },
+        {
+          "tag": "reduced count",
+          "n_in_active": 452,
+          "n_active": 2603,
+          "base_rate": 0.030188950946811902,
+          "active_rate": 0.1736457933154053,
+          "lift": 5.751965135235782,
+          "p_value": 9.806288710392915e-202
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 2172,
+          "n_active": 2603,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.8344218209757972,
+          "lift": 1.4600767419068768,
+          "p_value": 1.790116293717716e-183
+        },
+        {
+          "tag": "ip",
+          "n_in_active": 164,
+          "n_active": 2603,
+          "base_rate": 0.0049474907684553746,
+          "active_rate": 0.06300422589320015,
+          "lift": 12.734581799506886,
+          "p_value": 3.044858331225649e-125
+        }
+      ]
+    },
+    {
+      "atom": 103,
+      "n_active": 1821,
+      "top_tags": [
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 1750,
+          "n_active": 1821,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.9610104338275672,
+          "lift": 1.6815823219011523,
+          "p_value": 0.0
+        },
+        {
+          "tag": "median",
+          "n_in_active": 891,
+          "n_active": 1821,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.48929159802306427,
+          "lift": 2.6079010143033545,
+          "p_value": 5.163333055228272e-188
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 371,
+          "n_active": 1821,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.20373421197144426,
+          "lift": 5.237933048281311,
+          "p_value": 2.3399817169693373e-153
+        },
+        {
+          "tag": "mei",
+          "n_in_active": 331,
+          "n_active": 1821,
+          "base_rate": 0.03164439781528682,
+          "active_rate": 0.18176825919824272,
+          "lift": 5.744089688773721,
+          "p_value": 2.3738951367774113e-147
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 1287,
+          "n_active": 1821,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.7067545304777595,
+          "lift": 1.6021494207470388,
+          "p_value": 3.343964322675872e-117
+        }
+      ]
+    },
+    {
+      "atom": 104,
+      "n_active": 14,
+      "top_tags": [
+        {
+          "tag": "ca",
+          "n_in_active": 10,
+          "n_active": 14,
+          "base_rate": 0.0406856543339402,
+          "active_rate": 0.7142857142857143,
+          "lift": 17.556205644942846,
+          "p_value": 1.0644308153641784e-11
+        },
+        {
+          "tag": "price",
+          "n_in_active": 13,
+          "n_active": 14,
+          "base_rate": 0.2833492763909032,
+          "active_rate": 0.9285714285714286,
+          "lift": 3.2771265217222205,
+          "p_value": 7.821744504650396e-07
+        },
+        {
+          "tag": "median",
+          "n_in_active": 10,
+          "n_active": 14,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.7142857142857143,
+          "lift": 3.8071089843245214,
+          "p_value": 2.563960136416803e-05
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 10,
+          "n_active": 14,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.7142857142857143,
+          "lift": 3.027842660936186,
+          "p_value": 0.0002041271772250035
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 10,
+          "n_active": 14,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.7142857142857143,
+          "lift": 1.6192219420470406,
+          "p_value": 0.03680511375158389
+        }
+      ]
+    },
+    {
+      "atom": 105,
+      "n_active": 24,
+      "top_tags": [
+        {
+          "tag": "government",
+          "n_in_active": 19,
+          "n_active": 24,
+          "base_rate": 0.026465475565978544,
+          "active_rate": 0.7916666666666666,
+          "lift": 29.913184998056742,
+          "p_value": 3.892168376591021e-26
+        },
+        {
+          "tag": "federal",
+          "n_in_active": 13,
+          "n_active": 24,
+          "base_rate": 0.005358924512193867,
+          "active_rate": 0.5416666666666666,
+          "lift": 101.07749520153551,
+          "p_value": 6.595992460612449e-24
+        },
+        {
+          "tag": "sae",
+          "n_in_active": 21,
+          "n_active": 24,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.875,
+          "lift": 4.622527577025485,
+          "p_value": 7.320059166950238e-13
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 21,
+          "n_active": 24,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.875,
+          "lift": 4.2198707773203035,
+          "p_value": 4.6584528562828506e-12
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 21,
+          "n_active": 24,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.875,
+          "lift": 3.276901964560863,
+          "p_value": 7.576709091565765e-10
+        }
+      ]
+    },
+    {
+      "atom": 106,
+      "n_active": 69,
+      "top_tags": [
+        {
+          "tag": "food stamps",
+          "n_in_active": 19,
+          "n_active": 69,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.2753623188405797,
+          "lift": 1049.843137254902,
+          "p_value": 8.822370327527216e-54
+        },
+        {
+          "tag": "saipe",
+          "n_in_active": 19,
+          "n_active": 69,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.2753623188405797,
+          "lift": 1049.843137254902,
+          "p_value": 8.822370327527216e-54
+        },
+        {
+          "tag": "snap",
+          "n_in_active": 19,
+          "n_active": 69,
+          "base_rate": 0.0002622890116332891,
+          "active_rate": 0.2753623188405797,
+          "lift": 1049.843137254902,
+          "p_value": 8.822370327527216e-54
+        },
+        {
+          "tag": "nutrition",
+          "n_in_active": 19,
+          "n_active": 69,
+          "base_rate": 0.0002674319334300203,
+          "active_rate": 0.2753623188405797,
+          "lift": 1029.6538461538462,
+          "p_value": 1.389851999956952e-53
+        },
+        {
+          "tag": "benefits",
+          "n_in_active": 19,
+          "n_active": 69,
+          "base_rate": 0.0005811501630306209,
+          "active_rate": 0.2753623188405797,
+          "lift": 473.82300884955754,
+          "p_value": 3.0247693801436467e-46
+        }
+      ]
+    },
+    {
+      "atom": 107,
+      "n_active": 38000,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1299,
+          "n_active": 38000,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.03418421052631579,
+          "lift": 5.116894736842105,
+          "p_value": 0.0
+        },
+        {
+          "tag": "nonfarm",
+          "n_in_active": 1413,
+          "n_active": 38000,
+          "base_rate": 0.0099361249112846,
+          "active_rate": 0.03718421052631579,
+          "lift": 3.742325187969925,
+          "p_value": 0.0
+        },
+        {
+          "tag": "leisure",
+          "n_in_active": 1414,
+          "n_active": 38000,
+          "base_rate": 0.010589275979469456,
+          "active_rate": 0.03721052631578947,
+          "lift": 3.513982106796861,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hospitality",
+          "n_in_active": 1401,
+          "n_active": 38000,
+          "base_rate": 0.01051727507431522,
+          "active_rate": 0.03686842105263158,
+          "lift": 3.505510770814567,
+          "p_value": 0.0
+        },
+        {
+          "tag": "health",
+          "n_in_active": 2222,
+          "n_active": 38000,
+          "base_rate": 0.01836537373612697,
+          "active_rate": 0.05847368421052632,
+          "lift": 3.1839092985895148,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 108,
+      "n_active": 517,
+      "top_tags": [
+        {
+          "tag": "commodities",
+          "n_in_active": 286,
+          "n_active": 517,
+          "base_rate": 0.025051172071877476,
+          "active_rate": 0.5531914893617021,
+          "lift": 22.082459366550623,
+          "p_value": 0.0
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 422,
+          "n_active": 517,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.816247582205029,
+          "lift": 18.021211806416513,
+          "p_value": 0.0
+        },
+        {
+          "tag": "ppi",
+          "n_in_active": 446,
+          "n_active": 517,
+          "base_rate": 0.04931033418705835,
+          "active_rate": 0.8626692456479691,
+          "lift": 17.494694770784566,
+          "p_value": 0.0
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 509,
+          "n_active": 517,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.9845261121856866,
+          "lift": 8.730479605308947,
+          "p_value": 0.0
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 509,
+          "n_active": 517,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 0.9845261121856866,
+          "lift": 7.97738160210065,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 109,
+      "n_active": 5269,
+      "top_tags": [
+        {
+          "tag": "fl",
+          "n_in_active": 1049,
+          "n_active": 5269,
+          "base_rate": 0.029474084817066273,
+          "active_rate": 0.1990890111975707,
+          "lift": 6.754713926937365,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 3625,
+          "n_active": 5269,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.6879863351679636,
+          "lift": 3.317958206823979,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sae",
+          "n_in_active": 3282,
+          "n_active": 5269,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.6228885936610362,
+          "lift": 3.2906510875574417,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 2854,
+          "n_active": 5269,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.5416587587777567,
+          "lift": 3.070857870200442,
+          "p_value": 0.0
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 4246,
+          "n_active": 5269,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.8058455114822547,
+          "lift": 3.0179162739528613,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 110,
+      "n_active": 68,
+      "top_tags": [
+        {
+          "tag": "hicp",
+          "n_in_active": 44,
+          "n_active": 68,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.6470588235294118,
+          "lift": 14.147690516665454,
+          "p_value": 5.1274333896401104e-42
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 56,
+          "n_active": 68,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 0.8235294117647058,
+          "lift": 7.3028095901105,
+          "p_value": 1.4040982693793407e-41
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 41,
+          "n_active": 68,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.6029411764705882,
+          "lift": 16.521573877578085,
+          "p_value": 2.5876148275695027e-41
+        },
+        {
+          "tag": "eurostat",
+          "n_in_active": 40,
+          "n_active": 68,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.5882352941176471,
+          "lift": 16.835096711631373,
+          "p_value": 1.8392861370788423e-40
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 56,
+          "n_active": 68,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 0.8235294117647058,
+          "lift": 6.672863519704668,
+          "p_value": 1.915811582553537e-39
+        }
+      ]
+    },
+    {
+      "atom": 111,
+      "n_active": 100649,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1299,
+          "n_active": 100649,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.012906238512056752,
+          "lift": 1.9318820852666196,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 34165,
+          "n_active": 100649,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.33944698904112314,
+          "lift": 1.924446786690791,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb dal",
+          "n_in_active": 1271,
+          "n_active": 100649,
+          "base_rate": 0.00665494080497012,
+          "active_rate": 0.012628043994475851,
+          "lift": 1.8975441502116486,
+          "p_value": 0.0
+        },
+        {
+          "tag": "information",
+          "n_in_active": 1548,
+          "n_active": 100649,
+          "base_rate": 0.008192674422192736,
+          "active_rate": 0.015380182614829756,
+          "lift": 1.877309145004851,
+          "p_value": 0.0
+        },
+        {
+          "tag": "discontinued",
+          "n_in_active": 5144,
+          "n_active": 100649,
+          "base_rate": 0.028898077575832383,
+          "active_rate": 0.05110830708700533,
+          "lift": 1.7685711775425326,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 112,
+      "n_active": 14,
+      "top_tags": [
+        {
+          "tag": "mxp",
+          "n_in_active": 10,
+          "n_active": 14,
+          "base_rate": 0.003785190442394133,
+          "active_rate": 0.7142857142857143,
+          "lift": 188.70535714285714,
+          "p_value": 5.6083736660900025e-22
+        },
+        {
+          "tag": "exports",
+          "n_in_active": 8,
+          "n_active": 14,
+          "base_rate": 0.005348638668600405,
+          "active_rate": 0.5714285714285714,
+          "lift": 106.83626373626373,
+          "p_value": 1.9033640857649197e-15
+        },
+        {
+          "tag": "price index",
+          "n_in_active": 14,
+          "n_active": 14,
+          "base_rate": 0.11276884623692413,
+          "active_rate": 1.0,
+          "lift": 8.867697359419893,
+          "p_value": 5.3585640465121955e-14
+        },
+        {
+          "tag": "indexes",
+          "n_in_active": 14,
+          "n_active": 14,
+          "base_rate": 0.12341469435615762,
+          "active_rate": 1.0,
+          "lift": 8.10276284535567,
+          "p_value": 1.8953623540254855e-13
+        },
+        {
+          "tag": "price",
+          "n_in_active": 14,
+          "n_active": 14,
+          "base_rate": 0.2833492763909032,
+          "active_rate": 1.0,
+          "lift": 3.5292131772393143,
+          "p_value": 2.147807665289591e-08
+        }
+      ]
+    },
+    {
+      "atom": 113,
+      "n_active": 327,
+      "top_tags": [
+        {
+          "tag": "chile",
+          "n_in_active": 137,
+          "n_active": 327,
+          "base_rate": 0.002494317071414612,
+          "active_rate": 0.41896024464831805,
+          "lift": 167.96591317506858,
+          "p_value": 1.6287207153089826e-271
+        },
+        {
+          "tag": "mei",
+          "n_in_active": 222,
+          "n_active": 327,
+          "base_rate": 0.03164439781528682,
+          "active_rate": 0.6788990825688074,
+          "lift": 21.454005430333826,
+          "p_value": 5.968231858562495e-249
+        },
+        {
+          "tag": "oecd",
+          "n_in_active": 222,
+          "n_active": 327,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 0.6788990825688074,
+          "lift": 17.45425035208833,
+          "p_value": 4.5436258223954865e-229
+        },
+        {
+          "tag": "nation",
+          "n_in_active": 273,
+          "n_active": 327,
+          "base_rate": 0.16221289639069747,
+          "active_rate": 0.8348623853211009,
+          "lift": 5.146707838261485,
+          "p_value": 1.7003080931247976e-158
+        },
+        {
+          "tag": "labor force",
+          "n_in_active": 138,
+          "n_active": 327,
+          "base_rate": 0.031299822054905835,
+          "active_rate": 0.42201834862385323,
+          "lift": 13.48309098638174,
+          "p_value": 3.5016182091252935e-116
+        }
+      ]
+    },
+    {
+      "atom": 114,
+      "n_active": 10,
+      "top_tags": [
+        {
+          "tag": "oecd",
+          "n_in_active": 10,
+          "n_active": 10,
+          "base_rate": 0.03889591754867776,
+          "active_rate": 1.0,
+          "lift": 25.709639032130106,
+          "p_value": 7.880532718626335e-15
+        },
+        {
+          "tag": "mei",
+          "n_in_active": 9,
+          "n_active": 10,
+          "base_rate": 0.03164439781528682,
+          "active_rate": 0.9,
+          "lift": 28.441053144807412,
+          "p_value": 3.073828149521072e-13
+        },
+        {
+          "tag": "15 to 24 years",
+          "n_in_active": 6,
+          "n_active": 10,
+          "base_rate": 0.00417090957714897,
+          "active_rate": 0.6,
+          "lift": 143.85351418002466,
+          "p_value": 1.0700684712095743e-12
+        },
+        {
+          "tag": "euro area",
+          "n_in_active": 6,
+          "n_active": 10,
+          "base_rate": 0.005127493031340966,
+          "active_rate": 0.6,
+          "lift": 117.0162487462387,
+          "p_value": 3.694302030303137e-12
+        },
+        {
+          "tag": "europe",
+          "n_in_active": 6,
+          "n_active": 10,
+          "base_rate": 0.007770954834860781,
+          "active_rate": 0.6,
+          "lift": 77.21058901389807,
+          "p_value": 4.4588313426699374e-11
+        }
+      ]
+    },
+    {
+      "atom": 115,
+      "n_active": 183,
+      "top_tags": [
+        {
+          "tag": "fl",
+          "n_in_active": 63,
+          "n_active": 183,
+          "base_rate": 0.029474084817066273,
+          "active_rate": 0.3442622950819672,
+          "lift": 11.680169111905053,
+          "p_value": 7.473508929046648e-49
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 93,
+          "n_active": 183,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.5081967213114754,
+          "lift": 4.234798443697862,
+          "p_value": 1.676370034434949e-37
+        },
+        {
+          "tag": "county",
+          "n_in_active": 145,
+          "n_active": 183,
+          "base_rate": 0.33817282274405736,
+          "active_rate": 0.7923497267759563,
+          "lift": 2.3430319454607327,
+          "p_value": 2.510284620314417e-36
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 55,
+          "n_active": 183,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.3005464480874317,
+          "lift": 5.3731934956800655,
+          "p_value": 2.1735641316513847e-25
+        },
+        {
+          "tag": "median",
+          "n_in_active": 85,
+          "n_active": 183,
+          "base_rate": 0.1876189300665494,
+          "active_rate": 0.4644808743169399,
+          "lift": 2.475661033522503,
+          "p_value": 1.4348022599217366e-17
+        }
+      ]
+    },
+    {
+      "atom": 116,
+      "n_active": 136343,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 5608,
+          "n_active": 136343,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.04113155790909691,
+          "lift": 1.3546243873578288,
+          "p_value": 0.0
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 45472,
+          "n_active": 136343,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.3335118047864577,
+          "lift": 1.2490119866388367,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 34318,
+          "n_active": 136343,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.251703424451567,
+          "lift": 1.213892486165276,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sae",
+          "n_in_active": 30982,
+          "n_active": 136343,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.22723572167254644,
+          "lift": 1.2004610170475811,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sa",
+          "n_in_active": 27230,
+          "n_active": 136343,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.1997168904894274,
+          "lift": 1.1322667178046255,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 117,
+      "n_active": 5548,
+      "top_tags": [
+        {
+          "tag": "information",
+          "n_in_active": 507,
+          "n_active": 5548,
+          "base_rate": 0.008192674422192736,
+          "active_rate": 0.09138428262436914,
+          "lift": 11.154389630914993,
+          "p_value": 0.0
+        },
+        {
+          "tag": "financial",
+          "n_in_active": 771,
+          "n_active": 5548,
+          "base_rate": 0.014256179220538772,
+          "active_rate": 0.1389689978370584,
+          "lift": 9.747983361267428,
+          "p_value": 0.0
+        },
+        {
+          "tag": "manufacturing",
+          "n_in_active": 1090,
+          "n_active": 5548,
+          "base_rate": 0.050894354100451546,
+          "active_rate": 0.19646719538572457,
+          "lift": 3.8602945033539875,
+          "p_value": 0.0
+        },
+        {
+          "tag": "sae",
+          "n_in_active": 3620,
+          "n_active": 5548,
+          "base_rate": 0.18929037965048703,
+          "active_rate": 0.6524873828406633,
+          "lift": 3.447018195248173,
+          "p_value": 0.0
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 3962,
+          "n_active": 5548,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.7141312184571017,
+          "lift": 3.444047382787732,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 118,
+      "n_active": 305,
+      "top_tags": [
+        {
+          "tag": "ca",
+          "n_in_active": 121,
+          "n_active": 305,
+          "base_rate": 0.0406856543339402,
+          "active_rate": 0.39672131147540984,
+          "lift": 9.750889299191208,
+          "p_value": 5.650459093888661e-85
+        },
+        {
+          "tag": "unemployment",
+          "n_in_active": 98,
+          "n_active": 305,
+          "base_rate": 0.05593441746124808,
+          "active_rate": 0.32131147540983607,
+          "lift": 5.744432319017961,
+          "p_value": 7.448605973342711e-47
+        },
+        {
+          "tag": "household survey",
+          "n_in_active": 84,
+          "n_active": 305,
+          "base_rate": 0.047978317441704985,
+          "active_rate": 0.2754098360655738,
+          "lift": 5.740297925207663,
+          "p_value": 1.2658458471484887e-39
+        },
+        {
+          "tag": "20 years +",
+          "n_in_active": 18,
+          "n_active": 305,
+          "base_rate": 0.0004885775706894601,
+          "active_rate": 0.05901639344262295,
+          "lift": 120.79226919758412,
+          "p_value": 1.9788375390187538e-32
+        },
+        {
+          "tag": "males",
+          "n_in_active": 28,
+          "n_active": 305,
+          "base_rate": 0.009725265117618622,
+          "active_rate": 0.09180327868852459,
+          "lift": 9.439668490086778,
+          "p_value": 9.52251179545588e-19
+        }
+      ]
+    },
+    {
+      "atom": 119,
+      "n_active": 163,
+      "top_tags": [
+        {
+          "tag": "diffusion",
+          "n_in_active": 45,
+          "n_active": 163,
+          "base_rate": 0.0015325906954258854,
+          "active_rate": 0.27607361963190186,
+          "lift": 180.13525754518878,
+          "p_value": 2.0610581124133565e-88
+        },
+        {
+          "tag": "frb district",
+          "n_in_active": 43,
+          "n_active": 163,
+          "base_rate": 0.0015171619300356918,
+          "active_rate": 0.26380368098159507,
+          "lift": 173.8797130082146,
+          "p_value": 1.041099935807208e-83
+        },
+        {
+          "tag": "frb phi district",
+          "n_in_active": 43,
+          "n_active": 163,
+          "base_rate": 0.0015171619300356918,
+          "active_rate": 0.26380368098159507,
+          "lift": 173.8797130082146,
+          "p_value": 1.041099935807208e-83
+        },
+        {
+          "tag": "frb phi",
+          "n_in_active": 43,
+          "n_active": 163,
+          "base_rate": 0.0018000226288559056,
+          "active_rate": 0.26380368098159507,
+          "lift": 146.55575810692375,
+          "p_value": 2.6613126644903996e-80
+        },
+        {
+          "tag": "trough",
+          "n_in_active": 21,
+          "n_active": 163,
+          "base_rate": 0.0006942944425587064,
+          "active_rate": 0.12883435582822086,
+          "lift": 185.56155419222907,
+          "p_value": 1.22673786472755e-41
+        }
+      ]
+    },
+    {
+      "atom": 120,
+      "n_active": 19373,
+      "top_tags": [
+        {
+          "tag": "eurostat",
+          "n_in_active": 4053,
+          "n_active": 19373,
+          "base_rate": 0.03494101068699149,
+          "active_rate": 0.2092086925101946,
+          "lift": 5.987482571249229,
+          "p_value": 0.0
+        },
+        {
+          "tag": "harmonized",
+          "n_in_active": 3893,
+          "n_active": 19373,
+          "base_rate": 0.036494173069604306,
+          "active_rate": 0.2009497754606927,
+          "lift": 5.506352345001129,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hicp",
+          "n_in_active": 4715,
+          "n_active": 19373,
+          "base_rate": 0.0457360035383302,
+          "active_rate": 0.24337996180250865,
+          "lift": 5.321408583470526,
+          "p_value": 0.0
+        },
+        {
+          "tag": "europe",
+          "n_in_active": 764,
+          "n_active": 19373,
+          "base_rate": 0.007770954834860781,
+          "active_rate": 0.0394363289113715,
+          "lift": 5.074836972988019,
+          "p_value": 0.0
+        },
+        {
+          "tag": "cpi",
+          "n_in_active": 5433,
+          "n_active": 19373,
+          "base_rate": 0.058521307125003856,
+          "active_rate": 0.28044185206214833,
+          "lift": 4.79213240167574,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 121,
+      "n_active": 1548,
+      "top_tags": [
+        {
+          "tag": "active listing",
+          "n_in_active": 511,
+          "n_active": 1548,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.3301033591731266,
+          "lift": 10.871605244637717,
+          "p_value": 0.0
+        },
+        {
+          "tag": "listing",
+          "n_in_active": 951,
+          "n_active": 1548,
+          "base_rate": 0.23590582281605826,
+          "active_rate": 0.6143410852713178,
+          "lift": 2.6041794048904636,
+          "p_value": 1.7240891611098028e-222
+        },
+        {
+          "tag": "realtor.com",
+          "n_in_active": 1048,
+          "n_active": 1548,
+          "base_rate": 0.44112897419281843,
+          "active_rate": 0.6770025839793282,
+          "lift": 1.5347044143226214,
+          "p_value": 1.0811287748607985e-78
+        },
+        {
+          "tag": "copyrighted: citation required",
+          "n_in_active": 1232,
+          "n_active": 1548,
+          "base_rate": 0.5714917558963598,
+          "active_rate": 0.7958656330749354,
+          "lift": 1.3926108729716582,
+          "p_value": 3.9311274395002316e-78
+        },
+        {
+          "tag": "nc",
+          "n_in_active": 195,
+          "n_active": 1548,
+          "base_rate": 0.03125867868053198,
+          "active_rate": 0.12596899224806202,
+          "lift": 4.029888580239828,
+          "p_value": 1.6359689207557958e-60
+        }
+      ]
+    },
+    {
+      "atom": 122,
+      "n_active": 182806,
+      "top_tags": [
+        {
+          "tag": "sa",
+          "n_in_active": 33833,
+          "n_active": 182806,
+          "base_rate": 0.17638678886248857,
+          "active_rate": 0.18507598218876842,
+          "lift": 1.0492621549624896,
+          "p_value": 0.0
+        },
+        {
+          "tag": "bls",
+          "n_in_active": 71625,
+          "n_active": 182806,
+          "base_rate": 0.3817230845187768,
+          "active_rate": 0.391808802774526,
+          "lift": 1.0264215570521857,
+          "p_value": 5.44034079036257e-310
+        },
+        {
+          "tag": "employment",
+          "n_in_active": 50412,
+          "n_active": 182806,
+          "base_rate": 0.2670204996862818,
+          "active_rate": 0.27576775379363916,
+          "lift": 1.0327587361930428,
+          "p_value": 2.826442178236423e-300
+        },
+        {
+          "tag": "public domain: citation requested",
+          "n_in_active": 80053,
+          "n_active": 182806,
+          "base_rate": 0.4292591106859629,
+          "active_rate": 0.43791232235265803,
+          "lift": 1.0201584810928466,
+          "p_value": 4.1005042630621646e-213
+        },
+        {
+          "tag": "frb stl",
+          "n_in_active": 39106,
+          "n_active": 182806,
+          "base_rate": 0.20735232100060685,
+          "active_rate": 0.21392076846493002,
+          "lift": 1.0316777137223554,
+          "p_value": 2.2494750442925167e-204
+        }
+      ]
+    },
+    {
+      "atom": 123,
+      "n_active": 61016,
+      "top_tags": [
+        {
+          "tag": "earnings",
+          "n_in_active": 4682,
+          "n_active": 61016,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.07673397141733315,
+          "lift": 3.08270803105973,
+          "p_value": 0.0
+        },
+        {
+          "tag": "inflation",
+          "n_in_active": 8391,
+          "n_active": 61016,
+          "base_rate": 0.04529371226381132,
+          "active_rate": 0.13752130588698047,
+          "lift": 3.0362118495828607,
+          "p_value": 0.0
+        },
+        {
+          "tag": "social assistance",
+          "n_in_active": 910,
+          "n_active": 61016,
+          "base_rate": 0.00492691908126845,
+          "active_rate": 0.014914120886324898,
+          "lift": 3.0270683646960186,
+          "p_value": 0.0
+        },
+        {
+          "tag": "health",
+          "n_in_active": 3296,
+          "n_active": 61016,
+          "base_rate": 0.01836537373612697,
+          "active_rate": 0.05401861806739216,
+          "lift": 2.94132963714922,
+          "p_value": 0.0
+        },
+        {
+          "tag": "commodities",
+          "n_in_active": 4490,
+          "n_active": 61016,
+          "base_rate": 0.025051172071877476,
+          "active_rate": 0.07358725580175692,
+          "lift": 2.9374775595576303,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 124,
+      "n_active": 70064,
+      "top_tags": [
+        {
+          "tag": "nielsen",
+          "n_in_active": 1234,
+          "n_active": 70064,
+          "base_rate": 0.0066806554139537755,
+          "active_rate": 0.01761246860013702,
+          "lift": 2.6363384292131196,
+          "p_value": 0.0
+        },
+        {
+          "tag": "market hotness",
+          "n_in_active": 18337,
+          "n_active": 70064,
+          "base_rate": 0.12000493720492486,
+          "active_rate": 0.261717857958438,
+          "lift": 2.1808924203803293,
+          "p_value": 0.0
+        },
+        {
+          "tag": "active listing",
+          "n_in_active": 4634,
+          "n_active": 70064,
+          "base_rate": 0.030363810287900764,
+          "active_rate": 0.06613952957296186,
+          "lift": 2.178235502917657,
+          "p_value": 0.0
+        },
+        {
+          "tag": "rank",
+          "n_in_active": 3048,
+          "n_active": 70064,
+          "base_rate": 0.02001625163287767,
+          "active_rate": 0.04350308289563827,
+          "lift": 2.1733880895153384,
+          "p_value": 0.0
+        },
+        {
+          "tag": "score",
+          "n_in_active": 2844,
+          "n_active": 70064,
+          "base_rate": 0.02005225208545479,
+          "active_rate": 0.040591459237268784,
+          "lift": 2.0242843080310378,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 125,
+      "n_active": 137787,
+      "top_tags": [
+        {
+          "tag": "earnings",
+          "n_in_active": 4818,
+          "n_active": 137787,
+          "base_rate": 0.02489174149617881,
+          "active_rate": 0.03496701430468767,
+          "lift": 1.4047636767421652,
+          "p_value": 0.0
+        },
+        {
+          "tag": "hours",
+          "n_in_active": 5663,
+          "n_active": 137787,
+          "base_rate": 0.029453513129879347,
+          "active_rate": 0.041099668328652195,
+          "lift": 1.3954080162667697,
+          "p_value": 0.0
+        },
+        {
+          "tag": "private",
+          "n_in_active": 6318,
+          "n_active": 137787,
+          "base_rate": 0.03344956336593946,
+          "active_rate": 0.045853382394565524,
+          "lift": 1.37082155282351,
+          "p_value": 0.0
+        },
+        {
+          "tag": "construction",
+          "n_in_active": 3452,
+          "n_active": 137787,
+          "base_rate": 0.01832937328354985,
+          "active_rate": 0.025053161764172237,
+          "lift": 1.3668313355076258,
+          "p_value": 0.0
+        },
+        {
+          "tag": "retail trade",
+          "n_in_active": 4142,
+          "n_active": 137787,
+          "base_rate": 0.022052848664383208,
+          "active_rate": 0.03006089108551605,
+          "lift": 1.3631296139108937,
+          "p_value": 0.0
+        }
+      ]
+    },
+    {
+      "atom": 126,
+      "n_active": 0,
+      "top_tags": []
+    },
+    {
+      "atom": 127,
+      "n_active": 0,
+      "top_tags": []
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 # Internal working documents -- NEVER published (deleted once cleanup is finished)
 CLAUDE.md
 FILE_INVENTORY.md
+docs/metadata_interventions.md
 
 # Notebooks: the repo is 100% CLI (src/ + scripts/), so no .ipynb files are published.
 # The originals live in temp-trash/. Kept in case any of them reappear in the root.
@@ -44,3 +45,6 @@ __pycache__/
 .pytest_cache/
 build/
 dist/
+
+# demo/ playground: not published yet, publication policy still pending (see CLAUDE.md)
+demo/

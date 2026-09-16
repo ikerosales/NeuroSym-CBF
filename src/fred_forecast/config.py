@@ -21,6 +21,19 @@ def get_env(name: str, default: str | None = None) -> str:
     return value
 
 
+def fred_api_key() -> str:
+    """FRED API key.
+
+    The canonical name is `FRED_API_KEY` (the one documented in `.env.example`), but `API_KEY`
+    is also accepted as an alias since that's what this project's older `.env` files used.
+    """
+    for name in ("FRED_API_KEY", "API_KEY"):
+        value = os.getenv(name)
+        if value:
+            return value
+    raise RuntimeError("Missing FRED_API_KEY in your .env (see .env.example)")
+
+
 def data_dir() -> Path:
     return Path(os.getenv("DATA_DIR", "./data")).resolve()
 

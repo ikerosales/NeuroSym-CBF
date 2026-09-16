@@ -6,8 +6,11 @@ the original project). Saves aggregated metrics in JSON and per-sample arrays
 in `.npz`, under `<RESULTS_DIR>/metrics/{model}_ctx{N}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
-Custom models (`unimodal-ablation`, `neurosym-cbf`): evaluate an already trained checkpoint
-from `scripts/07_*`/`08_*`. Baselines (`autoets-normafter`, `autoets-normbefore`,
+Custom models (`unimodal-ablation`, `neurosym-cbf`): by default evaluate the checkpoint under
+`models/imported_from_kaggle/` -- the original weights imported from Kaggle, which back every
+number in the paper/report and which should ALWAYS be used for evaluating and publishing unless
+told otherwise. Pass `--checkpoint` explicitly to evaluate a different one (e.g. a local retrain
+from `scripts/07_*`/`08_*`). Baselines (`autoets-normafter`, `autoets-normbefore`,
 `chronos-bolt`, `chronos-2`, `timesfm`): zero-shot, no custom checkpoint required.
 
 The context length (`context_len`) for each baseline is read from `configs/baselines.yaml` -- in the thesis
@@ -36,8 +39,10 @@ from fred_forecast.datasets.load_series import load_metadata_embeddings, load_se
 from fred_forecast.datasets.timeseries_dataset import TimeSeriesDataset, split_train_test_obs
 from fred_forecast.datasets.univariate_dataset import UnivariateTestDataset
 from fred_forecast.evaluation.results_io import save_results
+from fred_forecast.models.checkpoint_io import check_hyperparams, load_checkpoint
 from fred_forecast.models.neurosym_cbf import NeuroSymCBFModel
 from fred_forecast.models.unimodal_ablation import UnimodalAblationModel
+from fred_forecast.reproducibility import set_reproducible_environment
 from fred_forecast.training.train_neurosym_cbf import evaluate_neurosym_cbf
 from fred_forecast.training.train_unimodal_ablation import evaluate_unimodal_ablation
 
@@ -81,7 +86,7 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
 
     if model_name == "unimodal-ablation":
         checkpoint_path = checkpoint_arg or (
-            models_dir() / f"unimodal_ablation_ctx{d['context_len']}_seed{config['seed']}.pt"
+            models_dir() / "imported_from_kaggle" / f"unimodal_ablation_ctx{d['context_len']}_seed{config['seed']}.pt"
         )
         model = UnimodalAblationModel(
             seq_len=d["context_len"],
@@ -94,15 +99,16 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
             seasonality=b["seasonality"],
             num_blocks=b["num_blocks"],
         ).to(device)
-        checkpoint = torch.load(checkpoint_path, map_location=device)
-        model.load_state_dict(checkpoint["model_state_dict"])
+        state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
+        check_hyperparams(hyperparams, {"context_len": d["context_len"], "horizon_len": d["horizon_len"]})
+        model.load_state_dict(state_dict)
         results = evaluate_unimodal_ablation(
             model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
         )
     else:
         sf = config["sae_film"]
         checkpoint_path = checkpoint_arg or (
-            models_dir() / f"neurosym_cbf_ctx{d['context_len']}_seed{config['seed']}.pt"
+            models_dir() / "imported_from_kaggle" / f"neurosym_cbf_ctx{d['context_len']}_seed{config['seed']}.pt"
         )
         d_meta = metadata_df["embeddings"].iloc[0].shape[0]
         model = NeuroSymCBFModel(
@@ -120,8 +126,12 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
             top_k=sf["top_k"],
             d_ff_film=sf["d_ff_meta"],
         ).to(device)
-        checkpoint = torch.load(checkpoint_path, map_location=device)
-        model.load_state_dict(checkpoint["model_state_dict"])
+        state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
+        check_hyperparams(
+            hyperparams,
+            {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "top_k": sf["top_k"]},
+        )
+        model.load_state_dict(state_dict)
         results = evaluate_neurosym_cbf(
             model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
         )
@@ -239,10 +249,15 @@ def main() -> None:
     parser.add_argument(
         "--checkpoint", type=str, default=None, help="Path to the checkpoint (custom models only); by default it is derived from --model"
     )
+    parser.add_argument(
+        "--label", type=str, default=None,
+        help="Name to save the results under (defaults to --model). Useful for evaluating an "
+             "alternate checkpoint without overwriting the repo model's results",
+    )
     args = parser.parse_args()
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger.info("Device: %s", device)
+    protocol = load_yaml_config("configs/model_protocol.yaml")
+    device = set_reproducible_environment(protocol["seed"], protocol["num_threads"])
 
     if args.model in OWN_MODEL_CHOICES:
         results, context_len = _evaluate_own_model(args.model, args.checkpoint, device)
@@ -261,14 +276,13 @@ def main() -> None:
         results["mae_mean"], results["smape_mean"], results["mase_mean"],
     )
 
+    label = args.label or args.model
     metrics_dir = results_dir() / "metrics"
-    json_path = metrics_dir / f"{args.model}_ctx{context_len}.json"
-    npz_path = metrics_dir / f"{args.model}_ctx{context_len}.npz"
     save_results(
         results,
-        json_path,
-        npz_path,
-        extra_metadata={"model": args.model, "context_len": context_len},
+        metrics_dir / f"{label}_ctx{context_len}.json",
+        metrics_dir / f"{label}_ctx{context_len}.npz",
+        extra_metadata={"model": args.model, "label": label, "context_len": context_len},
     )
 
 

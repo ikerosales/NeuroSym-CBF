@@ -10,7 +10,11 @@ tags:
   max_requests_per_minute: 120
   concurrent_requests: 20
   max_retries: 5
-  batch_size: 5000
+  # The checkpoint is only written when a chunk closes, so this value sets how much work is
+  # lost if the download gets interrupted. At 120 req/min, 5000 series meant ~42 min of
+  # exposure; 250 brings it down to ~2 min. The FRED API returns 429/502 fairly often on long
+  # runs, so the lower value is worth the extra disk writes.
+  batch_size: 250
 
 cleaning:
   context_months: 48
