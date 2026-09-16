@@ -88,7 +88,7 @@ You need Python 3.10 or newer. To train or evaluate the deep learning models you
 with CUDA; the rest of the pipeline runs fine on CPU.
 
 ```
-git clone https://github.com/ikerosales/Multimodal-FinanceIndicators-Agents
+git clone xxxxxxx
 cd Multimodal-FinanceIndicators-Agents
 python -m venv .venv
 source .venv/bin/activate        # on Windows: .venv\Scripts\activate
@@ -192,11 +192,7 @@ output is never published, and the script itself warns about that on startup).
 
 ## Authors and credits
 
-Main author, responsible for the code and the thesis: **Iker Rosales Saiz**.
-
-Secondary author and principal investigator of the work: **Pablo Montero-Manso** - The University of Sydney.
-
-Reviewing researcher: Emilio Parrado Hernández - Universidad Carlos III de Madrid.
+Anonymous Authors.
 
 ## License
 

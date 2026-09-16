@@ -10,8 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "Iker Rosales" },
-    { name = "Pablo Montero-Manso" },
+    { name = "Anonymous Authors" }
 ]
 
 # Cotas inferiores = versiones con las que se ha verificado el pipeline end-to-end.
