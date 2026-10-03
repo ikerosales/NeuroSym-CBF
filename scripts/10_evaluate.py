@@ -25,6 +25,7 @@ Usage:
     python scripts/10_evaluate.py --model chronos-bolt
     python scripts/10_evaluate.py --model chronos-2
     python scripts/10_evaluate.py --model timesfm
+    python scripts/10_evaluate.py --model unimodal-ablation --context-len 8 --d-model 148         --checkpoint models/local/unimodal_ablation_ctx8_seed40_d148.pt --label unimodal-ablation-wide
 """
 from __future__ import annotations
 
@@ -64,9 +65,19 @@ def _database_paths():
     return database_json, embeddings_pkl
 
 
-def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: torch.device) -> dict:
+def _evaluate_own_model(
+    model_name: str,
+    checkpoint_arg: str | None,
+    device: torch.device,
+    context_len: int | None = None,
+    d_model: int | None = None,
+) -> dict:
     config = load_yaml_config("configs/model_protocol.yaml")
     d, b = config["data"], config["backbone"]
+    if context_len is not None:
+        d["context_len"] = context_len
+    if d_model is not None:
+        b["d_model"] = d_model
     database_json, embeddings_pkl = _database_paths()
 
     df = load_series_observations(database_json)
@@ -100,7 +111,10 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
             num_blocks=b["num_blocks"],
         ).to(device)
         state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
-        check_hyperparams(hyperparams, {"context_len": d["context_len"], "horizon_len": d["horizon_len"]})
+        check_hyperparams(
+            hyperparams,
+            {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "d_model": b["d_model"]},
+        )
         model.load_state_dict(state_dict)
         results = evaluate_unimodal_ablation(
             model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
@@ -254,13 +268,23 @@ def main() -> None:
         help="Name to save the results under (defaults to --model). Useful for evaluating an "
              "alternate checkpoint without overwriting the repo model's results",
     )
+    parser.add_argument(
+        "--context-len", type=int, default=None,
+        help="Custom models only: overrides data.context_len from configs/model_protocol.yaml",
+    )
+    parser.add_argument(
+        "--d-model", type=int, default=None,
+        help="Custom models only: overrides backbone.d_model (e.g. 148 for the capacity-matched ablation)",
+    )
     args = parser.parse_args()
 
     protocol = load_yaml_config("configs/model_protocol.yaml")
     device = set_reproducible_environment(protocol["seed"], protocol["num_threads"])
 
     if args.model in OWN_MODEL_CHOICES:
-        results, context_len = _evaluate_own_model(args.model, args.checkpoint, device)
+        results, context_len = _evaluate_own_model(
+            args.model, args.checkpoint, device, context_len=args.context_len, d_model=args.d_model
+        )
     elif args.model in ("autoets-normafter", "autoets-normbefore"):
         variant = args.model.split("-", 1)[1]
         results, context_len = _evaluate_autoets(variant)
