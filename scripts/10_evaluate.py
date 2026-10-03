@@ -36,7 +36,12 @@ import torch
 from torch.utils.data import DataLoader
 
 from fred_forecast.config import data_dir, load_yaml_config, models_dir, results_dir
-from fred_forecast.datasets.load_series import load_metadata_embeddings, load_series_observations
+from fred_forecast.datasets.load_series import (
+    METADATA_CONTROLS,
+    apply_metadata_control,
+    load_metadata_embeddings,
+    load_series_observations,
+)
 from fred_forecast.datasets.timeseries_dataset import TimeSeriesDataset, split_train_test_obs
 from fred_forecast.datasets.univariate_dataset import UnivariateTestDataset
 from fred_forecast.evaluation.results_io import save_results
@@ -71,6 +76,7 @@ def _evaluate_own_model(
     device: torch.device,
     context_len: int | None = None,
     d_model: int | None = None,
+    metadata_control: str | None = None,
 ) -> dict:
     config = load_yaml_config("configs/model_protocol.yaml")
     d, b = config["data"], config["backbone"]
@@ -82,6 +88,9 @@ def _evaluate_own_model(
 
     df = load_series_observations(database_json)
     metadata_df = load_metadata_embeddings(embeddings_pkl)
+    if metadata_control:
+        metadata_df = apply_metadata_control(metadata_df, metadata_control, config["seed"])
+        logger.info("Metadata control: %s", metadata_control)
     _df_train, df_test = split_train_test_obs(df, d["context_len"], d["horizon_len"])
     test_set = TimeSeriesDataset(
         df_test,
@@ -276,6 +285,11 @@ def main() -> None:
         "--d-model", type=int, default=None,
         help="Custom models only: overrides backbone.d_model (e.g. 148 for the capacity-matched ablation)",
     )
+    parser.add_argument(
+        "--metadata-control", choices=METADATA_CONTROLS, default=None,
+        help="neurosym-cbf only: evaluate with control embeddings (another series' or the mean one) "
+             "instead of each series' own metadata",
+    )
     args = parser.parse_args()
 
     protocol = load_yaml_config("configs/model_protocol.yaml")
@@ -283,7 +297,8 @@ def main() -> None:
 
     if args.model in OWN_MODEL_CHOICES:
         results, context_len = _evaluate_own_model(
-            args.model, args.checkpoint, device, context_len=args.context_len, d_model=args.d_model
+            args.model, args.checkpoint, device,
+            context_len=args.context_len, d_model=args.d_model, metadata_control=args.metadata_control,
         )
     elif args.model in ("autoets-normafter", "autoets-normbefore"):
         variant = args.model.split("-", 1)[1]

@@ -4,8 +4,14 @@
 Trains only -- it does not evaluate or export results/figures. Once you have the checkpoint, use:
     python scripts/10_evaluate.py --model neurosym-cbf
 
+`--context-len` overrides the context from `configs/model_protocol.yaml` (to sweep contexts).
+`--metadata-control shuffled|constant` trains the metadata controls: the same model, with each
+series' embedding replaced by another series' (fixed permutation) or by the mean embedding. The
+control is recorded in the checkpoint name, so it never overwrites the standard model.
+
 Usage:
     python scripts/08_train_neurosym_cbf.py
+    python scripts/08_train_neurosym_cbf.py --context-len 8 --metadata-control shuffled
 """
 from __future__ import annotations
 
@@ -16,9 +22,15 @@ import torch
 from torch.utils.data import DataLoader
 
 from fred_forecast.config import data_dir, load_yaml_config, models_dir
-from fred_forecast.datasets.load_series import load_metadata_embeddings, load_series_observations
+from fred_forecast.datasets.load_series import (
+    METADATA_CONTROLS,
+    apply_metadata_control,
+    load_metadata_embeddings,
+    load_series_observations,
+)
 from fred_forecast.datasets.timeseries_dataset import TimeSeriesDataset, split_train_test_obs
 from fred_forecast.models.neurosym_cbf import NeuroSymCBFModel
+from fred_forecast.reproducibility import set_reproducible_environment
 from fred_forecast.training.train_neurosym_cbf import train_neurosym_cbf
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -26,16 +38,35 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args()  # only for -h/--help
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--context-len", type=int, default=None, help="Overrides data.context_len")
+    parser.add_argument(
+        "--min-context-len", type=int, default=None,
+        help="Overrides data.min_context_len (default with --context-len: min(config value, context_len))",
+    )
+    parser.add_argument(
+        "--metadata-control", choices=METADATA_CONTROLS, default=None,
+        help="Train with control embeddings instead of each series' own metadata",
+    )
+    args = parser.parse_args()
 
     config = load_yaml_config("configs/model_protocol.yaml")
     data_config = load_yaml_config("configs/data.yaml")
     d, b, sf, t = config["data"], config["backbone"], config["sae_film"], config["training"]
     context_months = data_config["cleaning"]["context_months"]
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    torch.manual_seed(config["seed"])
-    logger.info("Device: %s", device)
+    if args.context_len is not None:
+        d["context_len"] = args.context_len
+        d["min_context_len"] = min(d["min_context_len"], args.context_len)
+    if args.min_context_len is not None:
+        d["min_context_len"] = args.min_context_len
+    control_tag = f"_meta-{args.metadata_control}" if args.metadata_control else ""
+
+    device = set_reproducible_environment(config["seed"], config["num_threads"])
+    logger.info(
+        "context_len: %d | min_context_len: %d | metadata: %s",
+        d["context_len"], d["min_context_len"], args.metadata_control or "own",
+    )
 
     database_json = (
         data_dir() / data_config["paths"]["processed_dir"] / f"fred_database_context_{context_months}.json"
@@ -44,6 +75,8 @@ def main() -> None:
 
     df = load_series_observations(database_json)
     metadata_df = load_metadata_embeddings(embeddings_pkl)
+    if args.metadata_control:
+        metadata_df = apply_metadata_control(metadata_df, args.metadata_control, config["seed"])
     df_train, _df_test = split_train_test_obs(df, d["context_len"], d["horizon_len"])
     logger.info("Training series: %d", len(df_train))
 
@@ -93,7 +126,7 @@ def main() -> None:
 
     train_neurosym_cbf(model, train_loader, optimizer, scheduler, device, num_epochs=t["num_epochs"])
 
-    checkpoint_path = models_dir() / "local" / f"neurosym_cbf_ctx{d['context_len']}_seed{config['seed']}.pt"
+    checkpoint_path = models_dir() / "local" / f"neurosym_cbf_ctx{d['context_len']}_seed{config['seed']}{control_tag}.pt"
     checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
         {
