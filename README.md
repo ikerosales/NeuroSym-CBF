@@ -25,7 +25,7 @@ In the original thesis all of this was spread across my own machine, Kaggle and 
 A short version of this work, reframed around econometric world models, was accepted at the NeurIPS
 2026 workshop *Foundation Models for Temporal Systems: From Forecasting to World Modeling*:
 
-> Iker Rosales Saiz, Emilio Parrado Hernández and Pablo Montero-Manso. **Towards Econometric World
+> Iker Rosales Saiz, Emilio Parrado-Hernandez and Pablo Montero-Manso. **Towards Econometric World
 > Models: Structural Multimodality and the Terrastat Dataset.** NeurIPS 2026 Workshop on Foundation
 > Models for Temporal Systems, 2026.
 
@@ -214,7 +214,7 @@ Main author, responsible for the code and the thesis: **Iker Rosales Saiz**.
 
 Secondary author and principal investigator of the work: **Pablo Montero-Manso** - The University of Sydney.
 
-Reviewing researcher: Emilio Parrado Hernández - Universidad Carlos III de Madrid.
+Reviewing researcher: Emilio Parrado-Hernandez - Universidad Carlos III de Madrid.
 
 The workshop paper is co-authored by the three of us.
 
@@ -225,7 +225,7 @@ If you use this code or build on the work, please cite the workshop paper:
 ```bibtex
 @inproceedings{rosales2026econometric,
   title     = {Towards Econometric World Models: Structural Multimodality and the Terrastat Dataset},
-  author    = {Rosales Saiz, Iker and Parrado Hern{\'a}ndez, Emilio and Montero-Manso, Pablo},
+  author    = {Rosales Saiz, Iker and Parrado-Hernandez, Emilio and Montero-Manso, Pablo},
   booktitle = {NeurIPS 2026 Workshop on Foundation Models for Temporal Systems: From Forecasting to World Modeling},
   year      = {2026}
 }
