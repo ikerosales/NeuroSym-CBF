@@ -9,11 +9,6 @@ CLAUDE.md
 FILE_INVENTORY.md
 docs/metadata_interventions.md
 
-# Thesis PDF has the author/advisor/university on the title page -- temporarily excluded while
-# preparing an anonymized submission (see CLAUDE.md, "docs/paper.pdf sí se publica" -- re-add
-# once an anonymized version replaces it).
-docs/paper.pdf
-
 # Notebooks: the repo is 100% CLI (src/ + scripts/), so no .ipynb files are published.
 # The originals live in temp-trash/. Kept in case any of them reappear in the root.
 *.ipynb
