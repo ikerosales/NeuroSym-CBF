@@ -1,6 +1,6 @@
 # Multimodal-FinanceIndicators-Agents
 
-This repository accompanies my undergraduate thesis. The starting point is that every time series carries meaning beyond its numbers. A name that says what is being measured, the units, the sampling frequency, the categorical attributes, the descriptive tags: all of that is context a human analyst would use to read the data, and it is right there at inference time in most real-world databases.
+This repository accompanies my undergraduate thesis and the workshop paper that grew out of it, *Towards Econometric World Models: Structural Multimodality and the Terrastat Dataset* (NeurIPS 2026 Workshop on Foundation Models for Temporal Systems). The starting point is that every time series carries meaning beyond its numbers. A name that says what is being measured, the units, the sampling frequency, the categorical attributes, the descriptive tags: all of that is context a human analyst would use to read the data, and it is right there at inference time in most real-world databases.
 
 Yet current foundation models for time series forecasting are trained almost exclusively on numerical history and throw that textual and categorical metadata away. What this work asks is simple to state: does closing that gap actually buy you measurable forecasting gains?
 
@@ -19,6 +19,24 @@ scaling a unimodal model further.
 
 On the practical side, the whole pipeline (downloading the data, cleaning it, generating the text embeddings, training and evaluating) runs from here with a `pip install` and a handful of scripts.
 In the original thesis all of this was spread across my own machine, Kaggle and Google Colab; this repo unifies it so it can be run end to end anywhere, without depending on those platforms.
+
+## The workshop paper
+
+A short version of this work, reframed around econometric world models, was accepted at the NeurIPS
+2026 workshop *Foundation Models for Temporal Systems: From Forecasting to World Modeling*:
+
+> Iker Rosales Saiz, Emilio Parrado Hernández and Pablo Montero-Manso. **Towards Econometric World
+> Models: Structural Multimodality and the Terrastat Dataset.** NeurIPS 2026 Workshop on Foundation
+> Models for Temporal Systems, 2026.
+
+The paper introduces Terrastat, a corpus of economic time series from FRED, Eurostat and the OECD
+with their descriptive metadata (documentation at https://pmontman.github.io/terrastat/), and argues
+for *structural multimodality*: numerical history and text are only allowed to set an explicit
+econometric state, never to write the forecast directly. NeuroSym-CBF is the implementation of that
+idea, trained on FRED-194k, the monthly FRED subset this repository works with, and this repository
+is the code release the paper points to: the model, the baselines and the evaluation.
+
+The paper PDF is not stored in this repository.
 
 ## The thesis is the source of truth
 
@@ -197,6 +215,21 @@ Main author, responsible for the code and the thesis: **Iker Rosales Saiz**.
 Secondary author and principal investigator of the work: **Pablo Montero-Manso** - The University of Sydney.
 
 Reviewing researcher: Emilio Parrado Hernández - Universidad Carlos III de Madrid.
+
+The workshop paper is co-authored by the three of us.
+
+## Citing
+
+If you use this code or build on the work, please cite the workshop paper:
+
+```bibtex
+@inproceedings{rosales2026econometric,
+  title     = {Towards Econometric World Models: Structural Multimodality and the Terrastat Dataset},
+  author    = {Rosales Saiz, Iker and Parrado Hern{\'a}ndez, Emilio and Montero-Manso, Pablo},
+  booktitle = {NeurIPS 2026 Workshop on Foundation Models for Temporal Systems: From Forecasting to World Modeling},
+  year      = {2026}
+}
+```
 
 ## License
 
