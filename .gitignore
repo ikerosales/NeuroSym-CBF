@@ -53,3 +53,8 @@ dist/
 
 # demo/ playground: not published yet, publication policy still pending (see CLAUDE.md)
 demo/
+
+# Workshop paper LaTeX sources (camera-ready working copy) -- local context only, never published.
+paper_text/
+# Source zip of the workshop paper (extracted into paper_text/) -- working copy only, never published.
+nesycbf_neurips_fmts_2026.zip
