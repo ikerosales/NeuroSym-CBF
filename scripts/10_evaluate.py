@@ -6,8 +6,8 @@ the original project). Saves aggregated metrics in JSON and per-sample arrays
 in `.npz`, under `<RESULTS_DIR>/metrics/ctx{N}/{json,npz}/{model}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
-`tft` is the in-domain deep baseline: it is trained locally (`scripts/09_train_tft_baseline.py`), so
-its default checkpoint is under `models/local/`.
+`tft` is the in-domain deep baseline (`scripts/09_train_tft_baseline.py`, or its Kaggle notebook for a
+GPU run); like the custom models, its default checkpoint is the one under `models/imported_from_kaggle/`.
 
 Custom models (`unimodal-ablation`, `neurosym-cbf`): by default evaluate the checkpoint under
 `models/imported_from_kaggle/` -- the original weights imported from Kaggle, which back every
@@ -135,7 +135,7 @@ def _evaluate_own_model(
     elif model_name == "tft":
         tft = load_yaml_config("configs/baselines.yaml")["tft"]
         checkpoint_path = checkpoint_arg or (
-            models_dir() / "local" / f"tft_ctx{d['context_len']}_seed{config['seed']}.pt"
+            models_dir() / "imported_from_kaggle" / f"tft_ctx{d['context_len']}_seed{config['seed']}.pt"
         )
         model = TFTBaselineModel(
             seq_len=d["context_len"],
