@@ -6,6 +6,9 @@ the original project). Saves aggregated metrics in JSON and per-sample arrays
 in `.npz`, under `<RESULTS_DIR>/metrics/ctx{N}/{json,npz}/{model}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
+`tft` is the in-domain deep baseline: it is trained locally (`scripts/09_train_tft_baseline.py`), so
+its default checkpoint is under `models/local/`.
+
 Custom models (`unimodal-ablation`, `neurosym-cbf`): by default evaluate the checkpoint under
 `models/imported_from_kaggle/` -- the original weights imported from Kaggle, which back every
 number in the paper/report and which should ALWAYS be used for evaluating and publishing unless
@@ -47,6 +50,7 @@ from fred_forecast.datasets.univariate_dataset import UnivariateTestDataset
 from fred_forecast.evaluation.results_io import save_results
 from fred_forecast.models.checkpoint_io import check_hyperparams, load_checkpoint
 from fred_forecast.models.neurosym_cbf import NeuroSymCBFModel
+from fred_forecast.models.tft_baseline import TFTBaselineModel
 from fred_forecast.models.unimodal_ablation import UnimodalAblationModel
 from fred_forecast.reproducibility import set_reproducible_environment
 from fred_forecast.training.train_neurosym_cbf import evaluate_neurosym_cbf
@@ -55,7 +59,7 @@ from fred_forecast.training.train_unimodal_ablation import evaluate_unimodal_abl
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-OWN_MODEL_CHOICES = ["unimodal-ablation", "neurosym-cbf"]
+OWN_MODEL_CHOICES = ["unimodal-ablation", "neurosym-cbf", "tft"]
 BASELINE_CHOICES = ["autoets-normafter", "autoets-normbefore", "chronos-bolt", "chronos-2", "timesfm"]
 MODEL_CHOICES = OWN_MODEL_CHOICES + BASELINE_CHOICES
 
@@ -123,6 +127,28 @@ def _evaluate_own_model(
         check_hyperparams(
             hyperparams,
             {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "d_model": b["d_model"]},
+        )
+        model.load_state_dict(state_dict)
+        results = evaluate_unimodal_ablation(
+            model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
+        )
+    elif model_name == "tft":
+        tft = load_yaml_config("configs/baselines.yaml")["tft"]
+        checkpoint_path = checkpoint_arg or (
+            models_dir() / "local" / f"tft_ctx{d['context_len']}_seed{config['seed']}.pt"
+        )
+        model = TFTBaselineModel(
+            seq_len=d["context_len"],
+            horizon_len=d["horizon_len"],
+            d_model=tft["d_model"],
+            num_heads=tft["num_heads"],
+            dropout=tft["dropout"],
+            padding_value=d["padding_value"],
+        ).to(device)
+        state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
+        check_hyperparams(
+            hyperparams,
+            {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "d_model": tft["d_model"]},
         )
         model.load_state_dict(state_dict)
         results = evaluate_unimodal_ablation(

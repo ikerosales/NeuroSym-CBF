@@ -78,7 +78,8 @@ def evaluate_unimodal_ablation(model, loader, device, seasonality=12, padding_va
         all_preds.append(pred.cpu())
         all_targets.append(horizon.cpu())
         all_contexts.append(context.cpu())
-        all_coeffs.append(coeffs.cpu())
+        if coeffs is not None:  # models without a symbolic head (the TFT baseline) return None
+            all_coeffs.append(coeffs.cpu())
 
     mae_arr = np.array(all_mae)
     smape_arr = np.array(all_smape)
@@ -101,5 +102,5 @@ def evaluate_unimodal_ablation(model, loader, device, seasonality=12, padding_va
         "preds": torch.cat(all_preds),
         "targets": torch.cat(all_targets),
         "contexts": torch.cat(all_contexts),
-        "coeffs": torch.cat(all_coeffs),
+        **({"coeffs": torch.cat(all_coeffs)} if all_coeffs else {}),
     }

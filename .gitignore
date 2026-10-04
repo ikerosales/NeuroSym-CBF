@@ -53,3 +53,6 @@ demo/
 paper_text/
 # Source zip of the workshop paper (extracted into paper_text/) -- working copy only, never published.
 nesycbf_neurips_fmts_2026.zip
+
+# Separate environment for the Moirai baseline (uni2ts pins its own torch/numpy versions).
+.venv-moirai/
