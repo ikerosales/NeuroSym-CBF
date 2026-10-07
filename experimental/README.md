@@ -1,8 +1,16 @@
 # Experimental
 
-Preliminary/future work code -- **not** formally evaluated as part of the results reported in the
-thesis, and **not** part of the main reproducible pipeline (`src/fred_forecast/` + `scripts/`).
-Each line of work below is self-contained in its own subfolder.
+Everything that is **not** part of the main reproducible pipeline (`src/fred_forecast/` +
+`scripts/`): side experiments that are evaluated end to end but kept apart so their artefacts do not
+mix with the main ones (`unseen_series/`), and preliminary lines of work that were not evaluated in
+depth (`pinball_loss/`, `concept_naming/`). Each one is self-contained in its own subfolder.
+
+## `unseen_series/`
+
+Evaluates the trained models, without retraining, on FRED series that never entered training:
+monthly series the main dataset discarded, and natively weekly and daily series brought to monthly.
+It has its own `data/` (ignored by git), numbered `scripts/` and `results/`; see its `README.md` for
+the sets, the results table and how to reproduce it.
 
 ## `pinball_loss/`
 
@@ -46,7 +54,7 @@ hypergeometric test). Run once against the canonical Kaggle checkpoint's evaluat
 
 ## Why it is separate
 
-So that anyone browsing the repo can immediately tell what is validated thesis work
-(`src/fred_forecast/`) and what is an open/unfinished line. The code here is not installed as
-part of the `fred-forecast` package (it is not under `src/`) and it has no numbered script in
-`scripts/` -- each subfolder is run directly, as shown above.
+So that anyone browsing the repo can immediately tell what is the main pipeline
+(`src/fred_forecast/` + `scripts/`) and what is a side experiment or an open line. The code here is
+not installed as part of the `fred-forecast` package (it is not under `src/`) and it has no numbered
+script in `scripts/` -- each subfolder is run directly, as shown above.

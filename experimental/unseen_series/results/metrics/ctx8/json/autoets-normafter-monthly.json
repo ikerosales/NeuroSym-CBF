@@ -1,0 +1,23 @@
+{
+  "variant": "normafter",
+  "n_test_samples": 17302,
+  "n_fallbacks": 0,
+  "fallback_pct": 0.0,
+  "mae_mean": 1.0418024063110352,
+  "mae_median": 0.5970622301101685,
+  "mae_std": 1.2659876346588135,
+  "mae_p25": 0.34321844577789307,
+  "mae_p75": 1.172424554824829,
+  "mae_p90": 2.3095319271087646,
+  "smape_mean": 1.0294036865234375,
+  "smape_median": 0.9235851168632507,
+  "mase_mean": 4.274807453155518,
+  "mase_median": 2.3514041900634766,
+  "naive_baseline_mean": 0.25360170006752014,
+  "naive_baseline_median": 0.24242423474788666,
+  "naive_pct_below_001": 0.03346433938273032,
+  "fallback_series_ids": [],
+  "model": "autoets-normafter",
+  "label": "autoets-normafter-monthly",
+  "context_len": 8
+}
