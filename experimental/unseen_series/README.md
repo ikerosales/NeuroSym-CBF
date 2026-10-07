@@ -52,8 +52,8 @@ on the weekly series alone the eight models are close and NeuroSym-CBF is not ah
 From the repo root, with the trained models in `models/imported_from_kaggle/`:
 
 ```
-# monthly: no download, only the raw monthly parquets of Phase 1 and the list of candidate series
-python experimental/unseen_series/scripts/01_build_monthly_discarded.py --raw-dir <raw parquets> --pool-file <candidate_series_ids.json>
+# monthly: no extra download, only the raw monthly parquets of Phase 1 (scripts/01_download_releases.py)
+python experimental/unseen_series/scripts/01_build_monthly_discarded.py
 
 # weekly and daily: download, bring to monthly, build the databases (repeat with --set daily)
 python experimental/unseen_series/scripts/02_download_subperiod.py --set weekly
@@ -72,8 +72,15 @@ python experimental/unseen_series/scripts/08_build_table.py
 Steps 02 and 05 need `FRED_API_KEY` in `.env`. Moirai runs in its own environment (see
 `scripts/evaluate_moirai.py`).
 
+The monthly candidates are every series of the raw monthly download that is not in the main
+dataset: on the download behind the paper, 219,346 series, of which 194,442 are in `series_ids.json`
+and 17,302 of the remaining 24,904 pass the quality bar. FRED is a living database, so a download
+on another day gives a slightly different set. `series_ids/` pins the exact series of each set
+(`monthly.json`, `weekly_ctx8.json`, `weekly_ctx30.json`, `daily_ctx8.json`, `daily_ctx30.json`),
+and step 01 takes `--series-ids-file` to build exactly the published monthly set.
+
 ## What is not published
 
 `data/` under this folder is ignored by git, for the same reason as the main `data/`: it holds
-series downloaded from FRED and artefacts derived from them. The code, the aggregated metrics and
-the per-series errors are published.
+series downloaded from FRED and artefacts derived from them. The code, the aggregated metrics, the
+per-series errors and the lists of series identifiers are published.

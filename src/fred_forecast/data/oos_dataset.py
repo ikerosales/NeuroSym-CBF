@@ -20,15 +20,42 @@ import logging
 from pathlib import Path
 
 import pandas as pd
+import pyarrow.compute as pc
+import pyarrow.parquet as pq
 import tqdm
 
 logger = logging.getLogger(__name__)
 
 
-def load_discarded_ids(pool_path: Path, kept_path: Path) -> set[str]:
-    """`series_id`s of the candidate pool that did not make it into the final dataset."""
-    with open(pool_path) as f:
-        pool = {str(s) for s in json.load(f)}
+def list_raw_series_ids(raw_dir: Path) -> set[str]:
+    """Every `series_id` present in the raw `release_*.parquet` files of `raw_dir`.
+
+    Read through pyarrow with a dictionary column, so a release with millions of rows under a few
+    thousand series does not replicate the id text once per row.
+    """
+    files = sorted(raw_dir.glob("release_*.parquet"))
+    if not files:
+        raise FileNotFoundError(f"No release_*.parquet files in {raw_dir}")
+    series_ids: set[str] = set()
+    for file in tqdm.tqdm(files, desc="listing raw series"):
+        table = pq.read_table(file, columns=["series_id"], read_dictionary=["series_id"])
+        series_ids.update(str(s) for s in pc.unique(table.column("series_id")).to_pylist())
+    return series_ids
+
+
+def load_discarded_ids(kept_path: Path, raw_dir: Path | None = None, pool_path: Path | None = None) -> set[str]:
+    """`series_id`s of the candidate pool that did not make it into the final dataset.
+
+    The candidate pool is every series in the raw download (`raw_dir`), which is what the cleaning
+    phase started from; `pool_path` gives an explicit list instead.
+    """
+    if pool_path is not None:
+        with open(pool_path) as f:
+            pool = {str(s) for s in json.load(f)}
+    elif raw_dir is not None:
+        pool = list_raw_series_ids(raw_dir)
+    else:
+        raise ValueError("Either raw_dir or pool_path is needed to know the candidate pool")
     with open(kept_path) as f:
         kept = {str(s) for s in json.load(f)}
     discarded = pool - kept
