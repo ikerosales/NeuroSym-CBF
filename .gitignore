@@ -65,3 +65,6 @@ experimental/*/data/
 
 # Per-series arrays of the metadata interventions are large and stay local; the JSON is published.
 results/interventions/*.npz
+
+# Personal working notes and reports -- local only.
+apuntes/
