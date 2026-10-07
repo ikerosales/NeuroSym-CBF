@@ -1,5 +1,5 @@
-"""Análisis interpretativo de NeuroSym-CBF sobre un checkpoint ya entrenado.
+"""Interpretability analyses of NeuroSym-CBF on an already trained checkpoint.
 
-Nada de este subpaquete re-entrena ni modifica el modelo: todo son pases hacia delante con
-`torch.no_grad()` sobre pesos congelados.
+Nothing in this subpackage retrains or modifies the model: everything is forward passes with
+`torch.no_grad()` over frozen weights.
 """

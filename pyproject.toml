@@ -14,7 +14,7 @@ authors = [
     { name = "Pablo Montero-Manso" },
 ]
 
-# Cotas inferiores = versiones con las que se ha verificado el pipeline end-to-end.
+# Lower bounds = the versions the pipeline has been verified with end to end.
 dependencies = [
     "pandas>=2.3",
     "numpy>=2.4",
@@ -30,9 +30,9 @@ dependencies = [
     "sentencepiece>=0.2",
     "accelerate>=1.13",
     "chronos-forecasting>=2.2",
-    # NOTA: timesfm NO está aquí a propósito — el baseline TimesFM necesita timesfm 1.2.x
-    # (API TimesFm/TimesFmHparams, checkpoint timesfm-1.0-200m-pytorch), que ya no está en
-    # PyPI (la 2.x cambió la API y el checkpoint). Ver README, sección del baseline TimesFM.
+    # NOTE: timesfm is NOT listed here on purpose -- the TimesFM baseline needs timesfm 1.2.x
+    # (TimesFm/TimesFmHparams API, timesfm-1.0-200m-pytorch checkpoint), which is no longer on
+    # PyPI (2.x changed both the API and the checkpoint). See the README, TimesFM baseline note.
     "statsforecast>=2.0",
 ]
 

@@ -1,13 +1,13 @@
-# Intervenciones sobre la rama de metadatos de NeuroSym-CBF (script 13).
-# No re-entrenan nada: solo sustituyen el embedding de metadatos de cada serie y miden el efecto.
+# Interventions on the metadata branch of NeuroSym-CBF (script 13).
+# Nothing is retrained: they only replace each series' metadata embedding and measure the effect.
 
-# Nivel 2 — el NULO. Varias semillas para tener una distribución, no un único número.
+# Level 2 -- the NULL. Several seeds, to have a distribution instead of a single number.
 permutation_seeds: [0, 1, 2]
 
-# Nivel 3 — swaps dirigidos entre tags semánticamente distintos.
-# `max_pairs` acota el número de pares por swap (null = todos los que permita el grupo pequeño).
-# El primero es el ejemplo literal que propuso el tutor; los siguientes tienen mucho más volumen
-# (en FRED mensual solo 152 series llevan el tag `gdp` — el PIB es trimestral).
+# Level 3 -- targeted swaps between semantically different tags.
+# `max_pairs` caps the number of pairs per swap (null = as many as the smaller group allows).
+# The first one is the original example the experiment started from; the rest have far more volume
+# (in monthly FRED only 152 series carry the `gdp` tag -- GDP is quarterly).
 tag_swaps:
   - {a: gdp,           b: unemployment, max_pairs: null}
   - {a: cpi,           b: unemployment, max_pairs: 5000}
@@ -15,7 +15,7 @@ tag_swaps:
   - {a: manufacturing, b: housing,      max_pairs: 2000}
   - {a: inflation,     b: employment,   max_pairs: 5000}
 
-# Nivel 4 — control negativo: swap entre series con el MISMO conjunto de tags.
+# Level 4 -- negative control: swap between series with the SAME set of tags.
 within_tagset_swap:
   enabled: true
   min_group_size: 2

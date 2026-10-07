@@ -1,19 +1,19 @@
 #!/usr/bin/env python
-"""Intervenciones en los metadatos de NeuroSym-CBF sobre un checkpoint ya entrenado.
+"""Metadata interventions on an already trained NeuroSym-CBF checkpoint.
 
-Mide qué le pasa al forecast y a los conceptos del SAE cuando se le cambia a cada serie el
-embedding de metadatos: ablación, permutación aleatoria (el nulo), swaps dirigidos entre tags y
-control negativo entre series de tags idénticos. Ver `fred_forecast.interpretability.interventions`
-para el detalle de cada nivel.
+Measures what happens to the forecast and to the SAE concepts when each series is given a different
+metadata embedding: ablation, random permutation (the null), targeted swaps between tags and a
+negative control between series with identical tags. See
+`fred_forecast.interpretability.interventions` for the detail of each level.
 
-No re-entrena nada y no toca el contexto temporal: el encoder de la serie se ejecuta una sola vez
-por batch y se reutiliza en todas las intervenciones.
+Nothing is retrained and the temporal context is not touched: the series encoder runs once per
+batch and is reused by every intervention.
 
-Resultados en `<RESULTS_DIR>/interventions/metadata_interventions_ctx{N}.{json,npz}`.
+Results in `<RESULTS_DIR>/interventions/<label>_ctx{N}.{json,npz}`.
 
-Uso:
+Usage:
     python scripts/13_metadata_interventions.py
-    python scripts/13_metadata_interventions.py --max-batches 2      # prueba rápida
+    python scripts/13_metadata_interventions.py --max-batches 2      # quick test
 """
 from __future__ import annotations
 
@@ -75,7 +75,7 @@ def _build_test_set(context_len: int | None = None):
 def _load_model(protocol: dict, d_meta: int, checkpoint_arg: str | None, device: torch.device):
     d, b, sf = protocol["data"], protocol["backbone"], protocol["sae_film"]
     checkpoint_path = checkpoint_arg or (
-        models_dir() / f"neurosym_cbf_ctx{d['context_len']}_seed{protocol['seed']}.pt"
+        models_dir() / "imported_from_kaggle" / f"neurosym_cbf_ctx{d['context_len']}_seed{protocol['seed']}.pt"
     )
     model = NeuroSymCBFModel(
         seq_len=d["context_len"],
@@ -95,7 +95,7 @@ def _load_model(protocol: dict, d_meta: int, checkpoint_arg: str | None, device:
     state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
     check_hyperparams(hyperparams, {"context_len": d["context_len"], "top_k": sf["top_k"]})
     model.load_state_dict(state_dict)
-    logger.info("Checkpoint cargado <- %s", checkpoint_path)
+    logger.info("Checkpoint loaded <- %s", checkpoint_path)
     return model
 
 
@@ -109,14 +109,14 @@ def _build_interventions(config: dict, test_set, tags_df: pd.DataFrame) -> list:
     tag_sets = tag_sets_for(test_set.series_ids, tags_df)
     n_untagged = sum(1 for ts in tag_sets if not ts)
     if n_untagged:
-        logger.warning("%d series sin tags: no entran en swaps dirigidos ni en el control", n_untagged)
+        logger.warning("%d series without tags: they take part in no targeted swap and not in the control", n_untagged)
 
     for pair in config["tag_swaps"]:
         swap, matched_null = tag_swap_with_matched_null(
             pair["a"], pair["b"], tag_sets, seed=config["seed"], max_pairs=pair.get("max_pairs")
         )
         if swap.n_affected == 0:
-            logger.warning("Swap %r sin pares disponibles, se omite", swap.name)
+            logger.warning("Swap %r has no pairs available, skipped", swap.name)
             continue
         interventions.extend([swap, matched_null])
 
@@ -134,13 +134,13 @@ def _build_interventions(config: dict, test_set, tags_df: pd.DataFrame) -> list:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint de NeuroSym-CBF")
-    parser.add_argument("--context-len", type=int, default=None, help="Sobrescribe data.context_len")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Path to the NeuroSym-CBF checkpoint")
+    parser.add_argument("--context-len", type=int, default=None, help="Overrides data.context_len")
     parser.add_argument(
         "--label", type=str, default="metadata_interventions",
-        help="Prefijo de los ficheros de salida (para no pisar los de otro checkpoint)",
+        help="Prefix of the output files (so another checkpoint's results are not overwritten)",
     )
-    parser.add_argument("--max-batches", type=int, default=None, help="Limita batches (prueba rápida)")
+    parser.add_argument("--max-batches", type=int, default=None, help="Cap on the number of batches (quick test)")
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -163,7 +163,7 @@ def main() -> None:
     )
 
     summary = results["interventions"]
-    logger.info("%-32s %10s %12s %10s %10s", "intervención", "n", "ΔMAE", "% peor", "Jaccard")
+    logger.info("%-32s %10s %12s %10s %10s", "intervention", "n", "dMAE", "% worse", "Jaccard")
     for name, row in summary.items():
         logger.info(
             "%-32s %10d %12.5f %9.1f%% %10.3f",

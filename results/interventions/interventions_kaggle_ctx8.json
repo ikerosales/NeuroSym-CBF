@@ -2,7 +2,7 @@
   "interventions": {
     "baseline": {
       "kind": "identity",
-      "notes": "metadatos originales",
+      "notes": "original metadata",
       "n_evaluated": 194442,
       "mae_mean": 0.7046542763710022,
       "mae_median": 0.446560263633728,
@@ -57,7 +57,7 @@
     },
     "meta-zero": {
       "kind": "zero",
-      "notes": "embedding de metadatos = 0",
+      "notes": "metadata embedding = 0",
       "n_evaluated": 194442,
       "mae_mean": 0.8857401013374329,
       "mae_median": 0.5976194143295288,
@@ -112,7 +112,7 @@
     },
     "meta-mean": {
       "kind": "mean",
-      "notes": "embedding = media global del corpus",
+      "notes": "embedding = corpus mean",
       "n_evaluated": 194442,
       "mae_mean": 0.7603613138198853,
       "mae_median": 0.43661126494407654,
@@ -167,7 +167,7 @@
     },
     "permute-seed0": {
       "kind": "permute",
-      "notes": "permutaci\u00f3n global aleatoria (seed=0, 0 puntos fijos)",
+      "notes": "global random permutation (seed=0, 0 fixed points)",
       "n_evaluated": 194442,
       "mae_mean": 0.875460684299469,
       "mae_median": 0.5670539736747742,
@@ -222,7 +222,7 @@
     },
     "permute-seed1": {
       "kind": "permute",
-      "notes": "permutaci\u00f3n global aleatoria (seed=1, 2 puntos fijos)",
+      "notes": "global random permutation (seed=1, 2 fixed points)",
       "n_evaluated": 194440,
       "mae_mean": 0.8753584027290344,
       "mae_median": 0.5659257173538208,
@@ -277,7 +277,7 @@
     },
     "permute-seed2": {
       "kind": "permute",
-      "notes": "permutaci\u00f3n global aleatoria (seed=2, 5 puntos fijos)",
+      "notes": "global random permutation (seed=2, 5 fixed points)",
       "n_evaluated": 194437,
       "mae_mean": 0.8756030201911926,
       "mae_median": 0.5680292248725891,
@@ -332,7 +332,7 @@
     },
     "swap-gdp-vs-unemployment": {
       "kind": "permute",
-      "notes": "swap dirigido 'gdp' <-> 'unemployment': 152 pares (disponibles: 152 y 10876)",
+      "notes": "targeted swap 'gdp' <-> 'unemployment': 152 pairs (available: 152 and 10876)",
       "n_evaluated": 304,
       "mae_mean": 1.2870005369186401,
       "mae_median": 0.9625662565231323,
@@ -387,7 +387,7 @@
     },
     "null-gdp-vs-unemployment": {
       "kind": "permute",
-      "notes": "nulo emparejado de swap-gdp-vs-unemployment: barajado dentro de cada grupo",
+      "notes": "matched null of swap-gdp-vs-unemployment: shuffled within each group",
       "n_evaluated": 304,
       "mae_mean": 1.2235482931137085,
       "mae_median": 0.5106159448623657,
@@ -442,7 +442,7 @@
     },
     "swap-cpi-vs-unemployment": {
       "kind": "permute",
-      "notes": "swap dirigido 'cpi' <-> 'unemployment': 5000 pares (disponibles: 11379 y 10876)",
+      "notes": "targeted swap 'cpi' <-> 'unemployment': 5000 pairs (available: 11379 and 10876)",
       "n_evaluated": 10000,
       "mae_mean": 1.20357084274292,
       "mae_median": 1.0230635404586792,
@@ -497,7 +497,7 @@
     },
     "null-cpi-vs-unemployment": {
       "kind": "permute",
-      "notes": "nulo emparejado de swap-cpi-vs-unemployment: barajado dentro de cada grupo",
+      "notes": "matched null of swap-cpi-vs-unemployment: shuffled within each group",
       "n_evaluated": 10000,
       "mae_mean": 0.8054599761962891,
       "mae_median": 0.4522989094257355,
@@ -552,7 +552,7 @@
     },
     "swap-employment-vs-price": {
       "kind": "permute",
-      "notes": "swap dirigido 'employment' <-> 'price': 5000 pares (disponibles: 51884 y 55059)",
+      "notes": "targeted swap 'employment' <-> 'price': 5000 pairs (available: 51884 and 55059)",
       "n_evaluated": 10000,
       "mae_mean": 0.954104483127594,
       "mae_median": 0.6207375526428223,
@@ -607,7 +607,7 @@
     },
     "null-employment-vs-price": {
       "kind": "permute",
-      "notes": "nulo emparejado de swap-employment-vs-price: barajado dentro de cada grupo",
+      "notes": "matched null of swap-employment-vs-price: shuffled within each group",
       "n_evaluated": 10000,
       "mae_mean": 0.9498780369758606,
       "mae_median": 0.5723507404327393,
@@ -662,7 +662,7 @@
     },
     "swap-manufacturing-vs-housing": {
       "kind": "permute",
-      "notes": "swap dirigido 'manufacturing' <-> 'housing': 1986 pares (disponibles: 9841 y 1986)",
+      "notes": "targeted swap 'manufacturing' <-> 'housing': 1986 pairs (available: 9841 and 1986)",
       "n_evaluated": 3972,
       "mae_mean": 1.224100947380066,
       "mae_median": 0.7703063488006592,
@@ -717,7 +717,7 @@
     },
     "null-manufacturing-vs-housing": {
       "kind": "permute",
-      "notes": "nulo emparejado de swap-manufacturing-vs-housing: barajado dentro de cada grupo",
+      "notes": "matched null of swap-manufacturing-vs-housing: shuffled within each group",
       "n_evaluated": 3972,
       "mae_mean": 1.2491743564605713,
       "mae_median": 0.7817838191986084,
@@ -772,7 +772,7 @@
     },
     "swap-inflation-vs-employment": {
       "kind": "permute",
-      "notes": "swap dirigido 'inflation' <-> 'employment': 5000 pares (disponibles: 8774 y 51887)",
+      "notes": "targeted swap 'inflation' <-> 'employment': 5000 pairs (available: 8774 and 51887)",
       "n_evaluated": 10000,
       "mae_mean": 1.3760844469070435,
       "mae_median": 0.7638769149780273,
@@ -827,7 +827,7 @@
     },
     "null-inflation-vs-employment": {
       "kind": "permute",
-      "notes": "nulo emparejado de swap-inflation-vs-employment: barajado dentro de cada grupo",
+      "notes": "matched null of swap-inflation-vs-employment: shuffled within each group",
       "n_evaluated": 10000,
       "mae_mean": 1.2000916004180908,
       "mae_median": 0.6255085468292236,
@@ -882,7 +882,7 @@
     },
     "swap-within-tagset": {
       "kind": "permute",
-      "notes": "control negativo: swap dentro de 36060 grupos de tags id\u00e9nticos",
+      "notes": "negative control: swap within 36060 groups of identical tags",
       "n_evaluated": 110226,
       "mae_mean": 0.8867588043212891,
       "mae_median": 0.5957512259483337,

@@ -30,7 +30,7 @@ class NeuroSymCBFModel(nn.Module):
         6. coeffs_mod = γ ⊙ coeffs_ns + β
         7. coeffs_mod -> [SymbolicHead]               -> forecast   (B, H, 1)
 
-    Loss (calculada fuera del modelo): MAE(forecast, horizon).
+    Loss (computed outside the model): MAE(forecast, horizon).
     """
 
     def __init__(

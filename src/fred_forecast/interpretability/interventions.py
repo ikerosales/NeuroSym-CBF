@@ -1,26 +1,26 @@
-"""Intervenciones sobre la rama de metadatos de NeuroSym-CBF, sin re-entrenar.
+"""Interventions on the metadata branch of NeuroSym-CBF, without retraining.
 
-Todas las intervenciones sustituyen el embedding de metadatos que recibe una serie y miden qué
-le pasa al forecast y a los conceptos del SAE. El contexto temporal nunca se toca, así que
-`hidden_ts` y `coeffs_ns` son idénticos en todas las variantes: el runner los calcula **una vez
-por batch** y solo repite la cola del modelo (fusion -> SAE -> FiLM -> cabeza simbólica), que es
-la parte barata. Por eso evaluar N intervenciones no cuesta N pases completos.
+Every intervention replaces the metadata embedding a series receives and measures what happens to
+the forecast and to the SAE concepts. The temporal context is never touched, so `hidden_ts` and
+`coeffs_ns` are identical in every variant: the runner computes them **once per batch** and only
+repeats the tail of the model (fusion -> SAE -> FiLM -> symbolic head), which is the cheap part.
+That is why evaluating N interventions does not cost N full passes.
 
-Niveles, de menos a más informativo (cada uno controla al anterior):
+Levels, from least to most informative (each one controls for the previous one):
 
-1. **Ablación** (`zero`, `mean`): cota superior de cuánto usa el modelo el texto.
-2. **Permutación aleatoria** (`permute`): el NULO. Sin esto, un swap dirigido no dice nada —
-   no distinguirías daño semántico de "el vector simplemente no corresponde".
-3. **Swap dirigido por tag** (`tag_swap`): intercambia metadatos entre series de dos tags
-   semánticamente distintos. Solo es interpretable comparado contra el nulo del nivel 2.
-4. **Control negativo** (`within_tagset_swap`): intercambia metadatos entre series con el
-   *mismo* conjunto de tags. El texto sigue cambiando (el título y las unidades son distintos),
-   pero el contenido semántico es casi el mismo, así que el efecto debería ser ~0.
+1. **Ablation** (`zero`, `mean`): upper bound on how much the model uses the text.
+2. **Random permutation** (`permute`): the NULL. Without it a targeted swap says nothing -- you
+   could not tell semantic damage from "the vector simply is not this series' own".
+3. **Targeted swap by tag** (`tag_swap`): swaps metadata between series of two semantically
+   different tags. Only interpretable against the null of level 2.
+4. **Negative control** (`within_tagset_swap`): swaps metadata between series with the *same* set
+   of tags. The text still changes (title and units differ), but the semantic content is almost
+   the same, so the effect should be ~0.
 
-Nota de diseño: el efecto máximo alcanzable está acotado por la arquitectura. `coeffs_ns` sale
-del encoder de la serie y FiLM solo modula (`coeffs_mod = γ⊙coeffs_ns + β`), así que los
-metadatos no pueden cambiar el forecast arbitrariamente. Es una propiedad del modelo, no un
-artefacto de la medición.
+Design note: the largest achievable effect is bounded by the architecture. `coeffs_ns` comes from
+the series encoder and FiLM only modulates it (`coeffs_mod = γ⊙coeffs_ns + β`), so the metadata
+cannot change the forecast arbitrarily. That is a property of the model, not an artefact of the
+measurement.
 """
 from __future__ import annotations
 
@@ -47,12 +47,12 @@ BASELINE_NAME = "baseline"
 
 @dataclass
 class Intervention:
-    """Una intervención sobre la matriz de metadatos.
+    """One intervention on the metadata matrix.
 
-    `perm[i] = j` significa "la serie i recibe el embedding de la serie j". `affected` marca las
-    series donde el embedding realmente cambia; los agregados se calculan solo sobre ellas
-    (en un swap dirigido, la inmensa mayoría de las series no está implicada y promediar sobre
-    todas diluiría el efecto hasta hacerlo invisible). `affected=None` significa "todas".
+    `perm[i] = j` means "series i receives the embedding of series j". `affected` marks the series
+    whose embedding actually changes; the aggregates are computed only over them (in a targeted
+    swap the vast majority of series are not involved, and averaging over all of them would dilute
+    the effect until it disappeared). `affected=None` means "all of them".
     """
 
     name: str
@@ -67,25 +67,25 @@ class Intervention:
 
 
 # --------------------------------------------------------------------------------------------
-# Constructores de intervenciones
+# Intervention builders
 # --------------------------------------------------------------------------------------------
 
 
 def baseline_intervention() -> Intervention:
-    """Sin intervención: la referencia contra la que se comparan las demás."""
-    return Intervention(name=BASELINE_NAME, kind=IDENTITY, notes="metadatos originales")
+    """No intervention: the reference every other one is compared against."""
+    return Intervention(name=BASELINE_NAME, kind=IDENTITY, notes="original metadata")
 
 
 def ablation_interventions() -> list[Intervention]:
-    """Nivel 1: metadatos a cero y metadatos a la media global del corpus."""
+    """Level 1: metadata set to zero and metadata set to the corpus mean."""
     return [
-        Intervention(name="meta-zero", kind=ZERO, notes="embedding de metadatos = 0"),
-        Intervention(name="meta-mean", kind=MEAN, notes="embedding = media global del corpus"),
+        Intervention(name="meta-zero", kind=ZERO, notes="metadata embedding = 0"),
+        Intervention(name="meta-mean", kind=MEAN, notes="embedding = corpus mean"),
     ]
 
 
 def random_permutation_intervention(n_series: int, seed: int) -> Intervention:
-    """Nivel 2: permutación aleatoria global de embeddings entre series (el nulo)."""
+    """Level 2: global random permutation of embeddings across series (the null)."""
     rng = np.random.default_rng(seed)
     perm = rng.permutation(n_series)
     affected = perm != np.arange(n_series)
@@ -94,25 +94,25 @@ def random_permutation_intervention(n_series: int, seed: int) -> Intervention:
         kind=PERMUTE,
         perm=perm,
         affected=affected,
-        notes=f"permutación global aleatoria (seed={seed}, {int((~affected).sum())} puntos fijos)",
+        notes=f"global random permutation (seed={seed}, {int((~affected).sum())} fixed points)",
     )
 
 
 def tag_sets_for(series_ids: list[str], tags_df: pd.DataFrame) -> list[frozenset[str]]:
-    """Conjunto de tags de cada serie, en el mismo orden que `series_ids`.
+    """Set of tags of each series, in the same order as `series_ids`.
 
-    Las series sin fila en `tags_df` (o con tags vacíos) quedan como conjunto vacío: no entran
-    en ningún swap dirigido ni en ningún grupo del control negativo.
+    Series with no row in `tags_df` (or with empty tags) get an empty set: they take part in no
+    targeted swap and in no group of the negative control.
     """
     tag_map = dict(zip(tags_df["series_id"].astype(str), tags_df["tags"].fillna("")))
     return [frozenset(t for t in tag_map.get(sid, "").split("|") if t) for sid in series_ids]
 
 
 def _rotate_within_groups(groups: list[list[int]], n_series: int, rng) -> tuple[np.ndarray, np.ndarray, int]:
-    """Permutación que rota los miembros (ya barajados) dentro de cada grupo.
+    """Permutation that rotates the (already shuffled) members within each group.
 
-    La rotación garantiza que ninguna serie se quede con su propio embedding, y que el embedding
-    que recibe venga de otra serie del mismo grupo.
+    The rotation guarantees that no series keeps its own embedding, and that the embedding it
+    receives comes from another series of the same group.
     """
     perm = np.arange(n_series)
     affected = np.zeros(n_series, dtype=bool)
@@ -135,19 +135,19 @@ def tag_swap_with_matched_null(
     seed: int,
     max_pairs: int | None = None,
 ) -> list[Intervention]:
-    """Nivel 3 + su control emparejado. Devuelve las dos intervenciones, en ese orden.
+    """Level 3 plus its matched control. Returns the two interventions, in that order.
 
-    - **Swap dirigido**: cada serie con `tag_a` recibe el embedding de una serie con `tag_b`, y
-      viceversa. Se excluyen las series que llevan ambos tags (el cambio no sería contrastivo).
-    - **Nulo emparejado**: exactamente las mismas series, exactamente el mismo número de
-      embeddings cambiados, pero cada serie recibe el embedding de otra serie **de su propio
-      grupo** (una serie de CPI recibe metadatos de otra serie de CPI).
+    - **Targeted swap**: each series with `tag_a` receives the embedding of a series with `tag_b`,
+      and vice versa. Series carrying both tags are excluded (the change would not be contrastive).
+    - **Matched null**: exactly the same series, exactly the same number of embeddings changed,
+      but each series receives the embedding of another series **of its own group** (a CPI series
+      gets the metadata of another CPI series).
 
-    Comparar el swap contra el **nulo global** no vale: las series de un tag concreto pueden ser
-    más sensibles a los metadatos que la media del corpus, y entonces el efecto del swap se
-    confundiría con esa sensibilidad. El nulo emparejado fija la población y el número de
-    cambios, así que la diferencia entre ambos aísla lo único que varía: si el embedding nuevo
-    viene del grupo semántico contrario o del propio.
+    Comparing the swap against the **global null** is not valid: the series of one particular tag
+    may be more sensitive to metadata than the corpus average, and the effect of the swap would
+    then be confounded with that sensitivity. The matched null fixes the population and the number
+    of changes, so the difference between the two isolates the only thing that varies: whether the
+    new embedding comes from the opposite semantic group or from the series' own.
     """
     rng = np.random.default_rng(seed)
     group_a = [i for i, ts in enumerate(tag_sets) if tag_a in ts and tag_b not in ts]
@@ -174,8 +174,8 @@ def tag_swap_with_matched_null(
         perm=perm,
         affected=affected,
         notes=(
-            f"swap dirigido {tag_a!r} <-> {tag_b!r}: {n_pairs} pares "
-            f"(disponibles: {len(group_a)} y {len(group_b)})"
+            f"targeted swap {tag_a!r} <-> {tag_b!r}: {n_pairs} pairs "
+            f"(available: {len(group_a)} and {len(group_b)})"
         ),
     )
 
@@ -184,11 +184,11 @@ def tag_swap_with_matched_null(
         name=f"null-{label}",
         kind=PERMUTE,
         perm=null_perm,
-        affected=affected,  # se evalúa sobre las MISMAS series que el swap
-        notes=f"nulo emparejado de swap-{label}: barajado dentro de cada grupo",
+        affected=affected,  # evaluated on the SAME series as the swap
+        notes=f"matched null of swap-{label}: shuffled within each group",
     )
     if not np.array_equal(null_affected, affected):
-        logger.warning("El nulo emparejado de %s no cubre exactamente las mismas series", label)
+        logger.warning("The matched null of %s does not cover exactly the same series", label)
 
     return [swap, matched_null]
 
@@ -196,10 +196,10 @@ def tag_swap_with_matched_null(
 def within_tagset_swap_intervention(
     tag_sets: list[frozenset[str]], seed: int, min_group_size: int = 2
 ) -> Intervention:
-    """Nivel 4 (control negativo): intercambia embeddings entre series de tags idénticos.
+    """Level 4 (negative control): swaps embeddings between series with identical tags.
 
-    El texto codificado sigue cambiando (título y unidades difieren entre miembros del grupo),
-    pero la carga semántica es casi la misma, así que el efecto esperado es ~0.
+    The encoded text still changes (title and units differ between members of the group), but the
+    semantic load is almost the same, so the expected effect is ~0.
     """
     rng = np.random.default_rng(seed)
     groups: dict[frozenset[str], list[int]] = defaultdict(list)
@@ -214,7 +214,7 @@ def within_tagset_swap_intervention(
         kind=PERMUTE,
         perm=perm,
         affected=affected,
-        notes=f"control negativo: swap dentro de {n_groups} grupos de tags idénticos",
+        notes=f"negative control: swap within {n_groups} groups of identical tags",
     )
 
 
@@ -224,10 +224,10 @@ def within_tagset_swap_intervention(
 
 
 class _IndexedDataset(Dataset):
-    """Envuelve el dataset de test para devolver también el índice de serie de cada muestra.
+    """Wraps the test dataset so it also returns the series index of each sample.
 
-    Hace falta para saber a qué serie pertenece cada fila del batch y poder aplicarle la
-    permutación de metadatos correspondiente.
+    Needed to know which series each row of the batch belongs to, and so apply the matching
+    metadata permutation to it.
     """
 
     def __init__(self, base):
@@ -242,10 +242,10 @@ class _IndexedDataset(Dataset):
 
 @torch.no_grad()
 def _forward_tail(model, hidden, coeffs_ns, meta):
-    """Cola del modelo a partir de `hidden`/`coeffs_ns` ya calculados: fusion -> SAE -> FiLM -> head.
+    """Tail of the model from already computed `hidden`/`coeffs_ns`: fusion -> SAE -> FiLM -> head.
 
-    Réplica exacta de `NeuroSymCBFModel.forward` a partir del punto donde entran los metadatos
-    (ver `models/neurosym_cbf.py`), para no repetir el encoder en cada intervención.
+    Exact replica of `NeuroSymCBFModel.forward` from the point where the metadata comes in (see
+    `models/neurosym_cbf.py`), so the encoder is not repeated for every intervention.
     """
     fused = model.fusion_proj(torch.cat([hidden, meta], dim=-1))
     z = model.sae.encode(fused)
@@ -265,7 +265,7 @@ def _build_meta_batch(intervention: Intervention, idx: torch.Tensor, meta_all: t
         return meta_mean.expand(len(idx), -1)
     if intervention.kind == PERMUTE:
         return meta_all[perm_cache[intervention.name][idx]]
-    raise ValueError(f"Tipo de intervención desconocido: {intervention.kind!r}")
+    raise ValueError(f"Unknown intervention kind: {intervention.kind!r}")
 
 
 @torch.no_grad()
@@ -277,13 +277,13 @@ def run_metadata_interventions(
     batch_size: int = 2048,
     max_batches: int | None = None,
 ) -> dict:
-    """Ejecuta todas las intervenciones sobre el test set y devuelve métricas pareadas por serie.
+    """Runs every intervention over the test set and returns metrics paired by series.
 
-    `interventions[0]` debe ser la línea base (`baseline_intervention()`): es la referencia
-    contra la que se calculan todos los deltas.
+    `interventions[0]` must be the baseline (`baseline_intervention()`): it is the reference all
+    the deltas are computed against.
     """
     if not interventions or interventions[0].kind != IDENTITY:
-        raise ValueError("La primera intervención debe ser la línea base (kind='identity')")
+        raise ValueError("The first intervention must be the baseline (kind='identity')")
 
     model.eval()
     meta_all = torch.from_numpy(np.asarray(dataset.metadata, dtype=np.float32))
@@ -291,7 +291,7 @@ def run_metadata_interventions(
     n_series = meta_all.shape[0]
     for iv in interventions:
         if iv.perm is not None and len(iv.perm) != n_series:
-            raise ValueError(f"La permutación de {iv.name!r} no cuadra con {n_series} series")
+            raise ValueError(f"The permutation of {iv.name!r} does not match {n_series} series")
 
     perm_cache = {
         iv.name: torch.from_numpy(iv.perm.astype(np.int64))
@@ -371,14 +371,14 @@ def run_metadata_interventions(
 
 
 def _sign_test_z(n_worse: int, n_total: int) -> float:
-    """Estadístico z del test de signos (H0: la intervención empeora tanto como mejora)."""
+    """z statistic of the sign test (H0: the intervention makes things worse as often as better)."""
     if n_total == 0:
         return float("nan")
     return float((n_worse - n_total / 2) / np.sqrt(n_total / 4))
 
 
 def _aggregate(interventions, stacked, sums, series_index_arr, n_samples) -> dict:
-    """Agrega a escalares por intervención (JSON) y arrays por muestra (npz)."""
+    """Aggregates into per-intervention scalars (JSON) and per-sample arrays (npz)."""
     base = stacked[BASELINE_NAME]
     summary: dict[str, dict] = {}
     arrays: dict[str, np.ndarray] = {"series_index": series_index_arr}
