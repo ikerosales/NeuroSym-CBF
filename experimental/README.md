@@ -42,14 +42,11 @@ hypergeometric test). Run once against the canonical Kaggle checkpoint's evaluat
   per-tag reports).
 - **`run_concept_naming.py`** -- reads the `z` (SAE activation) array already saved by
   `scripts/10_evaluate.py` and writes the per-atom naming results as JSON, under `results/`.
-- **`build_report.py`** -- renders those JSON results into a bilingual (ES/EN) HTML report.
-- **`results/`** -- self-contained output of this experiment (JSON only; the rendered HTML is
-  local-only, not committed -- see the repo's publishing rules in the root README).
+- **`results/`** -- self-contained output of this experiment (JSON only).
 - Run from the root of the repo:
   ```
   python experimental/concept_naming/run_concept_naming.py \
       --npz results/metrics/ctx30/npz/neurosym-cbf.npz --context-len 30
-  python experimental/concept_naming/build_report.py
   ```
 
 ## Why it is separate
