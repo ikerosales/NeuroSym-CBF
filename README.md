@@ -145,8 +145,9 @@ There are two ways to look at this, depending on how far you want to go.
 
 If you just want to check the numbers, you do not need to run anything. In `results/metrics/` you
 have the results, one file per model and context, and in `results/comparison_point.csv` you have
-the full comparison table. Those numbers are exactly the ones in Table 6.1 of the thesis and in the
-tables of the workshop paper (I verified them one by one).
+the full comparison table. The numbers of the six original models are exactly the ones in Table 6.1
+of the thesis (I verified them one by one), and the tables of the workshop paper are built from
+these same files.
 
 If you want to rebuild everything from scratch, the scripts are numbered in the order they run. You
 need the FRED API key for the first phases and a GPU for training.
