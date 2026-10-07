@@ -27,7 +27,19 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger(__name__)
 
 MODELS = ["neurosym-cbf", "unimodal-ablation", "tft", "autoets-normafter", "chronos-2", "chronos-bolt", "timesfm", "moirai"]
-MOIRAI_PYTHON = REPO_ROOT / ".venv-moirai" / "python.exe"  # see scripts/evaluate_moirai.py
+
+
+def moirai_python() -> str:
+    """Interpreter of the separate Moirai environment (see `scripts/evaluate_moirai.py`).
+
+    Its location inside `.venv-moirai/` depends on the platform and on how the environment was
+    created (conda or venv), so the usual places are tried in turn.
+    """
+    env_dir = REPO_ROOT / ".venv-moirai"
+    for candidate in ("python.exe", "Scripts/python.exe", "bin/python"):
+        if (env_dir / candidate).exists():
+            return str(env_dir / candidate)
+    raise FileNotFoundError(f"No Python interpreter found in {env_dir}; see scripts/evaluate_moirai.py")
 
 
 def main() -> None:
@@ -48,7 +60,7 @@ def main() -> None:
                 database = database_path(set_name, context_len)
                 if model == "moirai":
                     cmd = [
-                        str(MOIRAI_PYTHON), "scripts/evaluate_moirai.py", "--context-len", str(context_len),
+                        moirai_python(), "scripts/evaluate_moirai.py", "--context-len", str(context_len),
                         "--database", str(database), "--label", label,
                     ]
                 else:

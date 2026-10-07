@@ -218,9 +218,18 @@ python scripts/10_evaluate.py --model neurosym-cbf --context-len 30 --metadata-c
 # metadata interventions at test time, on an already trained NeuroSym-CBF
 python scripts/13_metadata_interventions.py --context-len 30
 
-# Moirai, another pretrained baseline (runs in its own environment, see the script's docstring)
-.venv-moirai/python scripts/evaluate_moirai.py --context-len 30
+# Moirai, another pretrained baseline (runs in its own environment, see the script's docstring;
+# the interpreter is .venv-moirai/bin/python on Linux/macOS, .venv-moirai/python.exe with conda on Windows)
+.venv-moirai/bin/python scripts/evaluate_moirai.py --context-len 30
 ```
+
+Two things about these baselines that are not obvious from the commands. The TFT is my own
+implementation of its temporal backbone (gated residual networks, an LSTM encoder-decoder,
+interpretable causal attention and gated skips), not a library model: with a single series and no
+covariates, the variable selection and static enrichment of the original have nothing to act on and
+are left out; its width is set so that it has about as many parameters as NeuroSym-CBF. Moirai is
+`moirai-1.1-R-base`, evaluated without fine-tuning, with patch size 8 (the value its authors assign
+to monthly data) and the median of 100 sample paths as the point forecast.
 
 `--context-len` overrides the context of the config for one run, for my own models and for the
 baselines alike, which is the easy way to sweep the five contexts. The results of all of these are
