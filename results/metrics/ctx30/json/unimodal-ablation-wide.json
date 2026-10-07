@@ -1,0 +1,17 @@
+{
+  "mae_mean": 0.40181607007980347,
+  "mae_median": 0.29154932498931885,
+  "mae_std": 0.41816243529319763,
+  "mae_p25": 0.17445562779903412,
+  "mae_p75": 0.4882446527481079,
+  "mae_p90": 0.7781510949134827,
+  "smape_mean": 0.7750825881958008,
+  "smape_median": 0.6453040838241577,
+  "mase_mean": 1.624845266342163,
+  "mase_median": 1.2336673736572266,
+  "model": "unimodal-ablation",
+  "label": "unimodal-ablation-wide",
+  "context_len": 30,
+  "horizon_len": 18,
+  "n_test_samples": 194442
+}

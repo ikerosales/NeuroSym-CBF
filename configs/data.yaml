@@ -31,4 +31,4 @@ paths:
   interim_dir: interim          # -> <DATA_DIR>/interim/final_dataset_<freq>/release_<id>.parquet
   processed_dir: processed      # -> <DATA_DIR>/processed/fred_database_context_<N>.json
   embeddings_dir: embeddings    # -> <DATA_DIR>/embeddings/metadata_embeddings.pkl
-  series_ids_file: series_ids/series_ids.json
+  series_ids_file: series_ids.json

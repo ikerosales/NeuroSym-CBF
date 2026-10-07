@@ -1,0 +1,21 @@
+{
+  "mae_mean": 0.39022260904312134,
+  "mae_median": 0.2784433662891388,
+  "mae_std": 0.41132789850234985,
+  "mae_p25": 0.16857322677969933,
+  "mae_p75": 0.46981537342071533,
+  "mae_p90": 0.7612805426120758,
+  "smape_mean": 0.7306394577026367,
+  "smape_median": 0.6042077541351318,
+  "mase_mean": 1.5766619443893433,
+  "mase_median": 1.1824650764465332,
+  "model": "moirai",
+  "label": "moirai",
+  "context_len": 30,
+  "model_id": "Salesforce/moirai-1.1-R-base",
+  "patch_size": 8,
+  "num_samples": 100,
+  "seed": 40,
+  "horizon_len": 18,
+  "n_test_samples": 194442
+}

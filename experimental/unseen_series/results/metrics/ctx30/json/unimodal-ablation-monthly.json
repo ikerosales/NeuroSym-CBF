@@ -1,0 +1,15 @@
+{
+  "mae_mean": 0.33309075236320496,
+  "mae_median": 0.205506831407547,
+  "mae_std": 0.5146053433418274,
+  "mae_p25": 0.12091109901666641,
+  "mae_p75": 0.3580457270145416,
+  "mae_p90": 0.6350402235984802,
+  "smape_mean": 0.5828974843025208,
+  "smape_median": 0.398451030254364,
+  "mase_mean": 1.0707920789718628,
+  "mase_median": 0.6557216644287109,
+  "model": "unimodal-ablation",
+  "label": "unimodal-ablation-monthly",
+  "context_len": 30
+}

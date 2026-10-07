@@ -30,6 +30,14 @@ chronos2:
   model_id: amazon/chronos-2
   batch_size: 256
 
+# In-domain deep baseline, trained from scratch with the protocol of configs/model_protocol.yaml
+# (scripts/09_train_tft_baseline.py). d_model=68 gives 188,038 trainable parameters, on par with
+# NeuroSym-CBF (186,087-188,903 depending on the context length).
+tft:
+  d_model: 68
+  num_heads: 4
+  dropout: 0.1
+
 timesfm:
   context_len: 30
   min_context_len: 13

@@ -1,0 +1,17 @@
+{
+  "mae_mean": 0.7563187479972839,
+  "mae_median": 0.48187944293022156,
+  "mae_std": 0.8672744035720825,
+  "mae_p25": 0.281141459941864,
+  "mae_p75": 0.8630661368370056,
+  "mae_p90": 1.5515809059143066,
+  "smape_mean": 0.9132540225982666,
+  "smape_median": 0.8391382694244385,
+  "mase_mean": 3.0921082496643066,
+  "mase_median": 1.845301628112793,
+  "model": "neurosym-cbf",
+  "label": "neurosym-cbf-metashuffled",
+  "context_len": 8,
+  "horizon_len": 18,
+  "n_test_samples": 194442
+}

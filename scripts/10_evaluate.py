@@ -6,6 +6,9 @@ the original project). Saves aggregated metrics in JSON and per-sample arrays
 in `.npz`, under `<RESULTS_DIR>/metrics/ctx{N}/{json,npz}/{model}.{json,npz}` -- see
 `fred_forecast.evaluation.results_io`.
 
+`tft` is the in-domain deep baseline (`scripts/09_train_tft_baseline.py`, or its Kaggle notebook for a
+GPU run); like the custom models, its default checkpoint is the one under `models/imported_from_kaggle/`.
+
 Custom models (`unimodal-ablation`, `neurosym-cbf`): by default evaluate the checkpoint under
 `models/imported_from_kaggle/` -- the original weights imported from Kaggle, which back every
 number in the paper/report and which should ALWAYS be used for evaluating and publishing unless
@@ -25,22 +28,30 @@ Usage:
     python scripts/10_evaluate.py --model chronos-bolt
     python scripts/10_evaluate.py --model chronos-2
     python scripts/10_evaluate.py --model timesfm
+    python scripts/10_evaluate.py --model unimodal-ablation --context-len 8 --d-model 148         --checkpoint models/local/unimodal_ablation_ctx8_seed40_d148.pt --label unimodal-ablation-wide
 """
 from __future__ import annotations
 
 import argparse
 import logging
+from pathlib import Path
 
 import torch
 from torch.utils.data import DataLoader
 
 from fred_forecast.config import data_dir, load_yaml_config, models_dir, results_dir
-from fred_forecast.datasets.load_series import load_metadata_embeddings, load_series_observations
+from fred_forecast.datasets.load_series import (
+    METADATA_CONTROLS,
+    apply_metadata_control,
+    load_metadata_embeddings,
+    load_series_observations,
+)
 from fred_forecast.datasets.timeseries_dataset import TimeSeriesDataset, split_train_test_obs
 from fred_forecast.datasets.univariate_dataset import UnivariateTestDataset
 from fred_forecast.evaluation.results_io import save_results
 from fred_forecast.models.checkpoint_io import check_hyperparams, load_checkpoint
 from fred_forecast.models.neurosym_cbf import NeuroSymCBFModel
+from fred_forecast.models.tft_baseline import TFTBaselineModel
 from fred_forecast.models.unimodal_ablation import UnimodalAblationModel
 from fred_forecast.reproducibility import set_reproducible_environment
 from fred_forecast.training.train_neurosym_cbf import evaluate_neurosym_cbf
@@ -49,9 +60,29 @@ from fred_forecast.training.train_unimodal_ablation import evaluate_unimodal_abl
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-OWN_MODEL_CHOICES = ["unimodal-ablation", "neurosym-cbf"]
+OWN_MODEL_CHOICES = ["unimodal-ablation", "neurosym-cbf", "tft"]
 BASELINE_CHOICES = ["autoets-normafter", "autoets-normbefore", "chronos-bolt", "chronos-2", "timesfm"]
 MODEL_CHOICES = OWN_MODEL_CHOICES + BASELINE_CHOICES
+
+
+# Set from --database / --embeddings to evaluate on another set of series (e.g. an out-of-sample
+# experiment under experiments/) instead of the main database.
+_DATABASE_OVERRIDE: Path | None = None
+_EMBEDDINGS_OVERRIDE: Path | None = None
+
+
+_CONTEXT_OVERRIDE: int | None = None
+
+
+def _with_context_override(cfg: dict) -> dict:
+    """Baseline config with `context_len` replaced by --context-len, when given."""
+    if _CONTEXT_OVERRIDE is None:
+        return cfg
+    cfg = dict(cfg)
+    cfg["context_len"] = _CONTEXT_OVERRIDE
+    if "min_context_len" in cfg:
+        cfg["min_context_len"] = min(cfg["min_context_len"], _CONTEXT_OVERRIDE)
+    return cfg
 
 
 def _database_paths():
@@ -61,16 +92,30 @@ def _database_paths():
         data_dir() / data_config["paths"]["processed_dir"] / f"fred_database_context_{context_months}.json"
     )
     embeddings_pkl = data_dir() / data_config["paths"]["embeddings_dir"] / "metadata_embeddings.pkl"
-    return database_json, embeddings_pkl
+    return _DATABASE_OVERRIDE or database_json, _EMBEDDINGS_OVERRIDE or embeddings_pkl
 
 
-def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: torch.device) -> dict:
+def _evaluate_own_model(
+    model_name: str,
+    checkpoint_arg: str | None,
+    device: torch.device,
+    context_len: int | None = None,
+    d_model: int | None = None,
+    metadata_control: str | None = None,
+) -> dict:
     config = load_yaml_config("configs/model_protocol.yaml")
     d, b = config["data"], config["backbone"]
+    if context_len is not None:
+        d["context_len"] = context_len
+    if d_model is not None:
+        b["d_model"] = d_model
     database_json, embeddings_pkl = _database_paths()
 
     df = load_series_observations(database_json)
     metadata_df = load_metadata_embeddings(embeddings_pkl)
+    if metadata_control:
+        metadata_df = apply_metadata_control(metadata_df, metadata_control, config["seed"])
+        logger.info("Metadata control: %s", metadata_control)
     _df_train, df_test = split_train_test_obs(df, d["context_len"], d["horizon_len"])
     test_set = TimeSeriesDataset(
         df_test,
@@ -100,7 +145,32 @@ def _evaluate_own_model(model_name: str, checkpoint_arg: str | None, device: tor
             num_blocks=b["num_blocks"],
         ).to(device)
         state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
-        check_hyperparams(hyperparams, {"context_len": d["context_len"], "horizon_len": d["horizon_len"]})
+        check_hyperparams(
+            hyperparams,
+            {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "d_model": b["d_model"]},
+        )
+        model.load_state_dict(state_dict)
+        results = evaluate_unimodal_ablation(
+            model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
+        )
+    elif model_name == "tft":
+        tft = load_yaml_config("configs/baselines.yaml")["tft"]
+        checkpoint_path = checkpoint_arg or (
+            models_dir() / "imported_from_kaggle" / f"tft_ctx{d['context_len']}_seed{config['seed']}.pt"
+        )
+        model = TFTBaselineModel(
+            seq_len=d["context_len"],
+            horizon_len=d["horizon_len"],
+            d_model=tft["d_model"],
+            num_heads=tft["num_heads"],
+            dropout=tft["dropout"],
+            padding_value=d["padding_value"],
+        ).to(device)
+        state_dict, hyperparams = load_checkpoint(checkpoint_path, map_location=device)
+        check_hyperparams(
+            hyperparams,
+            {"context_len": d["context_len"], "horizon_len": d["horizon_len"], "d_model": tft["d_model"]},
+        )
         model.load_state_dict(state_dict)
         results = evaluate_unimodal_ablation(
             model, test_loader, device, seasonality=b["seasonality"], padding_value=d["padding_value"]
@@ -144,7 +214,7 @@ def _evaluate_autoets(variant: str) -> dict:
     from fred_forecast.evaluation.baselines.autoets import evaluate_autoets
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["autoets"]
+    cfg = _with_context_override(baselines_config["autoets"])
     database_json, _embeddings_pkl = _database_paths()
 
     df = load_series_observations(database_json)
@@ -183,7 +253,7 @@ def _evaluate_chronos_bolt(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.chronos import evaluate_chronos_bolt
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["chronos_bolt"]
+    cfg = _with_context_override(baselines_config["chronos_bolt"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     pipeline = BaseChronosPipeline.from_pretrained(
@@ -203,7 +273,7 @@ def _evaluate_chronos2(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.chronos import evaluate_chronos2
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["chronos2"]
+    cfg = _with_context_override(baselines_config["chronos2"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     pipeline = BaseChronosPipeline.from_pretrained(cfg["model_id"], device_map=str(device))
@@ -220,7 +290,7 @@ def _evaluate_timesfm(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.timesfm import evaluate_timesfm
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["timesfm"]
+    cfg = _with_context_override(baselines_config["timesfm"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     model = timesfm.TimesFm(
@@ -254,13 +324,43 @@ def main() -> None:
         help="Name to save the results under (defaults to --model). Useful for evaluating an "
              "alternate checkpoint without overwriting the repo model's results",
     )
+    parser.add_argument(
+        "--context-len", type=int, default=None,
+        help="Overrides the context length (data.context_len for the custom models, the per-baseline value "
+             "of configs/baselines.yaml for the baselines)",
+    )
+    parser.add_argument(
+        "--d-model", type=int, default=None,
+        help="Custom models only: overrides backbone.d_model (e.g. 148 for the capacity-matched ablation)",
+    )
+    parser.add_argument(
+        "--metadata-control", choices=METADATA_CONTROLS, default=None,
+        help="neurosym-cbf only: evaluate with control embeddings (another series' or the mean one) "
+             "instead of each series' own metadata",
+    )
+    parser.add_argument(
+        "--database", type=str, default=None,
+        help="Series database (JSON, same format as the main one) to evaluate on instead of the main database",
+    )
+    parser.add_argument(
+        "--embeddings", type=str, default=None,
+        help="Metadata embeddings pickle matching --database (needed by neurosym-cbf)",
+    )
     args = parser.parse_args()
+
+    global _DATABASE_OVERRIDE, _EMBEDDINGS_OVERRIDE, _CONTEXT_OVERRIDE
+    _CONTEXT_OVERRIDE = args.context_len
+    _DATABASE_OVERRIDE = Path(args.database) if args.database else None
+    _EMBEDDINGS_OVERRIDE = Path(args.embeddings) if args.embeddings else None
 
     protocol = load_yaml_config("configs/model_protocol.yaml")
     device = set_reproducible_environment(protocol["seed"], protocol["num_threads"])
 
     if args.model in OWN_MODEL_CHOICES:
-        results, context_len = _evaluate_own_model(args.model, args.checkpoint, device)
+        results, context_len = _evaluate_own_model(
+            args.model, args.checkpoint, device,
+            context_len=args.context_len, d_model=args.d_model, metadata_control=args.metadata_control,
+        )
     elif args.model in ("autoets-normafter", "autoets-normbefore"):
         variant = args.model.split("-", 1)[1]
         results, context_len = _evaluate_autoets(variant)

@@ -36,3 +36,32 @@ def load_metadata_embeddings(embeddings_pkl_path: Path) -> pd.DataFrame:
     metadata_df["series_id"] = metadata_df["series_id"].astype(str)
     metadata_df["embeddings"] = metadata_df["embeddings"].apply(lambda x: np.asarray(x, dtype=np.float32))
     return metadata_df.set_index("series_id")
+
+
+METADATA_CONTROLS = ("shuffled", "constant")
+
+
+def apply_metadata_control(metadata_df: pd.DataFrame, control: str, seed: int) -> pd.DataFrame:
+    """Replaces each series' embedding with a control embedding, keeping the index untouched.
+
+    Both controls keep the architecture and parameter count of NeuroSym-CBF and only remove the
+    correspondence between a series and its own description:
+
+    - `shuffled`: a fixed permutation of the embeddings across series. Every series still gets a
+      (mostly) distinct vector, so it can still work as an identifier, but it describes another series.
+    - `constant`: every series gets the mean embedding, so the metadata carries no information.
+
+    The permutation depends only on `seed` and on the sorted series ids, so training and evaluation
+    reproduce the same assignment.
+    """
+    if control not in METADATA_CONTROLS:
+        raise ValueError(f"Unknown metadata control {control!r}; expected one of {METADATA_CONTROLS}")
+    ordered = metadata_df.sort_index()
+    embeddings = np.stack(ordered["embeddings"].to_numpy())
+    if control == "shuffled":
+        embeddings = embeddings[np.random.default_rng(seed).permutation(len(embeddings))]
+    else:
+        embeddings = np.broadcast_to(embeddings.mean(axis=0), embeddings.shape)
+    controlled = ordered.copy()
+    controlled["embeddings"] = list(embeddings.astype(np.float32))
+    return controlled
