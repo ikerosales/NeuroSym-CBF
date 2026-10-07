@@ -118,6 +118,10 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=256)
     parser.add_argument("--max-batches", type=int, default=None, help="Stop early (timing / smoke test)")
     parser.add_argument("--label", default="moirai", help="Name to save the results under")
+    parser.add_argument(
+        "--database", type=str, default=None,
+        help="Series database (JSON, same format as the main one) to evaluate on instead of the main database",
+    )
     args = parser.parse_args()
 
     protocol = load_yaml_config("configs/model_protocol.yaml")
@@ -138,6 +142,8 @@ def main() -> None:
         data_dir() / data_config["paths"]["processed_dir"]
         / f"fred_database_context_{data_config['cleaning']['context_months']}.json"
     )
+    if args.database:
+        database_json = Path(args.database)
     df = load_series_observations(database_json)
     _df_train, df_test = split_train_test_obs(df, args.context_len, horizon_len)
     del df

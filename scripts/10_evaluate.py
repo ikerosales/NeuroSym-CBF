@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+from pathlib import Path
 
 import torch
 from torch.utils.data import DataLoader
@@ -64,6 +65,26 @@ BASELINE_CHOICES = ["autoets-normafter", "autoets-normbefore", "chronos-bolt", "
 MODEL_CHOICES = OWN_MODEL_CHOICES + BASELINE_CHOICES
 
 
+# Set from --database / --embeddings to evaluate on another set of series (e.g. an out-of-sample
+# experiment under experiments/) instead of the main database.
+_DATABASE_OVERRIDE: Path | None = None
+_EMBEDDINGS_OVERRIDE: Path | None = None
+
+
+_CONTEXT_OVERRIDE: int | None = None
+
+
+def _with_context_override(cfg: dict) -> dict:
+    """Baseline config with `context_len` replaced by --context-len, when given."""
+    if _CONTEXT_OVERRIDE is None:
+        return cfg
+    cfg = dict(cfg)
+    cfg["context_len"] = _CONTEXT_OVERRIDE
+    if "min_context_len" in cfg:
+        cfg["min_context_len"] = min(cfg["min_context_len"], _CONTEXT_OVERRIDE)
+    return cfg
+
+
 def _database_paths():
     data_config = load_yaml_config("configs/data.yaml")
     context_months = data_config["cleaning"]["context_months"]
@@ -71,7 +92,7 @@ def _database_paths():
         data_dir() / data_config["paths"]["processed_dir"] / f"fred_database_context_{context_months}.json"
     )
     embeddings_pkl = data_dir() / data_config["paths"]["embeddings_dir"] / "metadata_embeddings.pkl"
-    return database_json, embeddings_pkl
+    return _DATABASE_OVERRIDE or database_json, _EMBEDDINGS_OVERRIDE or embeddings_pkl
 
 
 def _evaluate_own_model(
@@ -193,7 +214,7 @@ def _evaluate_autoets(variant: str) -> dict:
     from fred_forecast.evaluation.baselines.autoets import evaluate_autoets
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["autoets"]
+    cfg = _with_context_override(baselines_config["autoets"])
     database_json, _embeddings_pkl = _database_paths()
 
     df = load_series_observations(database_json)
@@ -232,7 +253,7 @@ def _evaluate_chronos_bolt(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.chronos import evaluate_chronos_bolt
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["chronos_bolt"]
+    cfg = _with_context_override(baselines_config["chronos_bolt"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     pipeline = BaseChronosPipeline.from_pretrained(
@@ -252,7 +273,7 @@ def _evaluate_chronos2(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.chronos import evaluate_chronos2
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["chronos2"]
+    cfg = _with_context_override(baselines_config["chronos2"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     pipeline = BaseChronosPipeline.from_pretrained(cfg["model_id"], device_map=str(device))
@@ -269,7 +290,7 @@ def _evaluate_timesfm(device: torch.device) -> dict:
     from fred_forecast.evaluation.baselines.timesfm import evaluate_timesfm
 
     baselines_config = load_yaml_config("configs/baselines.yaml")
-    cfg = baselines_config["timesfm"]
+    cfg = _with_context_override(baselines_config["timesfm"])
     loader = _build_univariate_loader(cfg, baselines_config)
 
     model = timesfm.TimesFm(
@@ -305,7 +326,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--context-len", type=int, default=None,
-        help="Custom models only: overrides data.context_len from configs/model_protocol.yaml",
+        help="Overrides the context length (data.context_len for the custom models, the per-baseline value "
+             "of configs/baselines.yaml for the baselines)",
     )
     parser.add_argument(
         "--d-model", type=int, default=None,
@@ -316,7 +338,20 @@ def main() -> None:
         help="neurosym-cbf only: evaluate with control embeddings (another series' or the mean one) "
              "instead of each series' own metadata",
     )
+    parser.add_argument(
+        "--database", type=str, default=None,
+        help="Series database (JSON, same format as the main one) to evaluate on instead of the main database",
+    )
+    parser.add_argument(
+        "--embeddings", type=str, default=None,
+        help="Metadata embeddings pickle matching --database (needed by neurosym-cbf)",
+    )
     args = parser.parse_args()
+
+    global _DATABASE_OVERRIDE, _EMBEDDINGS_OVERRIDE, _CONTEXT_OVERRIDE
+    _CONTEXT_OVERRIDE = args.context_len
+    _DATABASE_OVERRIDE = Path(args.database) if args.database else None
+    _EMBEDDINGS_OVERRIDE = Path(args.embeddings) if args.embeddings else None
 
     protocol = load_yaml_config("configs/model_protocol.yaml")
     device = set_reproducible_environment(protocol["seed"], protocol["num_threads"])

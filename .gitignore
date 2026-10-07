@@ -56,3 +56,6 @@ nesycbf_neurips_fmts_2026.zip
 
 # Separate environment for the Moirai baseline (uni2ts pins its own torch/numpy versions).
 .venv-moirai/
+
+# Experiments keep their own data out of the repo (derived from FRED, same rules as data/).
+experimental/*/data/
