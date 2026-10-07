@@ -34,15 +34,7 @@ with their descriptive metadata (documentation at https://pmontman.github.io/ter
 for *structural multimodality*: numerical history and text are only allowed to set an explicit
 econometric state, never to write the forecast directly. NeuroSym-CBF is the implementation of that
 idea, trained on FRED-194k, the monthly FRED subset this repository works with, and this repository
-is the code release the paper points to: the model, the baselines and the evaluation.
-
-The paper PDF is not stored in this repository.
-
-## The thesis is the source of truth
-
-The full write-up of the work lives in `docs/paper.pdf`. If something about the design, the
-terminology or the reasoning behind a particular decision is not clear from the code, the answer is
-in there. It is the central document this repository accompanies, and it covers the architecture, the experimental protocol and the results in far more depth than a README can. When in doubt, read it before assuming anything.
+is the code release the paper points to: the model, the baselines, the controls and the evaluation.
 
 ## What is published and what is not
 
@@ -52,7 +44,7 @@ Everything else is published, which is what really matters to understand and rep
 
 The complete code, from start to finish. It is the "how": how the dataset is downloaded from the FRED API, how it is cleaned, how the database is built, how the embeddings are generated, and how everything is trained and evaluated. That code is entirely my own authorship.
 
-The list of series identifiers I used, in `series_ids/series_ids.json`. This is what makes the work reproducible on the data side: with that list and a FRED API key, anyone can re-download the same set of series and rebuild the dataset with the scripts here. The 194,442 series are all the monthly-frequency series that FRED had available at the time of my extraction, which I ran on **March 11, 2026**. That date matters more than it looks. FRED is a living
+The list of series identifiers I used, in `series_ids.json`. This is what makes the work reproducible on the data side: with that list and a FRED API key, anyone can re-download the same set of series and rebuild the dataset with the scripts here. The 194,442 series are all the monthly-frequency series that FRED had available at the time of my extraction, which I ran on **March 11, 2026**. That date matters more than it looks. FRED is a living
 database: series get revised, backfilled, and occasionally added or discontinued, so a download run
 on a different day will not return byte-for-byte the same values, and even the exact set of
 available monthly series can drift a little. The series_ids file pins down which series to use, but
@@ -77,12 +69,11 @@ The layout follows that of an installable Python package. The reusable code live
 │   ├── models/              # patch encoder, Top-K SAE, FiLM, symbolic head, NeuroSym-CBF, ablation
 │   ├── training/            # training loops (they only train and save a checkpoint)
 │   └── evaluation/          # evaluation of the models and baselines, plus aggregation
-├── scripts/                 # CLI entry points, numbered in pipeline order (01 download ... 11 aggregate)
+├── scripts/                 # CLI entry points, numbered in pipeline order (01 download ... 13 interventions)
 ├── configs/                 # per-phase configuration in YAML, nothing hardcoded in the code
-├── experimental/            # preliminary pinball-loss variant, kept outside the core pipeline
-├── series_ids/              # the series I used, the only piece of the dataset that is published
-├── results/                 # the computed thesis metrics and the comparison tables
-├── docs/                    # paper.pdf, the thesis write-up
+├── experimental/            # side experiments and preliminary work, kept outside the core pipeline
+├── series_ids.json          # the series I used, the only piece of the dataset that is published
+├── results/                 # the computed metrics and the comparison tables
 ├── data/                    # local runtime data (gitignored, empty in the repo)
 ├── models/                  # local trained checkpoints (gitignored, empty in the repo)
 ├── pyproject.toml           # package metadata and dependencies
@@ -94,11 +85,12 @@ The `data/` and `models/` folders are intentionally empty: that is where the pip
 downloaded data, the database, the embeddings and the checkpoints when you run it on your machine.
 None of that gets committed to the repository.
 
-A note on `experimental/`. It holds a variant of NeuroSym-CBF with a pinball loss for probabilistic
-quantile forecasting, together with its comparison against Chronos-2 in that same mode. It is
-preliminary work that I did not evaluate in depth in the thesis, so I kept it separate from the main
-pipeline to make it clear what is validated work and what is an open line. It has its own README
-inside.
+A note on `experimental/`. It holds everything that is not part of the main pipeline. One part is
+evaluated end to end and reported in the paper: `unseen_series/`, which scores the trained models on
+FRED series that never entered training. The rest is preliminary work that I did not evaluate in
+depth: a variant of NeuroSym-CBF with a pinball loss for probabilistic quantile forecasting, with
+its comparison against Chronos-2 in that same mode, and the naming of the sparse dictionary's atoms
+from FRED tags. Each has its own README inside.
 
 ## Getting started
 
@@ -152,9 +144,9 @@ None of the other baselines need any of this, `pip install -e .` is enough.
 There are two ways to look at this, depending on how far you want to go.
 
 If you just want to check the numbers, you do not need to run anything. In `results/metrics/` you
-have the thesis results, one file per model and context, and in `results/comparison_point.csv` you
-have the full comparison table. Those numbers are exactly the ones in Table 6.1 of the thesis (I
-verified them one by one), so you can cross-check the CSV against the PDF and see that they match.
+have the results, one file per model and context, and in `results/comparison_point.csv` you have
+the full comparison table. Those numbers are exactly the ones in Table 6.1 of the thesis and in the
+tables of the workshop paper (I verified them one by one).
 
 If you want to rebuild everything from scratch, the scripts are numbered in the order they run. You
 need the FRED API key for the first phases and a GPU for training.
@@ -202,6 +194,38 @@ deterministic given the frozen model, but my two own models, if you retrain them
 machine, will land within about one percent of the paper numbers. That is the normal variability of
 retraining a network on different hardware with the same seeds, not a bug, and it does not change
 any of the conclusions.
+
+### Controls and extra baselines of the workshop paper
+
+The workshop paper adds a few runs on top of the thesis comparison. They use the same scripts:
+
+```
+# in-domain deep baseline: a Temporal Fusion Transformer trained with the protocol of my own models
+python scripts/09_train_tft_baseline.py --context-len 30
+python scripts/10_evaluate.py --model tft --context-len 30
+
+# capacity-matched ablation: the numerical-only model widened to NeuroSym-CBF's parameter count
+python scripts/07_train_unimodal_ablation.py --context-len 30 --d-model 148
+python scripts/10_evaluate.py --model unimodal-ablation --context-len 30 --d-model 148 \
+    --checkpoint models/local/unimodal_ablation_ctx30_seed40_d148.pt --label unimodal-ablation-wide
+
+# shuffled metadata: NeuroSym-CBF trained and evaluated with another series' description
+python scripts/08_train_neurosym_cbf.py --context-len 30 --metadata-control shuffled
+python scripts/10_evaluate.py --model neurosym-cbf --context-len 30 --metadata-control shuffled \
+    --checkpoint models/local/neurosym_cbf_ctx30_seed40_meta-shuffled.pt --label neurosym-cbf-metashuffled
+
+# metadata interventions at test time, on an already trained NeuroSym-CBF
+python scripts/13_metadata_interventions.py --context-len 30
+
+# Moirai, another pretrained baseline (runs in its own environment, see the script's docstring)
+.venv-moirai/python scripts/evaluate_moirai.py --context-len 30
+```
+
+`--context-len` overrides the context of the config for one run, for my own models and for the
+baselines alike, which is the easy way to sweep the five contexts. The results of all of these are
+in `results/` too, under the labels `tft`, `unimodal-ablation-wide`, `neurosym-cbf-metashuffled`
+and `moirai`, and in `results/interventions/`. The evaluation on series never seen in training is a
+separate experiment, in `experimental/unseen_series/`.
 
 There are also a couple of unnumbered utilities that are not part of the mandatory pipeline:
 `scripts/check_data_quality.py` to diagnose duplicates and NaNs over the raw parquets, and
