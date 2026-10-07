@@ -9,6 +9,9 @@ CLAUDE.md
 FILE_INVENTORY.md
 docs/metadata_interventions.md
 
+# Thesis PDF: kept locally, not distributed with the repository (the workshop paper is the reference).
+docs/paper.pdf
+
 # Notebooks: the repo is 100% CLI (src/ + scripts/), so no .ipynb files are published.
 # The originals live in temp-trash/. Kept in case any of them reappear in the root.
 *.ipynb
@@ -59,3 +62,6 @@ nesycbf_neurips_fmts_2026.zip
 
 # Experiments keep their own data out of the repo (derived from FRED, same rules as data/).
 experimental/*/data/
+
+# Per-series arrays of the metadata interventions are large and stay local; the JSON is published.
+results/interventions/*.npz
