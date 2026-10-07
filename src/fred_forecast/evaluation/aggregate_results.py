@@ -65,6 +65,9 @@ def build_comparison_tables(results: list[dict]) -> tuple[pd.DataFrame, pd.DataF
     `pinball_mean` or `pinball_q50_mean` (point custom/baseline models do not have either of
     those two latter fields).
     """
+    # A result saved under another label (e.g. `unimodal-ablation-wide`, a control evaluated with
+    # `--label`) is a row of its own: the label, not the model class, names it in the tables.
+    results = [{**r, "model": r.get("label") or r.get("model")} for r in results]
     point_rows = [r for r in results if "mae_mean" in r]
     prob_rows = [r for r in results if "pinball_mean" in r or "pinball_q50_mean" in r]
 
